@@ -8,7 +8,7 @@ function GenInfo() {
             General Information
         </div>
         <div>
-
+            
         </div>
     </div>
   )

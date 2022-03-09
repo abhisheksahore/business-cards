@@ -1,0 +1,12 @@
+.mockup_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15rem;
+}
+
+.form_and_mockup {
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+}

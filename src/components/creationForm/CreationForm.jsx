@@ -5,7 +5,7 @@ import './CreationForm.css'
 function CreationForm() {
   return (
     <div className='creation_form_container'>
-        <GenInfo />    
+        <GenInfo />  
     </div>
   )
 }
