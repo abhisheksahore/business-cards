@@ -1,7 +1,56 @@
+.iphone_mockup {
+    display: flex;
+}
+
+.iphone_mockup_left_btns_wrapper {
+    /* background-color: red; */
+
+}
+
+.iphone_mockup_mute_btn {
+    width: 2.4px;
+    height: 25.6px;
+    background-color: rgb(179, 65, 255);
+    margin-top: 6rem;
+    border-top-left-radius: 1px;
+    border-bottom-left-radius: 1px;
+    box-shadow: 0px 0px .5px rgb(65, 64, 64) inset;
+}
+
+.iphone_mockup_volume_up_btn {
+    width: 2.4px;
+    height: 49.6px;
+    background-color: rgb(179, 65, 255);
+    margin-top: 1.6rem;
+    border-top-left-radius: 1px;
+    border-bottom-left-radius: 1px;
+    box-shadow: 0px 0px .5px rgb(65, 64, 64) inset;
+}
+.iphone_mockup_volume_down_btn {
+    width: 2.4px;
+    height: 49.6px;
+    background-color: rgb(179, 65, 255);
+    margin-top: 1rem;
+    border-top-left-radius: 1px;
+    border-bottom-left-radius: 1px;
+    box-shadow: 0px 0px .5px rgb(65, 64, 64) inset;
+}
+
+.iphone_mockup_power_btn {
+    width: 2.4px;
+    height: 76.8px;
+    margin-top: 10.5rem;
+    border-top-right-radius: 1px;
+    border-bottom-right-radius: 1px;
+    background-color: rgb(179, 65, 255);
+    box-shadow: 0px 0px .5px rgb(65, 64, 64) inset;
+}
+
 .outer {
     /* padding: 4px; */
     width: 21.35rem;
-    background-color: rgb(144, 144, 144);
+    /* background-color: rgb(144, 144, 144); */
+    background-color: rgb(179, 65, 255);
     height: 43.2rem;
     border-radius: 40px;
     box-shadow: 0px 0px 2px rgb(65, 64, 64) inset;
@@ -26,6 +75,7 @@
     padding: .8rem;
     background-color: white;
     border-radius: 36px;
+    box-shadow: 0px 0px 60px 5px black inset;
 }
 
 .inner_most {
@@ -58,7 +108,7 @@
     width: 8px;
     height: 8px;
     top: 0;
-    right: -8px;
+    right: -7.4px;
     background: radial-gradient(circle at right bottom, transparent 0px, transparent 70%, black 70%, black 100%);
 }
 .iphone_notch::before {
@@ -67,7 +117,7 @@
     width: 8px;
     height: 8px;
     top: 0;
-    left: -8px;
+    left: -7.4px;
     background: radial-gradient(circle at left bottom, transparent 0px, transparent 70%, black 70%, black 100%);
 }
 
@@ -94,8 +144,12 @@
 .band {
     height: 10px;
     width: 21.35rem;
-    background-color: rgb(87, 87, 87);
-    margin-top: 6rem;
+    background-color: rgb(206, 140, 250);;
+    margin-top: 4rem;
+}
+
+.lower_band {
+    margin-top: 34rem;
 }
 
 .screen_area {
