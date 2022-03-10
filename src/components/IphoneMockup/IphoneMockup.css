@@ -43,10 +43,48 @@
 
 .iphone_notch {
     width: 10.5rem;
-    height: 24px;
-    background-color: black;
-    border-bottom-left-radius: 13px;
-    border-bottom-right-radius: 13px;
+    height: 28px;
+    display: flex;
+    background-color: #000101;
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+    justify-content: center;
+    gap: 1rem;
+    position: relative;
+}
+.iphone_notch::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    top: 0;
+    right: -8px;
+    background: radial-gradient(circle at right bottom, transparent 0px, transparent 70%, black 70%, black 100%);
+}
+.iphone_notch::before {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    top: 0;
+    left: -8px;
+    background: radial-gradient(circle at left bottom, transparent 0px, transparent 70%, black 70%, black 100%);
+}
+
+.iphone_notch_speaker {
+    width: 48px;
+    height: 4.8px;
+    margin-top: 5px;
+    background-color: #222222;
+    border-radius: 10px;
+}
+
+.iphone_notch_cam {
+    width: 4.8px;
+    height: 4.8px;
+    margin-top: 5px;
+    background-color: #0E4D71;
+    border-radius: 10px;
 }
 
 .band_wrapper {
@@ -75,4 +113,8 @@
 
 .screen_area::-webkit-scrollbar {
     visibility: hidden;
-  }
+}
+
+.visibility_hidden {
+    visibility: hidden;
+}

@@ -8,7 +8,9 @@ function App() {
     <div className="App">
         <Navbar />
         <div className='form_and_mockup'>
-          <CreationForm />
+          <div className='creation_form_outer_container'>
+            <CreationForm />
+          </div>
           <div className='mockup_container'>
             <IphoneMockup />
           </div>

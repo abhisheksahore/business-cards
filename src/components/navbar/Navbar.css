@@ -1,6 +1,12 @@
 .navbar_container {
     color: white;
     padding: 1rem 2rem;
+    position: sticky;
+    right: 0rem;
+    left: 0rem;
+    top: 0rem;
+    background-color: #171C31;
+    z-index: 3;
 }
 
 .navbar_wrapper {
@@ -12,6 +18,7 @@
     letter-spacing: 1px;
     display: flex;
     justify-content: space-between;
+    
 }
 
 .logo {
