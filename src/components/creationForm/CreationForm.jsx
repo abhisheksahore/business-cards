@@ -10,6 +10,7 @@ function CreationForm() {
     DescribeYourself: null,
     ProfilePicture: null,
     Logo: null,
+    PrimaryButtons: ['TelegramIcon', 'WhatsAppIcon'],
   });
 
   return (
