@@ -10,7 +10,14 @@ function CreationForm() {
     DescribeYourself: null,
     ProfilePicture: null,
     Logo: null,
-    PrimaryButtons: ['TelegramIcon', 'WhatsAppIcon'],
+    PrimaryButtons: [],
+    Telegram: null,
+    Call: null,
+    WhatsApp: null,
+    Mail: null,
+    Website: null,
+    Location: null,
+    ProFeaturesList: [],
   });
 
   return (
