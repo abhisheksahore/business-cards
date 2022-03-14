@@ -9,6 +9,7 @@ import 'react-awesome-slider/dist/custom-animations/cube-animation.css';
 import AwesomeSlider from 'react-awesome-slider';
 import CoreStyles from 'react-awesome-slider/src/core/styles.scss';
 import CubeStyles from 'react-awesome-slider/src/styled/cube-animation/cube-animation.scss';
+import ReactPlayer from 'react-player';
 //icons
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
@@ -28,7 +29,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-function IphoneMockup({ formData }) {
+function IphoneMockup({ formData, setformData }) {
   return (
     <div className="outer">
       <div className="band_wrapper">
@@ -347,12 +348,67 @@ function IphoneMockup({ formData }) {
                     </div>
                   </div>
                 </div>
-
-                <AwesomeSlider animation="cubeAnimation" cssModule={CubeStyles}>
-                  <div data-src="https://upload.wikimedia.org/wikipedia/en/3/35/Supermanflying.png" />
-                  <div data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Superman_shield.svg/1200px-Superman_shield.svg.png" />
-                  <div data-src="https://i.ytimg.com/vi/weOF9_FGjOk/maxresdefault.jpg" />
-                </AwesomeSlider>
+                {formData &&
+                  formData.ProFeaturesList &&
+                  formData.ProFeaturesList.map((feature) => {
+                    return (
+                      <div
+                        style={{
+                          width: '100%',
+                          padding: '10px',
+                          marginTop: '50px',
+                        }}
+                      >
+                        <Typography
+                          variant="h7"
+                          component="div"
+                          gutterBottom
+                          style={{ color: '#5d6473' }}
+                        >
+                          {feature.title}
+                        </Typography>
+                        {feature.type === 'image' &&
+                        feature.images &&
+                        feature.images.length > 0 ? (
+                          <AwesomeSlider
+                            animation="cubeAnimation"
+                            cssModule={CubeStyles}
+                          >
+                            {feature &&
+                              feature.images &&
+                              feature.images.map((image) => {
+                                return <div data-src={image} />;
+                              })}
+                          </AwesomeSlider>
+                        ) : feature.type === 'media' ? (
+                          <div
+                            style={{
+                              maxWidth: '100%',
+                              display: 'flex',
+                              flexDirection: 'column',
+                              alignItems: 'center',
+                              height: '200px',
+                            }}
+                          >
+                            {feature &&
+                              feature.links &&
+                              feature.links.length > 0 &&
+                              feature.links.map((link) => {
+                                return (
+                                  <ReactPlayer
+                                    style={{
+                                      maxWidth: '275px',
+                                      marginTop: '10px',
+                                    }}
+                                    url={link}
+                                  />
+                                );
+                              })}
+                          </div>
+                        ) : null}
+                      </div>
+                    );
+                  })}
               </div>
             </div>
           </div>

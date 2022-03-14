@@ -33,7 +33,7 @@ function CreationForm() {
         <GenInfo formData={formData} setformData={setformData} />
       </div>
       <div style={{ width: '50%', marginLeft: '30px' }}>
-        <IphoneMockup formData={formData} />
+        <IphoneMockup formData={formData} setformData={setformData} />
       </div>
     </div>
   );
