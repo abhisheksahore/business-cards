@@ -1,0 +1,9 @@
+.primary_btn_container {
+    width: 100%;
+}
+
+.primary_btn_heading {
+    color: white;
+    font-weight: 600;
+    font-size: 2rem;
+}

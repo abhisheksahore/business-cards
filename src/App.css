@@ -1,12 +1,33 @@
 .mockup_container {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  /* justify-content: center; */
+  align-items: flex-start;
   margin-top: 15rem;
+  padding: 4rem 4rem 0rem 4rem;
+  position: fixed;
+  top: 0rem;
+  right: 0rem;
+  left: 60%;
+  z-index: 0;
+
 }
+
 
 .form_and_mockup {
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
+  width: 100%;
   gap: 5rem;
+  padding: 5rem;
+  /* background-color: green; */
+}
+
+.creation_form_outer_container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  width: 60%;
+  padding: 2rem;
+  padding-right: 8rem;
+  /* background-color: red; */
 }
