@@ -1,56 +1,83 @@
 .navbar_container {
-    color: white;
-    padding: 1rem 2rem;
+    color: rgb(195, 195, 195);
+    padding: 1rem 5rem 0;
     position: sticky;
     right: 0rem;
     left: 0rem;
     top: 0rem;
-    background-color: #171C31;
+    background-color: #171717;
+    background-color: #161D31;
     z-index: 3;
+    
 }
 
 .navbar_wrapper {
-    background-color: #283147;
+    background-color: transparent;
     /* background-color: white; */
-    padding: 1rem 3rem;
-    border-radius: 8px;
+    padding: 1rem 0rem 2rem;
+    /* border-radius: 8px; */
     font-weight: 600;
     letter-spacing: 1px;
     display: flex;
     justify-content: space-between;
+    border-bottom: 1.5px solid #303030;
     
 }
 
 .logo {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 600;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
 }
 
-.logo span {
-    color: #5D4FE7;
+.logo_com {
+    padding-bottom: 3px;
+}
+
+.logo_main {
+    color: #FE385D;
+    font-size: 2rem;
 }
 
 .welcome_note {
     display: flex;
     align-items: center;
+    font-size: 1.3rem;
 }
 
 .profile_btn {
     display: flex;
+    align-items: center;
     gap: 1rem;
 }
 
 .profile_username {
     display: flex;
     align-items: center;
+    font-size: 1rem;
+    font-weight: 800;
+    
 }
 
 .profile_pic {
     width: 50px;
     height: 50px;
+    position: relative;
 }
+
+.profile_pic::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: green;
+    border-radius: 50px;
+    border: 1.5px solid white;
+    bottom: 2px;
+    right: -2px;
+}
+
 
 .profile_pic img {
     width: 100%;
@@ -58,4 +85,19 @@
     object-fit: cover;
     border-radius: 100%;
     /* box-shadow: 0px 0px 100px 1px white; */
+}
+
+.navbar_logout_btn {
+    padding: .4rem 1rem .55rem;
+    background-color: #FE385D;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    color: white;
+    border: none;
+    text-decoration: none;
 }

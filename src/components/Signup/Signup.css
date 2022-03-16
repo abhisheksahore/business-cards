@@ -1,0 +1,171 @@
+.login_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white;
+    /* background-color: white; */
+}
+
+.login_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* background-color: #1A213C; */
+    padding: 2rem;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 400px;
+}
+
+/* .login_form {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    width: 100%;
+} */
+
+.form_group {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.form_group label {
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: white;
+}
+
+.input_box {
+    padding: .7rem 1rem;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+}
+.input_box:focus {
+    outline: 3px solid #FE385D;
+}
+
+.login_password_input {
+    position: relative;
+}
+
+.password_invisible {
+
+    display: none;
+    transform: translateX(-25px);
+}
+
+.password_visible {
+    display: block;
+    position: absolute;
+    right: 8px;
+    top: 9.5px;
+    cursor: pointer;
+}
+
+.display_none {
+    display: none;
+}
+
+.login_btn {
+    background-color: #FE385D;
+    border: none;
+    outline: none;
+    padding: .7rem;
+    color: white;
+    border-radius: 5px;
+    margin-top: .4rem;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+.login_btn:hover,
+.login_btn:focus {
+    background-color: #fc244b;
+}
+
+.login_instead_wrapper {
+    letter-spacing: 1px;
+    font-size: .85rem;
+    margin-top: 1.5rem;
+    color: black;
+}
+
+.login_instead {
+    text-decoration: none;
+    color: #fc2c52;
+    font-weight: 500;
+    margin-left: .7rem;
+}
+
+.error {
+    letter-spacing: 1px;
+    font-size: .8rem;
+    font-weight: 500;
+    margin-top: .4rem;
+}
+
+.signup_with_google {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 2rem;
+    outline: none;
+    outline: 2px solid #FE385D;
+    border: none;
+    padding: 1rem;
+    width: 100%;
+    justify-content: center;
+    border-radius: 8px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    background-color: transparent;
+    color: #FE385D;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.signup_with_google:hover,
+.signup_with_google:focus {
+    background-color: #FE385D;
+    color: white;
+    font-weight: 600;
+}
+
+.big_logo {
+    display: flex;
+    align-items: flex-end;
+    font-size: 3rem;
+    letter-spacing: 1px;
+    margin-bottom: 3rem;
+    font-weight: 600;
+    color: rgb(255, 255, 255);
+    gap: .2rem;
+    /* color: #F4511E; */
+    font-family: 'Varela Round', sans-serif;
+}
+.big_logo .big_logo_name {
+    color: #FE385D;
+    /* background-color: white;
+     */
+     /* outline: 4px solid #FE385D; */
+    border-radius: 15px;
+    /* padding: .7rem; */
+}
+
+.big_logo .big_logo_com {
+    color: white;
+    
+    /* background-color: white; */
+    border-radius: 15px;
+    /* padding: .7rem; */
+    font-size: 1.5rem;
+    font-weight: 800;
+    padding-bottom: .34rem;
+}

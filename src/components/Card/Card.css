@@ -1,0 +1,88 @@
+.card_container {
+    width: 100%;
+    max-width: 400px;
+    transition: transform .15s ease;
+    cursor: pointer;
+}
+
+.card_container:hover,
+.card_container:focus { 
+    transform: scale(1.05);
+}
+
+.card_wrapper {
+    color: white;
+    background-color: #FE385D;
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem 3rem;
+    border-radius: 10px;
+    border: 2px solid white;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.card_wrapper:hover,
+.card_wrapper:focus {
+    box-shadow: 0px 0px 10px rgb(215, 215, 215);    
+}
+
+
+
+.card_name {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
+
+}
+
+
+
+
+
+
+/* CONTROLS */
+
+.card_controls {
+    display: flex;
+    gap: 1rem;
+    font-size: 1.1rem;
+}
+
+.tooltip {
+    position: relative;
+    cursor: pointer;
+}
+
+.tooltip_text {
+    position: absolute;
+    background-color: white;
+    color: black;
+    top: -40px;
+    font-weight: 600;
+    font-size: .8rem;
+    letter-spacing: 1px;
+    border-radius: 10px;
+    right: -20px;
+    padding: .3rem .6rem;
+    visibility: hidden;
+}
+.tooltip_container:hover .tooltip_text{
+    visibility: visible;
+}
+
+.tooltip_text::after {
+    content: '';
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 8px solid white;
+    bottom: -8px;
+    right: 20px;
+}
+
+.tooltip_container {
+    position: relative;
+}
