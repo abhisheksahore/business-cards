@@ -60,3 +60,9 @@
 .bizcard_url_check_btn:focus {
     background-color: rgb(231, 231, 231);
 }
+
+
+.font_size-1-2_and_color_white {
+    font-size: 1.2rem;
+    color: white;
+}

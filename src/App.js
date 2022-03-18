@@ -13,6 +13,8 @@ import Signup from './components/Signup/Signup';
 import CreationForm from './components/creationForm/CreationForm';
 import Dashboard from './components/Dashboard/Dashboard';
 import CardView from './components/CardView/CardView';
+import Loader from './components/Loader/Loader';
+import BusinessInfo from './components/BusinessInfo/BusinessInfo';
 
 
 
@@ -25,6 +27,7 @@ function App() {
         {currentUser ? <Navbar /> : null}
         <Routes>
           <Route exact path='/login' element={<Login />} />
+          <Route exact path='/business' element={<BusinessInfo />} />
           <Route exact path='/' element={<MainFile />} />
           <Route exact path='/signup' element={<Signup />} />
           <Route exact path='/create' element={<CreationForm />}></Route>

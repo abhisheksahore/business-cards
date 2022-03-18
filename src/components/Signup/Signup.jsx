@@ -6,6 +6,7 @@ import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { Link } from 'react-router-dom'
 import AuthContext from '../../context/AuthContext/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import Loader from '../Loader/Loader';
 
 function Signup() {
     const navigate = useNavigate();
@@ -185,7 +186,7 @@ function Signup() {
                 </div>
             </div> :
             currentUser === undefined ?
-            <h1 style={{ color: "white" }}>Loading...</h1> :
+            <Loader /> :
             null}
         </>
     )

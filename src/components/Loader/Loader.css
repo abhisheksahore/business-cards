@@ -1,0 +1,26 @@
+.loader_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.loader {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 5px solid transparent;
+    border-top: 5px solid #FE385D;
+    border-bottom: 5px solid #FE385D;
+    animation: loader 1s ease infinite;
+}
+
+@keyframes loader {
+    to {
+        transform: rotate(1turn);
+    }
+}

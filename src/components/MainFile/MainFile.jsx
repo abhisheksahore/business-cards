@@ -5,6 +5,7 @@ import Login from '../Login/Login';
 import CreationForm from '../creationForm/CreationForm';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import AuthContext from '../../context/AuthContext/AuthContext';
+import Loader from '../Loader/Loader';
 
 
 function Main() {
@@ -20,7 +21,7 @@ function Main() {
     
     return (
         <>
-            {currentUser === undefined? <h1 style={{color: 'white'}}>Loading...</h1>: null}
+            {currentUser === undefined? <Loader />: null}
         </>
     )
 }

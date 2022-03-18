@@ -1,9 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './BusinessInfo.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoffee, faPlus } from '@fortawesome/free-solid-svg-icons'
 
 function BusinessInfo() {
+
+
+    const [component, setComponent] = useState([{
+        name: 'coffee',
+        icon: () => <FontAwesomeIcon style={{color:'white'}}  icon={faCoffee}/>
+    },
+    {
+        name: 'plus',
+        icon: () => <FontAwesomeIcon style={{color:'white'}}  icon={faPlus}/>
+    }])
   return (
     <div className='business_info_container'>
         <div className='business_info_heading'>
@@ -67,6 +77,12 @@ function BusinessInfo() {
                 </div>
             </div>
         </div>
+
+        {
+            component.map(e => {
+                return e.icon();
+            })
+        }
     </div>
   )
 }

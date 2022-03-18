@@ -4,6 +4,7 @@ import {faTrash, faEye, faPen} from '@fortawesome/free-solid-svg-icons'
 import './Card.css';
 
 function Card(props) {
+
   return (
     <div className='card_container'>
         {/* <div style={{color: "orangered"}}>Abhishek's new business card</div>        

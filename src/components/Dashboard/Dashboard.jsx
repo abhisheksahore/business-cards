@@ -5,6 +5,7 @@ import AuthContext from '../../context/AuthContext/AuthContext'
 import Card from '../Card/Card';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faEye, faPen, faMagnifyingGlass, faWeight } from '@fortawesome/free-solid-svg-icons'
+import Loader from '../Loader/Loader';
 
 
 function Dashboard() {
@@ -143,7 +144,7 @@ function Dashboard() {
                 </div>
             </div> :
                 currentUser === undefined ?
-                    <h1 style={{ color: "white" }}>Loading...</h1> :
+                    <Loader /> :
                     null
             }
         </>
