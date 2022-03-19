@@ -57,6 +57,7 @@ function CreationForm() {
         skype: null,
         
         facebook: null,
+        instagram: null,
         youtube: null,
         twitter: null,
         vimeo: null,
