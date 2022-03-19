@@ -7,8 +7,6 @@ import IphoneMockup from '../IphoneMockup/IphoneMockup';
 import Loader from '../Loader/Loader';
 import './CreationForm.css';
 
-import AddIcon from '@mui/icons-material/Add';
-import CloseIcon from '@mui/icons-material/Close';
 import TelegramIcon from '@mui/icons-material/Telegram';
 import StorefrontIcon from '@mui/icons-material/Storefront';
 import InstagramIcon from '@mui/icons-material/Instagram';
@@ -19,13 +17,12 @@ import LanguageIcon from '@mui/icons-material/Language';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import AddLocationIcon from '@mui/icons-material/AddLocation';
 import TwitterIcon from '@mui/icons-material/Twitter';
-import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
-import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookMessenger, faWeixin, faSkype, faViber, faVimeo, faSpotify, faDiscord, faPinterest, faTiktok, faReddit, faSnapchat, faTwitch, faLinkedin, faBehance, faPaypal, faStripeS, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import Media from '../MediaSection';
+import FontsAndColors from '../FontsAndColors';
 
 function CreationForm() {
     const [formData, setformData] = useState({
@@ -55,7 +52,7 @@ function CreationForm() {
         store: null,
         viber: null,
         skype: null,
-        
+
         facebook: null,
         instagram: null,
         youtube: null,
@@ -80,6 +77,15 @@ function CreationForm() {
         eBayStore: null,
         yelp: null,
 
+        // colors
+        logoBackgroundColor: '#1E2A37',
+        mainBackgroundColor: '#F9FAFB',
+        buttonBackgroundColor: '#374151',
+        cardBackgroundColor: '#E5E7EB',
+        fontColor: '#ECECEC',
+
+        // fonts
+        font: "'Montserrat', sans - serif",
 
         ProFeaturesList: [],
     });
@@ -90,6 +96,145 @@ function CreationForm() {
             navigate('/login');
         }
     }, [currentUser])
+
+
+
+    const colorInputVariables = [
+        {
+            stateName: 'logoBackgroundColor',
+            name: 'Logo Background Color'
+        },
+        {
+            stateName: 'mainBackgroundColor',
+            name: 'Main Background Color'
+        },
+        {
+            stateName: 'buttonBackgroundColor',
+            name: 'Button Background Color'
+        },
+        {
+            stateName: 'cardBackgroundColor',
+            name: 'Card Background Color'
+        },
+        {
+            stateName: 'fontColor',
+            name: 'Font Color'
+        }
+    ]
+
+
+
+    const fontOptions = [
+        {
+            fontFamily: "'Andada Pro', serif",
+            name: 'Andada Pro'
+        },
+        {
+            fontFamily: "'Anton', sans - serif",
+            name: 'Anton'
+        },
+        {
+            fontFamily: "'Archivo', sans - serif",
+            name: 'Archivo'
+        },
+        {
+            fontFamily: "'BioRhyme', serif",
+            name: 'BioRhyme'
+        },
+        {
+            fontFamily: "'Cormorant', serif",
+            name: 'Cormorant'
+        },
+        {
+            fontFamily: "'Encode Sans', sans - serif",
+            name: 'Encode Sans'
+        },
+        {
+            fontFamily: "'Epilogue', sans - serif",
+            name: 'Epilogue'
+        },
+        {
+            fontFamily: "'Hahmlet', serif",
+            name: 'Hahmlet'
+        },
+        {
+            fontFamily: "'Inter', sans - serif",
+            name: 'Inter'
+        },
+        {
+            fontFamily: "'JetBrains Mono', monospace",
+            name: 'JetBrains Mono'
+        },
+        {
+            fontFamily: "'Lato', sans - serif",
+            name: 'Lato'
+        },
+        {
+            fontFamily: "'Lora', serif",
+            name: 'Lora'
+        },
+        {
+            fontFamily: "'Manrope', sans - serif",
+            name: 'Manrope'
+        },
+        {
+            fontFamily: "'Montserrat', sans - serif",
+            name: 'Montserrat'
+        },
+        {
+            fontFamily: "'Nunito', sans - serif",
+            name: 'Nunito'
+        },
+        {
+            fontFamily: "'Old Standard TT', serif",
+            name: 'Old Standard TT'
+        },
+        {
+            fontFamily: "'Open Sans', sans - serif",
+            name: 'Open Sans'
+        },
+        {
+            fontFamily: "'Oswald', sans - serif",
+            name: 'Oswald'
+        },
+        {
+            fontFamily: "'Oxygen', sans - serif",
+            name: 'Oxygen'
+        },
+        {
+            fontFamily: "'Playfair Display', serif",
+            name: 'Playfair Display'
+        },
+        {
+            fontFamily: "'Poppins', sans - serif",
+            name: 'Poppins'
+        },
+        {
+            fontFamily: "'Raleway', sans - serif",
+            name: 'Raleway'
+        },
+        {
+            fontFamily: "'Roboto', sans - serif",
+            name: 'Roboto'
+        },
+        {
+            fontFamily: "'Sora', sans - serif",
+            name: 'Sora'
+        },
+        {
+            fontFamily: "'Source Sans Pro', sans - serif",
+            name: 'Source Sans Pro'
+        },
+        {
+            fontFamily: "'Spectral', serif",
+            name: 'Spectral'
+        },
+        {
+            fontFamily: "'Work Sans', sans - serif",
+            name: 'Work Sans'
+        }
+    ]
+
 
 
 
@@ -190,7 +335,7 @@ function CreationForm() {
         },
         {
             name: 'twitter',
-            component: <TwitterIcon style={{ color: '#fff' }} />,   
+            component: <TwitterIcon style={{ color: '#fff' }} />,
             placeholder: 'https://twitter.com/YourUserName',
             type: 'text'
         },
@@ -283,7 +428,7 @@ function CreationForm() {
         },
         {
             name: 'bingBusinessProfile',
-            component:<FontAwesomeIcon className='font_size-1-2_and_color_white' icon={faGoogle} />,
+            component: <FontAwesomeIcon className='font_size-1-2_and_color_white' icon={faGoogle} />,
             placeholder: 'https://vimeo.com/id',
             type: 'text'
         },
@@ -321,10 +466,11 @@ function CreationForm() {
 
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
                         <GeneralInfo formData={formData} setformData={setformData} />
-                        <GenInfo iconsNameContactMap={iconsNameContactMap} formData={formData} color={'#7366F0'} keyName={'PrimaryButtons'} setformData={setformData} heading={'Contact Info'}/>
-                        <GenInfo iconsNameContactMap={iconsNameSocialMap} formData={formData} color={'#FE385D'} keyName={'socialMedia'} setformData={setformData} heading={'Social Media'}/>
-                        <GenInfo iconsNameContactMap={iconsNameCommerceMap} formData={formData} color={'#029C5F'} keyName={'commerce'} setformData={setformData} heading={'Commerce'}/>
+                        <GenInfo iconsNameContactMap={iconsNameContactMap} formData={formData} color={'#7366F0'} keyName={'PrimaryButtons'} setformData={setformData} heading={'Contact Info'} />
+                        <GenInfo iconsNameContactMap={iconsNameSocialMap} formData={formData} color={'#FE385D'} keyName={'socialMedia'} setformData={setformData} heading={'Social Media'} />
+                        <GenInfo iconsNameContactMap={iconsNameCommerceMap} formData={formData} color={'#029C5F'} keyName={'commerce'} setformData={setformData} heading={'Commerce'} />
                         <Media formData={formData} setformData={setformData} />
+                        <FontsAndColors formData={formData} setformData={setformData} colorInputVariables={colorInputVariables} fontOptions={fontOptions} />
                     </div>
                 </div>
                 <div style={{ width: '50%', marginLeft: '30px' }}>
