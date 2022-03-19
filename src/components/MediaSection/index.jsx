@@ -3,6 +3,7 @@ import { Typography } from '@mui/material';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import ReactDragListView from 'react-drag-listview';
 import uuid from 'react-uuid';
+import Switch from '@mui/material/Switch';
 
 //icons
 import AddIcon from '@mui/icons-material/Add';
@@ -1284,6 +1285,32 @@ const Media = ({ formData, setformData }) => {
             style={{ color: '#5d6473' }}
           >
             Add Custom Link{' '}
+          </Typography>
+        </div>
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center', marginTop: '20px' }}>
+        <Switch
+          onChange={(e) => {
+            setformData((formState) => ({
+              ...formState,
+              SaveToContact: e.target.checked,
+            }));
+          }}
+        />
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            marginLeft: '15px',
+          }}
+        >
+          <Typography
+            variant="h7"
+            component="div"
+            gutterBottom
+            style={{ color: '#5d6473' }}
+          >
+            Save to contact{' '}
           </Typography>
         </div>
       </div>
