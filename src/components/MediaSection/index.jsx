@@ -420,6 +420,9 @@ const Media = ({ formData, setformData }) => {
                                           ? 'Add youtube video URL here'
                                           : 'Add facebook video URL here'
                                       }
+                                      value={
+                                        formData.ProFeaturesList[index].links[i]
+                                      }
                                       sx={{
                                         width: '400px',
                                         borderRadius: '5px',
@@ -450,7 +453,7 @@ const Media = ({ formData, setformData }) => {
                                                 // e.target.value,
                                                 // ];
 
-                                                currentItem.links[index] =
+                                                currentItem.links[i] =
                                                   e.target.value;
                                               }
                                               setformData((formState) => ({
