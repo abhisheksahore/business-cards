@@ -23,7 +23,12 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebookMessenger, faWeixin, faSkype, faViber } from '@fortawesome/free-brands-svg-icons';
+import {
+  faFacebookMessenger,
+  faWeixin,
+  faSkype,
+  faViber,
+} from '@fortawesome/free-brands-svg-icons';
 
 function GenInfo({ formData, setformData }) {
   const profilePictureInput = useRef();
@@ -44,8 +49,7 @@ function GenInfo({ formData, setformData }) {
 
   useEffect(() => {
     console.log(formData);
-  }, [])
-
+  }, []);
 
   const dragProps = {
     onDragEnd(fromIndex, toIndex) {
@@ -67,7 +71,7 @@ function GenInfo({ formData, setformData }) {
       data.splice(toIndex, 0, item);
       setformData((formState) => ({
         ...formState,
-        ProFeaturesListe: data,
+        ProFeaturesList: data,
       }));
     },
     nodeSelector: 'li',
@@ -99,7 +103,6 @@ function GenInfo({ formData, setformData }) {
             }));
           }}
         />
-
 
         {/* Card name */}
         <OutlinedInput
@@ -143,7 +146,6 @@ function GenInfo({ formData, setformData }) {
           }}
         />
 
-
         {/* Gender Pronouns */}
         <OutlinedInput
           variant="outlined"
@@ -164,7 +166,6 @@ function GenInfo({ formData, setformData }) {
             }));
           }}
         />
-
 
         {/* Job Title */}
         <OutlinedInput
@@ -227,8 +228,6 @@ function GenInfo({ formData, setformData }) {
             }));
           }}
         />
-
-
 
         <OutlinedInput
           variant="outlined"
@@ -331,9 +330,6 @@ function GenInfo({ formData, setformData }) {
           </div>
         )}
 
-
-
-
         {/* C O V E R   P H O T O  */}
 
         {formData && formData.coverPhoto ? (
@@ -417,8 +413,6 @@ function GenInfo({ formData, setformData }) {
             </div>
           </div>
         )}
-
-
 
         {formData && formData.ProfilePicture ? (
           <div
@@ -563,21 +557,33 @@ function GenInfo({ formData, setformData }) {
                       <StorefrontIcon style={{ color: '#fff' }} />
                     ) : item === 'messengerIcon' ? (
                       <div>
-                        <FontAwesomeIcon className='font_size-1-2_and_color_white' icon={faFacebookMessenger} />
+                        <FontAwesomeIcon
+                          className="font_size-1-2_and_color_white"
+                          icon={faFacebookMessenger}
+                        />
                       </div>
                     ) : item === 'viberIcon' ? (
                       <div>
-                        <FontAwesomeIcon className='font_size-1-2_and_color_white' icon={faViber} />
+                        <FontAwesomeIcon
+                          className="font_size-1-2_and_color_white"
+                          icon={faViber}
+                        />
                       </div>
                     ) : item === 'calendarMonthIcon' ? (
                       <CalendarMonthIcon style={{ color: '#fff' }} />
                     ) : item === 'weChatIcon' ? (
                       <div>
-                        <FontAwesomeIcon className='font_size-1-2_and_color_white' icon={faWeixin} />
+                        <FontAwesomeIcon
+                          className="font_size-1-2_and_color_white"
+                          icon={faWeixin}
+                        />
                       </div>
                     ) : item === 'skypeIcon' ? (
                       <div>
-                        <FontAwesomeIcon className='font_size-1-2_and_color_white' icon={faSkype} />
+                        <FontAwesomeIcon
+                          className="font_size-1-2_and_color_white"
+                          icon={faSkype}
+                        />
                       </div>
                     ) : null}{' '}
                   </Box>
@@ -766,8 +772,8 @@ function GenInfo({ formData, setformData }) {
           </ol>
         </ReactDragListView>
         {formData &&
-          formData.PrimaryButtons &&
-          formData.PrimaryButtons.length > 0 ? (
+        formData.PrimaryButtons &&
+        formData.PrimaryButtons.length > 0 ? (
           <Divider
             style={{
               marginTop: '30px',
@@ -778,8 +784,8 @@ function GenInfo({ formData, setformData }) {
         ) : null}
         <div style={{ display: 'flex', maxWidth: '450px', flexWrap: 'wrap' }}>
           {formData &&
-            formData.PrimaryButtons &&
-            formData.PrimaryButtons.includes('CallIcon') ? null : (
+          formData.PrimaryButtons &&
+          formData.PrimaryButtons.includes('CallIcon') ? null : (
             <Box
               sx={{
                 width: '55px',
@@ -808,8 +814,8 @@ function GenInfo({ formData, setformData }) {
             </Box>
           )}
           {formData &&
-            formData.PrimaryButtons &&
-            formData.PrimaryButtons.includes('TelegramIcon') ? null : (
+          formData.PrimaryButtons &&
+          formData.PrimaryButtons.includes('TelegramIcon') ? null : (
             <Box
               sx={{
                 width: '55px',
@@ -838,8 +844,8 @@ function GenInfo({ formData, setformData }) {
             </Box>
           )}
           {formData &&
-            formData.PrimaryButtons &&
-            formData.PrimaryButtons.includes('WhatsAppIcon') ? null : (
+          formData.PrimaryButtons &&
+          formData.PrimaryButtons.includes('WhatsAppIcon') ? null : (
             <Box
               sx={{
                 width: '55px',
@@ -868,8 +874,8 @@ function GenInfo({ formData, setformData }) {
             </Box>
           )}
           {formData &&
-            formData.PrimaryButtons &&
-            formData.PrimaryButtons.includes('MailOutlineIcon') ? null : (
+          formData.PrimaryButtons &&
+          formData.PrimaryButtons.includes('MailOutlineIcon') ? null : (
             <Box
               sx={{
                 width: '55px',
@@ -901,8 +907,8 @@ function GenInfo({ formData, setformData }) {
             </Box>
           )}
           {formData &&
-            formData.PrimaryButtons &&
-            formData.PrimaryButtons.includes('LanguageIcon') ? null : (
+          formData.PrimaryButtons &&
+          formData.PrimaryButtons.includes('LanguageIcon') ? null : (
             <Box
               sx={{
                 width: '55px',
@@ -931,8 +937,8 @@ function GenInfo({ formData, setformData }) {
             </Box>
           )}
           {formData &&
-            formData.PrimaryButtons &&
-            formData.PrimaryButtons.includes('AddLocationIcon') ? null : (
+          formData.PrimaryButtons &&
+          formData.PrimaryButtons.includes('AddLocationIcon') ? null : (
             <Box
               sx={{
                 width: '55px',
@@ -964,13 +970,10 @@ function GenInfo({ formData, setformData }) {
             </Box>
           )}
 
-
-
-
           {/*  W E C H A T  */}
           {formData &&
-            formData.PrimaryButtons &&
-            formData.PrimaryButtons.includes('weChatIcon') ? null : (
+          formData.PrimaryButtons &&
+          formData.PrimaryButtons.includes('weChatIcon') ? null : (
             <Box
               sx={{
                 width: '55px',
@@ -991,24 +994,23 @@ function GenInfo({ formData, setformData }) {
               onClick={() => {
                 setformData((formState) => ({
                   ...formState,
-                  PrimaryButtons: [
-                    ...formData.PrimaryButtons,
-                    'weChatIcon',
-                  ],
+                  PrimaryButtons: [...formData.PrimaryButtons, 'weChatIcon'],
                 }));
               }}
             >
               <div>
-                <FontAwesomeIcon className='font_size-1-2_and_color_white' icon={faWeixin} />
+                <FontAwesomeIcon
+                  className="font_size-1-2_and_color_white"
+                  icon={faWeixin}
+                />
               </div>
             </Box>
           )}
-
 
           {/* m e s s e n g e r */}
           {formData &&
-            formData.PrimaryButtons &&
-            formData.PrimaryButtons.includes('messengerIcon') ? null : (
+          formData.PrimaryButtons &&
+          formData.PrimaryButtons.includes('messengerIcon') ? null : (
             <Box
               sx={{
                 width: '55px',
@@ -1029,24 +1031,23 @@ function GenInfo({ formData, setformData }) {
               onClick={() => {
                 setformData((formState) => ({
                   ...formState,
-                  PrimaryButtons: [
-                    ...formData.PrimaryButtons,
-                    'messengerIcon',
-                  ],
+                  PrimaryButtons: [...formData.PrimaryButtons, 'messengerIcon'],
                 }));
               }}
             >
               <div>
-                <FontAwesomeIcon className='font_size-1-2_and_color_white' icon={faFacebookMessenger} />
+                <FontAwesomeIcon
+                  className="font_size-1-2_and_color_white"
+                  icon={faFacebookMessenger}
+                />
               </div>
             </Box>
           )}
-
 
           {/* v i b e r */}
           {formData &&
-            formData.PrimaryButtons &&
-            formData.PrimaryButtons.includes('viberIcon') ? null : (
+          formData.PrimaryButtons &&
+          formData.PrimaryButtons.includes('viberIcon') ? null : (
             <Box
               sx={{
                 width: '55px',
@@ -1067,24 +1068,23 @@ function GenInfo({ formData, setformData }) {
               onClick={() => {
                 setformData((formState) => ({
                   ...formState,
-                  PrimaryButtons: [
-                    ...formData.PrimaryButtons,
-                    'viberIcon',
-                  ],
+                  PrimaryButtons: [...formData.PrimaryButtons, 'viberIcon'],
                 }));
               }}
             >
               <div>
-                <FontAwesomeIcon className='font_size-1-2_and_color_white' icon={faViber} />
+                <FontAwesomeIcon
+                  className="font_size-1-2_and_color_white"
+                  icon={faViber}
+                />
               </div>
             </Box>
           )}
 
-
           {/* s t o r e */}
           {formData &&
-            formData.PrimaryButtons &&
-            formData.PrimaryButtons.includes('storeIcon') ? null : (
+          formData.PrimaryButtons &&
+          formData.PrimaryButtons.includes('storeIcon') ? null : (
             <Box
               sx={{
                 width: '55px',
@@ -1105,10 +1105,7 @@ function GenInfo({ formData, setformData }) {
               onClick={() => {
                 setformData((formState) => ({
                   ...formState,
-                  PrimaryButtons: [
-                    ...formData.PrimaryButtons,
-                    'storeIcon',
-                  ],
+                  PrimaryButtons: [...formData.PrimaryButtons, 'storeIcon'],
                 }));
               }}
             >
@@ -1116,11 +1113,10 @@ function GenInfo({ formData, setformData }) {
             </Box>
           )}
 
-
           {/* S k y p e */}
           {formData &&
-            formData.PrimaryButtons &&
-            formData.PrimaryButtons.includes('skypeIcon') ? null : (
+          formData.PrimaryButtons &&
+          formData.PrimaryButtons.includes('skypeIcon') ? null : (
             <Box
               sx={{
                 width: '55px',
@@ -1141,24 +1137,23 @@ function GenInfo({ formData, setformData }) {
               onClick={() => {
                 setformData((formState) => ({
                   ...formState,
-                  PrimaryButtons: [
-                    ...formData.PrimaryButtons,
-                    'skypeIcon',
-                  ],
+                  PrimaryButtons: [...formData.PrimaryButtons, 'skypeIcon'],
                 }));
               }}
             >
               <div>
-                <FontAwesomeIcon className='font_size-1-2_and_color_white' icon={faSkype} />
+                <FontAwesomeIcon
+                  className="font_size-1-2_and_color_white"
+                  icon={faSkype}
+                />
               </div>
             </Box>
           )}
 
-
           {/* S k y p e */}
           {formData &&
-            formData.PrimaryButtons &&
-            formData.PrimaryButtons.includes('calendarMonthIcon') ? null : (
+          formData.PrimaryButtons &&
+          formData.PrimaryButtons.includes('calendarMonthIcon') ? null : (
             <Box
               sx={{
                 width: '55px',
@@ -1189,7 +1184,6 @@ function GenInfo({ formData, setformData }) {
               <CalendarMonthIcon style={{ color: '#fff' }} />
             </Box>
           )}
-
 
           {/*------------------------- Primary Buttons---------------------------- */}
           <ReactDragListView {...dragPropsProFeatures}>
@@ -1644,7 +1638,7 @@ function GenInfo({ formData, setformData }) {
                                                     currentItem &&
                                                     currentItem.videos &&
                                                     currentItem.videos.length >
-                                                    0
+                                                      0
                                                   ) {
                                                     currentItem.videos.pop();
 

@@ -21,7 +21,7 @@ const Media = ({ formData, setformData }) => {
       data.splice(toIndex, 0, item);
       setformData((formState) => ({
         ...formState,
-        ProFeaturesListe: data,
+        ProFeaturesList: data,
       }));
     },
     nodeSelector: 'li',
@@ -87,6 +87,7 @@ const Media = ({ formData, setformData }) => {
                                 variant="outlined"
                                 name={'title'}
                                 placeholder={'Title'}
+                                value={formData.ProFeaturesList[index].title}
                                 sx={{
                                   width: '300px',
                                   borderRadius: '5px',
@@ -339,6 +340,7 @@ const Media = ({ formData, setformData }) => {
                                 variant="outlined"
                                 name={'title'}
                                 placeholder={'Title'}
+                                value={formData.ProFeaturesList[index].title}
                                 sx={{
                                   width: '300px',
                                   borderRadius: '5px',
@@ -400,7 +402,7 @@ const Media = ({ formData, setformData }) => {
                           >
                             {featured &&
                               featured.videos &&
-                              featured.videos.map((video, index) => {
+                              featured.videos.map((video, i) => {
                                 return (
                                   <div
                                     style={{
@@ -696,6 +698,7 @@ const Media = ({ formData, setformData }) => {
                                 variant="outlined"
                                 name={'title'}
                                 placeholder={'Title'}
+                                value={formData.ProFeaturesList[index].title}
                                 sx={{
                                   width: '300px',
                                   borderRadius: '5px',
@@ -751,6 +754,7 @@ const Media = ({ formData, setformData }) => {
                             variant="outlined"
                             name={'description'}
                             placeholder={'Description'}
+                            value={formData.ProFeaturesList[index].description}
                             sx={{
                               width: '300px',
                               height: '200px',
@@ -825,6 +829,7 @@ const Media = ({ formData, setformData }) => {
                                 variant="outlined"
                                 name={'title'}
                                 placeholder={'Title'}
+                                value={formData.ProFeaturesList[index].title}
                                 sx={{
                                   width: '300px',
                                   borderRadius: '5px',
@@ -881,6 +886,7 @@ const Media = ({ formData, setformData }) => {
                             variant="outlined"
                             name={'description'}
                             placeholder={'Description'}
+                            value={formData.ProFeaturesList[index].description}
                             sx={{
                               width: '300px',
                               borderRadius: '5px',
@@ -923,6 +929,7 @@ const Media = ({ formData, setformData }) => {
                               variant="outlined"
                               name={'link'}
                               placeholder={'Button link'}
+                              value={formData.ProFeaturesList[index].link}
                               sx={{
                                 width: '140px',
                                 borderRadius: '5px',
@@ -957,6 +964,9 @@ const Media = ({ formData, setformData }) => {
                               variant="outlined"
                               name={'btnLabel'}
                               placeholder={'Button label'}
+                              value={
+                                formData.ProFeaturesList[index].buttonLabel
+                              }
                               sx={{
                                 width: '140px',
                                 borderRadius: '5px',
