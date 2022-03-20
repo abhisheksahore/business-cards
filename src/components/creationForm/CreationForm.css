@@ -6,3 +6,24 @@
     width: 600px;
     gap: 8rem;
 }
+
+
+.create_btn {
+    margin: 6rem 0;
+    width: fit-content;
+    outline: none;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 1rem 1.75rem;
+    background-color: #FE395D;
+    cursor: pointer;
+}
+
+.create_btn:hover,
+.create_btn:focus {
+    box-shadow: 0px 0px 5px 2px #FE395D;
+}

@@ -1,0 +1,29 @@
+.slug_check_button {
+    padding: 18px;
+    height: fit-content;
+    background-color: #FE395D;
+    color: white;
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-size: 1.1rem;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+}
+
+
+.slug_error {
+    color: #FE395D;
+    font-size: 1rem; 
+    margin-top: .5rem; 
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.slug_success {
+    color: #01da10;
+    font-size: 1rem;
+    margin-top: .5rem;
+    font-weight: 600; 
+    letter-spacing: 1px;
+}

@@ -1,22 +1,66 @@
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
+import './GeneralInfo.css'
 import { Typography } from '@mui/material';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
+import AuthContext from '../../context/AuthContext/AuthContext';
 
 
 
-const GeneralInfo = ({ formData, setformData }) => {
+const GeneralInfo = ({ formData, setformData, edit }) => {
+
+    const [slugExists, setSlugExists] = useState();
+    const [slugError, setSlugError] = useState('');
+
+    const {currentUser} = useContext(AuthContext);
     const LogoInput = useRef();
     const coverInput = useRef();
     const profilePictureInput = useRef();
+
+    const deleteFile = async (file) => {
+        const newToken = await currentUser.getIdToken(true);
+        const promise = await fetch(`user/fileupload/deletefiles`, {
+            method: "POST",
+            headers: {
+                token: newToken
+            },
+            body: JSON.stringify({urls: [file]})
+
+        })
+    }
+
+    const checkSlug = async () => {
+
+        if (/^[a-z](-?[a-z])*$/.test(formData.cardSlug)) {
+            setSlugError('');
+            const newToken = await currentUser.getIdToken(true);
+            const promise = await fetch(`/user/card/checkSlug?slug=${formData.cardSlug}`, {
+                method: "GET",
+                headers: {
+                    token: newToken
+                }
+            });
+            const data = await promise.json();
+            console.log(data);
+            setSlugExists(data.status);
+        } else {
+            setSlugError('Not a valid Slug.');
+        }
+
+    }
+
+
+
     return (
         <>
          <div className="gen_info_heading">General Information</div>
             <OutlinedInput
+                required
                 variant="outlined"
                 name={'Name'}
+                value={formData.Name}
                 placeholder={'Name'}
                 sx={{
                     width: '450px',
@@ -37,8 +81,10 @@ const GeneralInfo = ({ formData, setformData }) => {
 
             {/* Card name */}
             <OutlinedInput
+                required
                 variant="outlined"
                 name={'cardName'}
+                value={formData.cardName}
                 placeholder={'Card Name'}
                 sx={{
                     width: '450px',
@@ -57,25 +103,66 @@ const GeneralInfo = ({ formData, setformData }) => {
             />
 
             {/* Card URL */}
-            <OutlinedInput
-                variant="outlined"
-                name={'cardUrl'}
-                placeholder={'Card URL'}
-                sx={{
-                    width: '450px',
-                    borderRadius: '5px',
-                    marginTop: '15px',
-                    border: '0.5px solid #6a97ae',
-                    color: '#fff',
-                    backgroundColor: '#283046;',
-                }}
-                onChange={(e) => {
-                    setformData((formState) => ({
-                        ...formState,
-                        cardUrl: e.target.value,
-                    }));
-                }}
-            />
+            <div style={{display:'flex', alignItems: 'flex-end', justifyContent: 'space-between', width: '449px'}}>
+                <OutlinedInput
+                    variant="outlined"
+                    name={'cardSlug'}
+                    // placeholder={'Card URL'}
+                    // disabled
+                    sx={{
+                        width: '35%',
+                        borderRadius: '5px',
+                        marginTop: '15px',
+                        border: '0.5px solid #6a97ae',
+                        color: '#fff',
+                        backgroundColor: '#283046;',
+                        fontWeight: '700'
+                    }}
+                    value={'bizcard.com/'}
+                />
+                <OutlinedInput
+                    required
+                    variant="outlined"
+                    name={'cardSlug'}
+                    value={formData.cardSlug}
+                    placeholder={'Card URL'}
+                    sx={{
+                        width: '35%',
+                        borderRadius: '5px',
+                        marginTop: '15px',
+                        border: '0.5px solid #6a97ae',
+                        color: '#fff',
+                        backgroundColor: '#283046;',
+                    }}
+                    onChange={(e) => {
+                        setformData((formState) => ({
+                            ...formState,
+                            cardSlug: e.target.value,
+                        }));
+                    }}
+                />
+                <button className='slug_check_button' onClick={checkSlug}>
+                    Check
+                </button>
+            </div>
+            { 
+                slugExists === true?
+                <small className='slug_error'>
+                    Slug already exists. Choose another one 
+                </small>:
+                slugExists === false?
+                <small className='slug_success'>
+                    Available 
+                </small>:
+                null
+            }
+            {
+                slugError !== ""?
+                <small className='slug_error'>
+                    {slugError} 
+                </small>:
+                null
+            }
 
 
             {/* Gender Pronouns */}
@@ -83,6 +170,7 @@ const GeneralInfo = ({ formData, setformData }) => {
                 variant="outlined"
                 name={'genderPronouns'}
                 placeholder={'Gender pronouns'}
+                value={formData.genderPronouns}
                 sx={{
                     width: '450px',
                     borderRadius: '5px',
@@ -119,6 +207,7 @@ const GeneralInfo = ({ formData, setformData }) => {
                         jobTitle: e.target.value,
                     }));
                 }}
+                value={formData.jobTitle}
             />
 
             <OutlinedInput
@@ -139,6 +228,7 @@ const GeneralInfo = ({ formData, setformData }) => {
                         BusinessName: e.target.value,
                     }));
                 }}
+                value={formData.BusinessName}
             />
 
             {/* Business Description */}
@@ -160,6 +250,7 @@ const GeneralInfo = ({ formData, setformData }) => {
                         businessDescription: e.target.value,
                     }));
                 }}
+                value={formData.businessDescription}
             />
 
 
@@ -182,6 +273,7 @@ const GeneralInfo = ({ formData, setformData }) => {
                         DescribeYourself: e.target.value,
                     }));
                 }}
+                value={formData.DescribeYourself}
             />
             {formData && formData.Logo ? (
                 <div
@@ -193,6 +285,9 @@ const GeneralInfo = ({ formData, setformData }) => {
                     />
                     <CloseIcon
                         onClick={() => {
+                            if (edit) {
+                                deleteFile(formData.Logo);
+                            }
                             setformData((formState) => ({
                                 ...formState,
                                 Logo: null,
@@ -232,7 +327,7 @@ const GeneralInfo = ({ formData, setformData }) => {
                                 console.log(e.target.files[0]);
                                 setformData((formState) => ({
                                     ...formState,
-                                    Logo: URL.createObjectURL(e.target.files[0]),
+                                    Logo: e.target.files[0],
                                 }));
                             }}
                         />
@@ -280,6 +375,9 @@ const GeneralInfo = ({ formData, setformData }) => {
                     />
                     <CloseIcon
                         onClick={() => {
+                            if (edit) {
+                                deleteFile(formData.coverPhoto);
+                            }
                             setformData((formState) => ({
                                 ...formState,
                                 coverPhoto: null,
@@ -319,7 +417,7 @@ const GeneralInfo = ({ formData, setformData }) => {
                                 console.log(e.target.files[0]);
                                 setformData((formState) => ({
                                     ...formState,
-                                    coverPhoto: URL.createObjectURL(e.target.files[0]),
+                                    coverPhoto: e.target.files[0],
                                 }));
                             }}
                         />
@@ -364,6 +462,9 @@ const GeneralInfo = ({ formData, setformData }) => {
                     />
                     <CloseIcon
                         onClick={() => {
+                            if (edit) {
+                                deleteFile(formData.ProfilePicture);
+                            }
                             setformData((formState) => ({
                                 ...formState,
                                 ProfilePicture: null,
@@ -403,7 +504,7 @@ const GeneralInfo = ({ formData, setformData }) => {
                                 console.log(e.target.files[0]);
                                 setformData((formState) => ({
                                     ...formState,
-                                    ProfilePicture: URL.createObjectURL(e.target.files[0]),
+                                    ProfilePicture: e.target.files[0],
                                 }));
                             }}
                         />

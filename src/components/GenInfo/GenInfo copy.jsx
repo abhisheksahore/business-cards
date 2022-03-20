@@ -67,7 +67,7 @@ function GenInfo({ formData, setformData }) {
       data.splice(toIndex, 0, item);
       setformData((formState) => ({
         ...formState,
-        ProFeaturesListe: data,
+        ProFeaturesList: data,
       }));
     },
     nodeSelector: 'li',

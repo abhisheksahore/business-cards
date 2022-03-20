@@ -10,6 +10,9 @@ import AwesomeSlider from 'react-awesome-slider';
 import CoreStyles from 'react-awesome-slider/src/core/styles.scss';
 import CubeStyles from 'react-awesome-slider/src/styled/cube-animation/cube-animation.scss';
 import ReactPlayer from 'react-player';
+import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
+
 //icons
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
@@ -31,12 +34,12 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function IphoneMockup({ formData, setformData }) {
   return (
-    <div className='iphone_mockup'>
-      <div className='iphone_mockup_left_btns_wrapper'>
-        <div className='iphone_mockup_mute_btn'></div>
-        <div className='iphone_mockup_volume_btns_wrapper'>
-          <div className='iphone_mockup_volume_up_btn'></div>
-          <div className='iphone_mockup_volume_down_btn'></div>
+    <div className="iphone_mockup">
+      <div className="iphone_mockup_left_btns_wrapper">
+        <div className="iphone_mockup_mute_btn"></div>
+        <div className="iphone_mockup_volume_btns_wrapper">
+          <div className="iphone_mockup_volume_up_btn"></div>
+          <div className="iphone_mockup_volume_down_btn"></div>
         </div>
       </div>
       <div className="outer">
@@ -48,9 +51,9 @@ function IphoneMockup({ formData, setformData }) {
           <div className="inner">
             <div className="inner_most">
               <div className="iphone_notch">
-                <div className='iphone_notch_cam visibility_hidden'></div>
-                <div className='iphone_notch_speaker'></div>
-                <div className='iphone_notch_cam'></div>
+                <div className="iphone_notch_cam visibility_hidden"></div>
+                <div className="iphone_notch_speaker"></div>
+                <div className="iphone_notch_cam"></div>
               </div>
 
               <div className="screen_area">
@@ -95,7 +98,11 @@ function IphoneMockup({ formData, setformData }) {
                     <Typography variant="h6" component="div">
                       {formData && formData.Name}{' '}
                     </Typography>
-                    <Typography variant="subtitle1" gutterBottom component="div">
+                    <Typography
+                      variant="subtitle1"
+                      gutterBottom
+                      component="div"
+                    >
                       {formData && formData.BusinessName}
                     </Typography>
                     <div style={{ marginTop: '20px' }}>
@@ -382,18 +389,33 @@ function IphoneMockup({ formData, setformData }) {
                             {feature.title}
                           </Typography>
                           {feature.type === 'image' &&
-                            feature.images &&
-                            feature.images.length > 0 ? (
-                            <AwesomeSlider
-                              animation="cubeAnimation"
-                              cssModule={CubeStyles}
-                            >
+                          feature.images &&
+                          feature.images.length > 0 ? (
+                            // <AwesomeSlider
+                            //   animation="cubeAnimation"
+                            //   cssModule={CubeStyles}
+                            // >
+                            //   {feature &&
+                            //     feature.images &&
+                            //     feature.images.map((image) => {
+                            //       return <div data-src={image} />;
+                            //     })}
+                            // </AwesomeSlider>
+                            <Carousel dynamicHeight={false} showThumbs={false}>
                               {feature &&
                                 feature.images &&
                                 feature.images.map((image) => {
-                                  return <div data-src={image} />;
+                                  return (
+                                    <img
+                                      style={{
+                                        height: '200px',
+                                        objectFit: 'cover',
+                                      }}
+                                      src={image}
+                                    />
+                                  );
                                 })}
-                            </AwesomeSlider>
+                            </Carousel>
                           ) : feature.type === 'media' ? (
                             <div
                               style={{
@@ -429,9 +451,9 @@ function IphoneMockup({ formData, setformData }) {
           </div>
         </div>
       </div>
-      <div className='iphone_mockup_power_btn'></div>
+      <div className="iphone_mockup_power_btn"></div>
     </div>
-  )
+  );
 }
 
 export default IphoneMockup;
