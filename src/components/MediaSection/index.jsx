@@ -87,6 +87,7 @@ const Media = ({ formData, setformData }) => {
                                 variant="outlined"
                                 name={'title'}
                                 placeholder={'Title'}
+                                value={formData.ProFeaturesList[index].title}
                                 sx={{
                                   width: '300px',
                                   borderRadius: '5px',
@@ -340,6 +341,7 @@ const Media = ({ formData, setformData }) => {
                                 variant="outlined"
                                 name={'title'}
                                 placeholder={'Title'}
+                                value={formData.ProFeaturesList[index].title}
                                 sx={{
                                   width: '300px',
                                   borderRadius: '5px',
@@ -401,7 +403,7 @@ const Media = ({ formData, setformData }) => {
                           >
                             {featured &&
                               featured.videos &&
-                              featured.videos.map((video, index) => {
+                              featured.videos.map((video, i) => {
                                 return (
                                   <div
                                     style={{
@@ -418,6 +420,9 @@ const Media = ({ formData, setformData }) => {
                                         video === 'youtube'
                                           ? 'Add youtube video URL here'
                                           : 'Add facebook video URL here'
+                                      }
+                                      value={
+                                        formData.ProFeaturesList[index].links[i]
                                       }
                                       sx={{
                                         width: '400px',
@@ -449,7 +454,7 @@ const Media = ({ formData, setformData }) => {
                                                 // e.target.value,
                                                 // ];
 
-                                                currentItem.links[index] =
+                                                currentItem.links[i] =
                                                   e.target.value;
                                               }
                                               setformData((formState) => ({
@@ -697,6 +702,7 @@ const Media = ({ formData, setformData }) => {
                                 variant="outlined"
                                 name={'title'}
                                 placeholder={'Title'}
+                                value={formData.ProFeaturesList[index].title}
                                 sx={{
                                   width: '300px',
                                   borderRadius: '5px',
@@ -752,6 +758,7 @@ const Media = ({ formData, setformData }) => {
                             variant="outlined"
                             name={'description'}
                             placeholder={'Description'}
+                            value={formData.ProFeaturesList[index].description}
                             sx={{
                               width: '300px',
                               height: '200px',
@@ -826,6 +833,7 @@ const Media = ({ formData, setformData }) => {
                                 variant="outlined"
                                 name={'title'}
                                 placeholder={'Title'}
+                                value={formData.ProFeaturesList[index].title}
                                 sx={{
                                   width: '300px',
                                   borderRadius: '5px',
@@ -882,6 +890,7 @@ const Media = ({ formData, setformData }) => {
                             variant="outlined"
                             name={'description'}
                             placeholder={'Description'}
+                            value={formData.ProFeaturesList[index].description}
                             sx={{
                               width: '300px',
                               borderRadius: '5px',
@@ -924,6 +933,7 @@ const Media = ({ formData, setformData }) => {
                               variant="outlined"
                               name={'link'}
                               placeholder={'Button link'}
+                              value={formData.ProFeaturesList[index].link}
                               sx={{
                                 width: '140px',
                                 borderRadius: '5px',
@@ -958,6 +968,9 @@ const Media = ({ formData, setformData }) => {
                               variant="outlined"
                               name={'btnLabel'}
                               placeholder={'Button label'}
+                              value={
+                                formData.ProFeaturesList[index].buttonLabel
+                              }
                               sx={{
                                 width: '140px',
                                 borderRadius: '5px',
