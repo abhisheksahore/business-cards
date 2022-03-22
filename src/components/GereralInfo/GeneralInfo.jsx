@@ -52,6 +52,21 @@ const GeneralInfo = ({ formData, setformData, edit }) => {
     }
 
 
+    const fetchPhoto = async (filePath) => {
+        const newToken = await currentUser.getIdToken(true);
+        const promise = await fetch(`/user/fileupload/getImageUrl`, {
+            method: "POST",
+            headers: {
+                token: newToken
+            },
+            body: JSON.stringify({
+                urls: [filePath] 
+            })
+        });
+        const data = await promise.json();
+        console.log(data);
+    }
+
 
     return (
         <>
@@ -280,7 +295,7 @@ const GeneralInfo = ({ formData, setformData, edit }) => {
                     style={{ display: 'flex', marginTop: '20px', alignItems: 'center' }}
                 >
                     <img
-                        src={formData.Logo}
+                        src={edit && typeof(formData.Logo) === 'string'? fetchPhoto(formData.Logo): URL.createObjectURL(formData.Logo)}
                         style={{ width: '55px', height: '55px', objectFit: 'cover' }}
                     />
                     <CloseIcon
@@ -370,7 +385,7 @@ const GeneralInfo = ({ formData, setformData, edit }) => {
                     style={{ display: 'flex', marginTop: '20px', alignItems: 'center' }}
                 >
                     <img
-                        src={formData.coverPhoto}
+                        src={edit && typeof(formData.coverPhoto) === 'string'? fetchPhoto(formData.coverPhoto): URL.createObjectURL(formData.coverPhoto)}
                         style={{ width: '55px', height: '55px', objectFit: 'cover' }}
                     />
                     <CloseIcon
@@ -457,7 +472,7 @@ const GeneralInfo = ({ formData, setformData, edit }) => {
                     style={{ display: 'flex', marginTop: '20px', alignItems: 'center' }}
                 >
                     <img
-                        src={formData.ProfilePicture}
+                        src={edit && typeof(formData.ProfilePicture) === 'string'? fetchPhoto(formData.ProfilePicture): URL.createObjectURL(formData.ProfilePicture)}
                         style={{ width: '55px', height: '55px', objectFit: 'cover' }}
                     />
                     <CloseIcon

@@ -28,7 +28,8 @@ function Dashboard() {
             },
             method: 'GET'
         });
-        return await promise.json();
+        const data = await promise.json();
+        return data
     }
 
     useEffect(() => {
@@ -38,8 +39,8 @@ function Dashboard() {
     }, [currentUser])
 
 
-    useEffect(() => {
-        const cardsData = fetchCards();
+    useEffect(async () => {
+        const cardsData = await fetchCards();
         console.log(cardsData)
     }, [])
     

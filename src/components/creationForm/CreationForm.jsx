@@ -51,6 +51,7 @@ function CreationForm() {
 
     const [edit, setEdit] = useState(false);
     const { pathname } = useLocation();
+    const [uploadError, setUploadError] = useState('')
 
 
     useEffect(() => {
@@ -577,86 +578,132 @@ function CreationForm() {
 
 
     const submitCard = async () => {
-        console.log('creating card')
-        const formDataTemp = formData;
-        const proFeatureTemp = []
+        console.log(' in submitCard function')
+        if (formData.cardName !== null && formData.cardSlug !== null && formData.Name !== null && formData.cardSlug.length > 6) {
+            setUploadError('');
+            console.log('creating card')
+            const formDataTemp = formData;
+            const proFeatureTemp = []
 
-        // upload Logo if not already
-        if (typeof (formData.Logo) === 'object') {
-            const data = await uploadSingleFiles('Logo');
-            console.log(data);
-            formDataTemp.Logo = data.data[0]
-        }
-        // upload profile picture if not already
-        if (typeof (formData.coverPhoto) === 'object') {
-            const data = await uploadSingleFiles('coverPhoto');
-            formDataTemp.coverPhoto = data.data[0]
-        }
-        // upload cover photo if not already
-        if (typeof (formData.ProfilePicture) === 'object') {
-            const data = await uploadSingleFiles('ProfilePicture');
-            formDataTemp.ProfilePicture = data.data[0]
-        }
-
-
-        for (const f of formData.ProFeaturesList) {
-            const newToken = await currentUser.getIdToken(true);
-            const form = new FormData();
-            if (f.images) {
-                let images = [];
-                for (const image of f.images) {
-                    if (typeof(image) === 'string') {
-                        images.push(image);
-                    } else {
-                        form.append("files", image);
-                    }
-                }
-                console.log(images);
-                const promise = await fetch(`/user/fileupload`, {
-                    method: "POST",
-                    body: form,
-                    headers: {
-                        token: newToken
-                    }
-                });
-                const data = await promise.json();
-                if (f.images) {
-                    f.images = [...images, ...data.data]
-                } else {
-                    f.image = [...images, ...data.data];
-                }
-                console.log(data);
-                proFeatureTemp.push(f);
-            } else if (f.image && typeof(f.image) === 'object') {
-                console.log(f.image)
-                form.append("files", f.image);
-                const promise = await fetch(`/user/fileupload`, {
-                    method: "POST",
-                    body: form,
-                    headers: {
-                        token: newToken
-                    }
-                });
-                const data = await promise.json();
-                if (f.images) {
-                    f.images = data.data
-                } else {
-                    f.image = data.data[0];
-                }
-                console.log(data.data);
-                proFeatureTemp.push(f);
-            } else {
-                proFeatureTemp.push(f);
+            // upload Logo if not already
+            if (typeof (formData.Logo) === 'object' && formData.Logo !== undefined && formData.Logo !== null) {
+                const data = await uploadSingleFiles('Logo');
+                formDataTemp.Logo = data.data[0]
+            }
+            // upload profile picture if not already
+            if (typeof (formData.coverPhoto) === 'object' && formData.coverPhoto !== undefined && formData.coverPhoto !== null) {
+                const data = await uploadSingleFiles('coverPhoto');
+                formDataTemp.coverPhoto = data.data[0]
+            }
+            // upload cover photo if not already
+            if (typeof (formData.ProfilePicture) === 'object' && formData.ProfilePicture !== undefined && formData.ProfilePicture !== null) {
+                const data = await uploadSingleFiles('ProfilePicture');
+                formDataTemp.ProfilePicture = data.data[0]
             }
 
+            console.log('here')
+            for (const f of formData.ProFeaturesList) {
+                const newToken = await currentUser.getIdToken(true);
+                const form = new FormData();
+                if (f.images) {
+                    let flag = 0;
+                    let images = [];
+                    for (const image of f.images) {
+                        if (typeof (image) === 'string') {
+                            images.push(image);
+                        } else {
+                            flag = 1;
+                            form.append("files", image);
+                        }
+                    }
+                    console.log(images);
+
+
+                    if (flag === 1) {
+                        const promise = await fetch(`/user/fileupload`, {
+                            method: "POST",
+                            body: form,
+                            headers: {
+                                token: newToken
+                            }
+                        });
+                        const data = await promise.json();
+                        if (f.images) {
+                            f.images = [...images, ...data.data]
+                        } else {
+                            f.image = [...images, ...data.data];
+                        }
+                    } else {
+                        f.images = [...images];
+                    }
+                    proFeatureTemp.push(f);
+                } else if (f.image && typeof (f.image) === 'object') {
+                    console.log(f.image)
+                    if (typeof(f.image) === 'object' && f.image !== null && f.image !== undefined && Array.isArray(f.image) === false) {
+                        form.append("files", f.image);
+                        const promise = await fetch(`/user/fileupload`, {
+                            method: "POST",
+                            body: form,
+                            headers: {
+                                token: newToken
+                            }
+                        });
+                        const data = await promise.json();
+                        if (f.images) {
+                            f.images = data.data
+                        } else {
+                            f.image = data.data[0];
+                        }
+                    } 
+                    proFeatureTemp.push(f);
+                } else {
+                    proFeatureTemp.push(f);
+                }
+
+            }
+            console.log(proFeatureTemp);
+            formDataTemp.ProFeaturesList = proFeatureTemp;
+            console.log(formDataTemp)
+            console.log(currentUser);
+
+            const newToken = await currentUser.getIdToken(true);
+            if (edit) {
+                const cardId = pathname.split('/')[2];
+                const promise = await fetch(`/user/card/editCard?id=${cardId}`, {
+                    method: 'PUT',
+                    headers: {
+                        token: newToken,
+                        uid: currentUser.uid,
+                        'Accept': 'application/json, text/plain, */*',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formDataTemp)
+                })
+                const data = await promise.json();
+                if (data.status === 'success') {
+                    navigate('/dashboard');
+                }
+            } else {
+                const promise = await fetch(`/user/card/createCard`, {
+                    method: 'POST',
+                    headers: {
+                        token: newToken,
+                        uid: currentUser.uid,
+                        'Accept': 'application/json, text/plain, */*',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formDataTemp)
+                })
+                const data = await promise.json();
+                if (data.status === 'success') {
+                    navigate('/dashboard');
+                }
+            }
+        } else {
+            setUploadError('Fill the required fields');
+            console.log('in else block')
         }
-        console.log(proFeatureTemp);
-        formDataTemp.ProFeaturesList = proFeatureTemp;
-        console.log(formDataTemp)
-
-
-        // formDataTemp
-
+        console.log('getting out of submit card function')
     }
 
     return (
@@ -678,7 +725,14 @@ function CreationForm() {
                         <GenInfo iconsNameContactMap={iconsNameCommerceMap} formData={formData} color={'#029C5F'} keyName={'commerce'} setformData={setformData} heading={'Commerce'} />
                         <Media formData={formData} setformData={setformData} edit={edit} />
                         <FontsAndColors formData={formData} setformData={setformData} colorInputVariables={colorInputVariables} fontOptions={fontOptions} />
-                        <button className='create_btn' onClick={submitCard}>{edit ? 'Update card' : 'Create Card'}</button>
+                        <div style={{margin: '6rem 0'}}>
+                            {
+                                uploadError? 
+                                <div style={{color: '#FE395D'}}>{uploadError}</div>:
+                                null
+                            }
+                            <button className='create_btn' onClick={submitCard}>{edit ? 'Update card' : 'Create Card'}</button>
+                        </div>
                     </div>
                 </div>
                 <div style={{ width: '50%', marginLeft: '30px' }}>

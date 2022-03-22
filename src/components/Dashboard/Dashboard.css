@@ -71,7 +71,7 @@ table {
 
 
 .table-row:hover td {
-    background-color: #283046;
+    background-color: #332059;
 }
 
 .tdata {
@@ -82,8 +82,7 @@ table {
 
 .theading {
     padding: 2rem;
-    background-color: #343434;
-    background-color: #283046;
+    background-color: #332059;
     border: none;
     font-size: 1.1rem;
     letter-spacing: 2px;
@@ -163,6 +162,10 @@ table {
     outline: 1px solid #FE385D;
 }
 
+
+.table_business_name {
+    color: #6aa354;
+}
 
 
 .searchbar_wrapper input::placeholder {
@@ -261,9 +264,9 @@ table {
 }
 
 .dashboard_create_new_card_btn {
-    padding: 1rem 1rem;
-    background-color: #FE385D;
-    outline: 4px solid #FE385D;
+    padding: 1.25rem 1.25rem;
+    background-color: #6aa354;
+    /* outline: 4px solid #FE385D; */
     border: none;
     font-weight: 600;
     font-size: 1.1rem;

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import { Typography } from '@mui/material';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import ReactDragListView from 'react-drag-listview';
@@ -12,8 +12,11 @@ import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import FacebookIcon from '@mui/icons-material/Facebook';
+import AuthContext from '../../context/AuthContext/AuthContext';
 
-const Media = ({ formData, setformData }) => {
+const Media = ({ formData, setformData, edit }) => {
+
+    const {currentUser} = useContext(AuthContext); 
   const dragPropsProFeatures = {
     onDragEnd(fromIndex, toIndex) {
       const data = formData.ProFeaturesList;
@@ -27,6 +30,25 @@ const Media = ({ formData, setformData }) => {
     nodeSelector: 'li',
     handleSelector: 'a',
   };
+
+
+//   fetch photo url using path of photo in firestrore
+  const fetchPhoto = async (filePath) => {
+    const newToken = await currentUser.getIdToken(true);
+    const promise = await fetch(`/user/fileupload/getImageUrl`, {
+        method: "POST",
+        headers: {
+            token: newToken
+        },
+        body: JSON.stringify({
+            urls: [filePath] 
+        })
+    });
+    const data = await promise.json();
+    console.log(data);
+}
+
+
   return (
     <>
       <div>
@@ -215,7 +237,7 @@ const Media = ({ formData, setformData }) => {
                                         }}
                                       />
                                       <img
-                                        src={image}
+                                        src={edit && typeof(image) === 'string'? fetchPhoto(image): URL.createObjectURL(image)}
                                         style={{
                                           width: '55px',
                                           height: '55px',
@@ -1046,7 +1068,7 @@ const Media = ({ formData, setformData }) => {
                                 }}
                               />
                               <img
-                                src={featured.image}
+                                src={edit && typeof(featured.image) === 'string'? fetchPhoto(featured.image): URL.createObjectURL(featured.image)}
                                 style={{
                                   width: '55px',
                                   height: '55px',
