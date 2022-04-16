@@ -66,3 +66,101 @@
     font-size: 1.2rem;
     color: white;
 }
+
+
+/* T o o l t i p */
+.tooltip {
+    position: relative;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.tooltip_text {
+    position: absolute;
+    background-color: white;
+    color: black;
+    top: -20px;
+    font-weight: 600;
+    font-size: .8rem;
+    letter-spacing: 1px;
+    border-radius: 10px;
+    right: 22px;
+    padding: .3rem .6rem;
+    visibility: hidden;
+}
+.tooltip_container:hover .tooltip_text{
+    visibility: visible;
+}
+
+.tooltip_text::after {
+    content: '';
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 8px solid white;
+    bottom: -8px;
+    right: 13px;
+}
+
+.tooltip_container {
+    position: relative;
+}
+
+.edit_heading_popup {
+    background-color: white; 
+    position: relative; 
+    width: fit-content; 
+    padding: 1.25rem 1rem 1rem; 
+    display: flex; 
+    align-items: center;
+    border-radius: 10px;
+    justify-content: space-between;
+}
+
+/* .edit_heading_popup::after {
+    content: '';
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    border-left: 5px solid transparent;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-right: 12px solid white;
+    bottom: -8px;
+    left: -17px;
+    top: 32px;
+} */
+
+.xmark_close_btn {
+    color: red;
+    font-size: 1rem;
+    position: relative;
+    top: -32px;
+    right: -8px;
+    cursor: pointer;
+}
+
+.heading_input {
+    padding: .5rem;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border: none;
+    /* outline: 2px solid grey; */
+    outline: 2px solid #1EB954;
+}
+
+
+.heading_save_btn {
+    height: 35.5px;
+    background-color: #1EB954;
+    padding: 0 .5rem;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    outline: none;
+    border: none;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+}

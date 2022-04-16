@@ -24,6 +24,7 @@ function Login() {
     })
     const [loading, setLoading] = useState(false);
     const [loadingGoogle, setLoadingGoogle] = useState(false);
+    const [signupMethod, setSignupMethod] = useState('');
 
     useEffect(() => {
         if (!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(user.email.toLowerCase()) && user.email !== '') {
@@ -39,10 +40,35 @@ function Login() {
     }, [user.email])
 
 
+
+    const sendToken = async () => {
+        const newToken = await currentUser.getIdToken(true);
+        console.log(typeof (newToken))
+        const promise = await fetch(`/user/auth/googleSignIn`, {
+            method: 'POST',
+            headers: {
+                accessToken: newToken,
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ accessToken: newToken })
+        })
+        const data = await promise.json();
+        if (data.status === 'success') {
+            console.log(data.status)
+            navigate('/dashboard')
+        } else if (data.status === 'error') {
+        }
+    }
+
     // redirecting to dashboard if the user is already logged in 
     useEffect(() => {
         if (currentUser) {
-            navigate('/dashboard')
+            if (signupMethod === 'google') {
+                sendToken()
+            } else {
+                navigate('/dashboard')
+            }
         }
     }, [currentUser])
 
@@ -97,6 +123,7 @@ function Login() {
         setError({ ...error, submit: '' })
         setLoadingGoogle(true);
         try {
+            await setSignupMethod('google');
             await signinWithGoogle();
 
             navigate('/dashboard')

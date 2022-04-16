@@ -1,0 +1,13 @@
+.cardFinalView__screen_area_wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardFinalView__screen_area {
+    width: 100%;
+    min-width: 300px;
+    max-width: 450px;
+    background-color: white;
+}

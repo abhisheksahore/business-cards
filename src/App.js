@@ -15,6 +15,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import CardView from './components/CardView/CardView';
 import Loader from './components/Loader/Loader';
 import BusinessInfo from './components/BusinessInfo/BusinessInfo';
+import CardFinalView from './components/CardFinalView/CardFinalView';
 
 
 
@@ -33,7 +34,8 @@ function App() {
           <Route exact path='/create' element={<CreationForm />}></Route>
           <Route exact path='/edit/:cardId' element={<CreationForm />}></Route>
           <Route exact path='/dashboard' element={<Dashboard />}></Route>
-          <Route exact path='/card/:cardURL' element={<CardView />}></Route>
+          <Route exact path='/card/:cardId' element={<CardView />}></Route>
+          <Route exact path='/:slug' element={<CardFinalView />}></Route>
           <Route path='*' element={<h1 style={{color: 'white'}}>404 page not found</h1>}></Route>
         </Routes>
       </Router>

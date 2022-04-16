@@ -26,3 +26,13 @@
 .create_btn:focus {
     box-shadow: 0px 0px 5px 2px #FE395D;
 }
+
+
+.error_message 
+{ 
+    color: #FE395D;
+    letter-spacing: 1px;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}

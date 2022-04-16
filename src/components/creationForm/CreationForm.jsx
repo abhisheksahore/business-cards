@@ -46,42 +46,24 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import Media from '../MediaSection';
 import FontsAndColors from '../FontsAndColors';
+import { Button } from 'react-bootstrap';
+
+
+
+
+
+// c o m p o n e n t
 
 function CreationForm() {
+    const navigate = useNavigate();
+    const { currentUser } = useContext(AuthContext);
 
     const [edit, setEdit] = useState(false);
     const { pathname } = useLocation();
     const [uploadError, setUploadError] = useState('')
-
-
-    useEffect(() => {
-        if (pathname && pathname.includes('/edit/')) {
-            setEdit(true);
-        }
-    }, [])
-
-    const getCardData = async () => {
-        const cardId = pathname.split('/')[2];
-        if (cardId) {
-            const promise = await fetch(`/user/card/getCard?id=${cardId}`);
-            const data = await promise.json();
-            console.log(data);
-            if (data.status === 'success') {
-                setformData({ ...data.data });
-            } else {
-                alert('invalid Card ID');
-                navigate('/dashboard');
-            }
-        }
-    }
-
-    useEffect(() => {
-        if (edit) {
-            getCardData();
-        }
-    }, [edit])
-
-
+    const [slugExists, setSlugExists] = useState();
+    const [slugError, setSlugError] = useState('');
+    const [cardLimitReached, setCardLimitReached] = useState(false);
     const [formData, setformData] = useState({
         Name: null,
         BusinessName: null,
@@ -110,6 +92,12 @@ function CreationForm() {
         skype: null,
         signal: null,
 
+        // editable button names
+        contactHeading: 'Contact Info',
+        socialMediaHeading: 'Social Media',
+        commerceHeading: 'Commerce',
+
+
         // s o c i a l   m e d i a 
         facebook: null,
         instagram: null,
@@ -125,7 +113,6 @@ function CreationForm() {
         spotify: null,
         behance: null,
         discord: null,
-
 
         // c o m m e r c e
         cashapp: null,
@@ -149,20 +136,93 @@ function CreationForm() {
         fontColor: '#ECECEC',
 
         // fonts
-        font: "'Montserrat', sans - serif",
+        font: "'Montserrat', sans-serif",
 
 
 
         ProFeaturesList: [],
     }
     );
-    const navigate = useNavigate();
-    const { currentUser } = useContext(AuthContext);
+
     useEffect(() => {
+        if (pathname && pathname.includes('/edit/')) {
+            setEdit(true);
+        }
+    }, [])
+
+    const getCardData = async () => {
+        const cardId = pathname.split('/')[2];
+        if (cardId && currentUser) {
+            const newToken = await currentUser.getIdToken(true);
+            const promise = await fetch(`/user/card/getCard?id=${cardId}`, {
+                method: 'GET',
+                headers: {
+                    token: newToken
+                }
+            });
+            const data = await promise.json();
+            if (data.status === 'success') {
+                setformData({ ...data.data });
+            } else {
+                alert('invalid Card ID');
+                navigate('/dashboard');
+            }
+        }
+    }
+
+
+
+
+
+    useEffect(() => {
+        if (edit) {
+            getCardData();
+        }
+    }, [edit, currentUser])
+
+
+
+
+
+
+
+
+
+    useEffect(async () => {
         if (currentUser === null) {
             navigate('/login');
         }
+
+        // fetch user data and set total cards to cardLimitReached state here
+        if (currentUser) {
+            const newToken = await currentUser.getIdToken(true);
+            const promise = await fetch(`/user/auth/getUserDetails`, {
+                headers: {
+                    token: newToken
+                }
+            })
+            const data = await promise.json();
+            console.log(data);
+            if (data.data.totalCards >= 2) {
+                setCardLimitReached(true)
+            } else {
+                setCardLimitReached(false)
+            }
+        }
     }, [currentUser]);
+
+
+
+
+
+
+
+    useEffect(() => {
+        console.log(formData)
+    }, [formData])
+
+
+
 
 
     const colorInputVariables = [
@@ -179,10 +239,6 @@ function CreationForm() {
             name: 'Button Background Color'
         },
         {
-            stateName: 'cardBackgroundColor',
-            name: 'Card Background Color'
-        },
-        {
             stateName: 'fontColor',
             name: 'Font Color'
         }
@@ -195,11 +251,15 @@ function CreationForm() {
             name: 'Andada Pro'
         },
         {
-            fontFamily: "'Anton', sans - serif",
+            fontFamily: "'Palette Mosaic', cursive",
+            name: 'Palette Mosaic'
+        },
+        {
+            fontFamily: "'Anton', sans-serif",
             name: 'Anton'
         },
         {
-            fontFamily: "'Archivo', sans - serif",
+            fontFamily: "'Archivo', sans-serif",
             name: 'Archivo'
         },
         {
@@ -211,11 +271,11 @@ function CreationForm() {
             name: 'Cormorant'
         },
         {
-            fontFamily: "'Encode Sans', sans - serif",
+            fontFamily: "'Encode Sans', sans-serif",
             name: 'Encode Sans'
         },
         {
-            fontFamily: "'Epilogue', sans - serif",
+            fontFamily: "'Epilogue', sans-serif",
             name: 'Epilogue'
         },
         {
@@ -223,7 +283,7 @@ function CreationForm() {
             name: 'Hahmlet'
         },
         {
-            fontFamily: "'Inter', sans - serif",
+            fontFamily: "'Inter', sans-serif",
             name: 'Inter'
         },
         {
@@ -231,7 +291,7 @@ function CreationForm() {
             name: 'JetBrains Mono'
         },
         {
-            fontFamily: "'Lato', sans - serif",
+            fontFamily: "'Lato', sans-serif",
             name: 'Lato'
         },
         {
@@ -239,15 +299,15 @@ function CreationForm() {
             name: 'Lora'
         },
         {
-            fontFamily: "'Manrope', sans - serif",
+            fontFamily: "'Manrope', sans-serif",
             name: 'Manrope'
         },
         {
-            fontFamily: "'Montserrat', sans - serif",
+            fontFamily: "'Montserrat', sans-serif",
             name: 'Montserrat'
         },
         {
-            fontFamily: "'Nunito', sans - serif",
+            fontFamily: "'Nunito', sans-serif",
             name: 'Nunito'
         },
         {
@@ -255,15 +315,15 @@ function CreationForm() {
             name: 'Old Standard TT'
         },
         {
-            fontFamily: "'Open Sans', sans - serif",
+            fontFamily: "'Open Sans', sans-serif",
             name: 'Open Sans'
         },
         {
-            fontFamily: "'Oswald', sans - serif",
+            fontFamily: "'Oswald', sans-serif",
             name: 'Oswald'
         },
         {
-            fontFamily: "'Oxygen', sans - serif",
+            fontFamily: "'Oxygen', sans-serif",
             name: 'Oxygen'
         },
         {
@@ -271,23 +331,23 @@ function CreationForm() {
             name: 'Playfair Display'
         },
         {
-            fontFamily: "'Poppins', sans - serif",
+            fontFamily: "'Poppins', sans-serif",
             name: 'Poppins'
         },
         {
-            fontFamily: "'Raleway', sans - serif",
+            fontFamily: "'Raleway', sans-serif",
             name: 'Raleway'
         },
         {
-            fontFamily: "'Roboto', sans - serif",
+            fontFamily: "'Roboto', sans-serif",
             name: 'Roboto'
         },
         {
-            fontFamily: "'Sora', sans - serif",
+            fontFamily: "'Sora', sans-serif",
             name: 'Sora'
         },
         {
-            fontFamily: "'Source Sans Pro', sans - serif",
+            fontFamily: "'Source Sans Pro', sans-serif",
             name: 'Source Sans Pro'
         },
         {
@@ -295,7 +355,7 @@ function CreationForm() {
             name: 'Spectral'
         },
         {
-            fontFamily: "'Work Sans', sans - serif",
+            fontFamily: "'Work Sans', sans-serif",
             name: 'Work Sans'
         }
     ]
@@ -340,7 +400,7 @@ function CreationForm() {
         {
             name: 'store',
             component: <StorefrontIcon style={{ color: '#fff' }} />,
-            placeholder: 'https://example.com',
+            placeholder: 'https://mystore.com',
             type: 'text',
             tooltip: 'Store'
         },
@@ -395,98 +455,112 @@ function CreationForm() {
             component: <FacebookIcon style={{ color: '#fff' }} />,
             placeholder: 'https://facebook.com/YourUserName',
             type: 'text',
-            tooltip: 'Facebook'
+            tooltip: 'Facebook',
+            color: '#1778F2'
         },
         {
             name: 'instagram',
             component: <InstagramIcon style={{ color: '#fff' }} />,
             placeholder: 'https://instagram.com/YourUserName',
             type: 'text',
-            tooltip: 'Instagram'
+            tooltip: 'Instagram',
+            color: '#FE395D'
         },
         {
             name: 'youtube',
             component: <YouTubeIcon style={{ color: '#fff' }} />,
             placeholder: 'https://youtube.com/myChannel',
             type: 'text',
-            tooltip: 'YouTube'
+            tooltip: 'YouTube',
+            color: '#FF0000'
         },
         {
             name: 'twitter',
             component: <TwitterIcon style={{ color: '#fff' }} />,
             placeholder: 'https://twitter.com/YourUserName',
             type: 'text',
-            tooltip: 'Twitter'
+            tooltip: 'Twitter',
+            color: '#55B3F3'
         },
         {
             name: 'vimeo',
             component: <FontAwesomeIcon className='font_size-1-2_and_color_white' icon={faVimeo} />,
             placeholder: 'https://vimeo.com/id',
             type: 'text',
-            tooltip: 'Vimeo'
+            tooltip: 'Vimeo',
+            color: '#19B1E3'
         },
         {
             name: 'twitch',
             component: <FontAwesomeIcon className='font_size-1-2_and_color_white' icon={faTwitch} />,
             placeholder: 'https://twitch.tv/myChannel',
             type: 'text',
-            tooltip: 'Twitch'
+            tooltip: 'Twitch',
+            color: '#8D44F7'
         },
         {
             name: 'linkedin',
             component: <FontAwesomeIcon className='font_size-1-2_and_color_white' icon={faLinkedin} />,
             placeholder: 'https://linkedin.com/YourUserName',
             type: 'text',
-            tooltip: 'Linkedin'
+            tooltip: 'Linkedin',
+            color: '#0073AF'
         },
         {
             name: 'snapchat',
             component: <FontAwesomeIcon className='font_size-1-2_and_color_white' icon={faSnapchat} />,
             placeholder: 'http://snapchat.com/add/YourUserName',
             type: 'text',
-            tooltip: 'Snapchat'
+            tooltip: 'Snapchat',
+            color: '#FCD704'
         },
         {
             name: 'reddit',
             component: <FontAwesomeIcon className='font_size-1-2_and_color_white' icon={faReddit} />,
             placeholder: 'https://reddit.com/user/YourUserName',
             type: 'text',
-            tooltip: 'Reddit'
+            tooltip: 'Reddit',
+            color: '#FF5700'
         },
         {
             name: 'tiktok',
             component: <FontAwesomeIcon className='font_size-1-2_and_color_white' icon={faTiktok} />,
             placeholder: 'https://tiktok.com/@username',
             type: 'text',
-            tooltip: 'TikTok'
+            tooltip: 'TikTok',
+            color: '#000000'
         },
         {
             name: 'pinterest',
             component: <FontAwesomeIcon className='font_size-1-2_and_color_white' icon={faPinterest} />,
             placeholder: 'https://pinterest.com/username',
             type: 'text',
-            tooltip: 'Pinterest'
+            tooltip: 'Pinterest',
+            color: '#DF0122'
         },
         {
             name: 'spotify',
             component: <FontAwesomeIcon className='font_size-1-2_and_color_white' icon={faSpotify} />,
             placeholder: 'https://open.spotify.com/user/userID',
             type: 'text',
-            tooltip: 'Spotify'
+            tooltip: 'Spotify',
+            color: '#1DB954'
         },
         {
             name: 'behance',
             component: <FontAwesomeIcon className='font_size-1-2_and_color_white' icon={faBehance} />,
             placeholder: 'https://behance.net/user_name',
             type: 'text',
-            tooltip: 'Behance'
+            tooltip: 'Behance',
+            color: '#053eff'
         },
         {
             name: 'discord',
             component: <FontAwesomeIcon className='font_size-1-2_and_color_white' icon={faDiscord} />,
             placeholder: 'https://discord.gg/EXZHcnd',
             type: 'text',
-            tooltip: 'Discord'
+            tooltip: 'Discord',
+            color: '#4F6DF7'
         }
     ]
 
@@ -518,28 +592,28 @@ function CreationForm() {
             component: <FontAwesomeIcon className='font_size-1-2_and_color_white' icon={faGoogle} />,
             placeholder: 'Your Google Business Profile',
             type: 'text',
-            tooltip: 'Google Business Profile'
+            tooltip: 'Google'
         },
         {
             name: 'bingBusinessProfile',
             component: <img src={bing} />,
             placeholder: 'Your Bing Business Profile',
             type: 'text',
-            tooltip: 'Bing Business Profile'
+            tooltip: 'Bing'
         },
         {
             name: 'amazonStore',
             component: <FontAwesomeIcon className='font_size-1-2_and_color_white' icon={faAmazon} />,
             placeholder: 'Your amazon store',
             type: 'text',
-            tooltip: 'Amazon Store'
+            tooltip: 'Amazon'
         },
         {
             name: 'eBayStore',
             component: <FontAwesomeIcon className='font_size-1-2_and_color_white' icon={faEbay} />,
             placeholder: 'Your eBay store',
             type: 'text',
-            tooltip: 'eBay Store'
+            tooltip: 'eBay'
         },
         {
             name: 'yelp',
@@ -551,57 +625,107 @@ function CreationForm() {
     ]
 
 
-    useEffect(() => {
-        if (submitClick) {
-            // console.log(formData);
-        }
-    }, [formData])
+    // useEffect(() => {
+    //     if (submitClick) {
+
+    //     }
+    // }, [formData])
 
     const [submitClick, setSubmitClick] = useState(false)
 
 
-    const uploadSingleFiles = async (fileType) => {
-        const newToken = await currentUser.getIdToken(true);
-        const form = new FormData();
-        form.append('files', formData[fileType]);
-        const promise = await fetch(`/user/fileupload`, {
-            method: "POST",
-            body: form,
-            headers: {
-                token: newToken
-            }
-        });
-        const data = await promise.json();
-        console.log(data);
-        return data;
-    }
+    // const uploadSingleFiles = async (fileType) => {
+    //     const newToken = await currentUser.getIdToken(true);
+    //     const form = new FormData();
+    //     form.append('files', formData[fileType]);
+    //     const promise = await fetch(`/user/fileupload`, {
+    //         method: "POST",
+    //         body: form,
+    //         headers: {
+    //             token: newToken
+    //         }
+    //     });
+    //     const data = await promise.json();
+    //     return data;
+    // }
 
 
     const submitCard = async () => {
-        console.log(' in submitCard function')
-        if (formData.cardName !== null && formData.cardSlug !== null && formData.Name !== null && formData.cardSlug.length > 6) {
+        if (edit) {
+            setSlugError('');
+            setSlugExists(false);
+        }
+        if ((edit || cardLimitReached === false) && formData.cardName !== null && formData.cardSlug !== null && formData.Name !== null && formData.cardSlug.length > 6 && (edit || slugExists === false) && slugError === '') {
             setUploadError('');
-            console.log('creating card')
-            const formDataTemp = formData;
+            setSubmitClick(true);
+            const formDataTemp = JSON.parse(JSON.stringify(formData));
             const proFeatureTemp = []
 
             // upload Logo if not already
-            if (typeof (formData.Logo) === 'object' && formData.Logo !== undefined && formData.Logo !== null) {
-                const data = await uploadSingleFiles('Logo');
+            if (formData.Logo !== undefined && formData.Logo !== null && typeof (formData.Logo) === 'object' && !formData.Logo.url) {
+                // const data = await uploadSingleFiles('Logo');
+                const newToken = await currentUser.getIdToken(true);
+                const form = new FormData();
+                form.append('files', formData['Logo']);
+                const promise = await fetch(`/user/fileupload`, {
+                    method: "POST",
+                    body: form,
+                    headers: {
+                        token: newToken
+                    }
+                });
+                const data = await promise.json();
+                 if (data.status === 'error') {
+                     setSubmitClick(false);
+                 }
                 formDataTemp.Logo = data.data[0]
+            } else if (formData.Logo && formData.Logo.url) {
+                formDataTemp.Logo = formData.Logo.name;
             }
             // upload profile picture if not already
-            if (typeof (formData.coverPhoto) === 'object' && formData.coverPhoto !== undefined && formData.coverPhoto !== null) {
-                const data = await uploadSingleFiles('coverPhoto');
+            if (formData.coverPhoto !== undefined && formData.coverPhoto !== null && typeof (formData.coverPhoto) === 'object' && !formData.coverPhoto.url) {
+                // const data = await uploadSingleFiles('coverPhoto');
+                const newToken = await currentUser.getIdToken(true);
+                const form = new FormData();
+                form.append('files', formData['coverPhoto']);
+                const promise = await fetch(`/user/fileupload`, {
+                    method: "POST",
+                    body: form,
+                    headers: {
+                        token: newToken
+                    }
+                });
+                const data = await promise.json();
+                if (data.status === 'error') {
+                    setSubmitClick(false);
+                }
                 formDataTemp.coverPhoto = data.data[0]
+            } else if (formData.coverPhoto && formData.coverPhoto.url) {
+                formDataTemp.coverPhoto = formData.coverPhoto.name;
             }
             // upload cover photo if not already
-            if (typeof (formData.ProfilePicture) === 'object' && formData.ProfilePicture !== undefined && formData.ProfilePicture !== null) {
-                const data = await uploadSingleFiles('ProfilePicture');
-                formDataTemp.ProfilePicture = data.data[0]
+            if (formData.ProfilePicture !== undefined && formData.ProfilePicture !== null && typeof (formData.ProfilePicture) === 'object' && !formData.ProfilePicture.url) {
+                // const data = await uploadSingleFiles('ProfilePicture');
+                const newToken = await currentUser.getIdToken(true);
+                const form = new FormData();
+                form.append('files', formData['ProfilePicture']);
+                const promise = await fetch(`/user/fileupload`, {
+                    method: "POST",
+                    body: form,
+                    headers: {
+                        token: newToken
+                    }
+                });
+                const data = await promise.json();
+                if (data.status === 'error') {
+                    setSubmitClick(false);
+                }
+                formDataTemp.ProfilePicture = data.data[0];
+            } else if (formData.ProfilePicture && formData.ProfilePicture.url) {
+                formDataTemp.ProfilePicture = formData.ProfilePicture.name;
             }
-
-            console.log('here')
+            console.log('in edit')
+            // file Upload
             for (const f of formData.ProFeaturesList) {
                 const newToken = await currentUser.getIdToken(true);
                 const form = new FormData();
@@ -609,14 +733,13 @@ function CreationForm() {
                     let flag = 0;
                     let images = [];
                     for (const image of f.images) {
-                        if (typeof (image) === 'string') {
-                            images.push(image);
+                        if (image.url) {
+                            images.push(image.name);
                         } else {
                             flag = 1;
                             form.append("files", image);
                         }
                     }
-                    console.log(images);
 
 
                     if (flag === 1) {
@@ -628,6 +751,9 @@ function CreationForm() {
                             }
                         });
                         const data = await promise.json();
+                        if (data.status === 'error') {
+                            setSubmitClick(false);
+                        }
                         if (f.images) {
                             f.images = [...images, ...data.data]
                         } else {
@@ -637,9 +763,9 @@ function CreationForm() {
                         f.images = [...images];
                     }
                     proFeatureTemp.push(f);
-                } else if (f.image && typeof (f.image) === 'object') {
-                    console.log(f.image)
-                    if (typeof(f.image) === 'object' && f.image !== null && f.image !== undefined && Array.isArray(f.image) === false) {
+                } else if (f.image) {
+
+                    if (!f.image.url) {
                         form.append("files", f.image);
                         const promise = await fetch(`/user/fileupload`, {
                             method: "POST",
@@ -649,25 +775,30 @@ function CreationForm() {
                             }
                         });
                         const data = await promise.json();
+                        if (data.status === 'error') {
+                            setSubmitClick(false);
+                        }
                         if (f.images) {
                             f.images = data.data
                         } else {
                             f.image = data.data[0];
                         }
-                    } 
+                    } else if (f.image.url) {
+                        f.image = f.image.name;
+                    }
                     proFeatureTemp.push(f);
                 } else {
                     proFeatureTemp.push(f);
                 }
 
             }
-            console.log(proFeatureTemp);
+
             formDataTemp.ProFeaturesList = proFeatureTemp;
-            console.log(formDataTemp)
-            console.log(currentUser);
+
 
             const newToken = await currentUser.getIdToken(true);
             if (edit) {
+
                 const cardId = pathname.split('/')[2];
                 const promise = await fetch(`/user/card/editCard?id=${cardId}`, {
                     method: 'PUT',
@@ -682,6 +813,8 @@ function CreationForm() {
                 const data = await promise.json();
                 if (data.status === 'success') {
                     navigate('/dashboard');
+                } else  if (data.status === 'error' || data.statusCode !== undefined) {
+                    setSubmitClick(false);
                 }
             } else {
                 const promise = await fetch(`/user/card/createCard`, {
@@ -697,18 +830,27 @@ function CreationForm() {
                 const data = await promise.json();
                 if (data.status === 'success') {
                     navigate('/dashboard');
+                } else if (data.status === 'error'|| data.statusCode !== undefined) {
+                    setUploadError(data.message);
+                    setSubmitClick(false);
                 }
             }
-        } else {
-            setUploadError('Fill the required fields');
-            console.log('in else block')
+        } else if (!edit && cardLimitReached === true) {
+            setUploadError('Can not create more than 2 cards.');
         }
-        console.log('getting out of submit card function')
+        else if (slugExists === undefined) {
+            setUploadError('Check for valid slug.');
+        } else if (slugError !== '') {
+            setUploadError(slugError);
+        } else {
+            console.log(slugError);
+            setUploadError("Fill the required fields.");
+        }
     }
 
     return (
         <>
-            {currentUser ? <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+            {currentUser ? <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: '3rem' }}>
                 <div
                     style={{
                         width: '50%',
@@ -717,21 +859,20 @@ function CreationForm() {
                         marginRight: '30px',
                     }}
                 >
-
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
-                        <GeneralInfo formData={formData} setformData={setformData} edit={edit} />
-                        <GenInfo iconsNameContactMap={iconsNameContactMap} formData={formData} color={'#7366F0'} keyName={'PrimaryButtons'} setformData={setformData} heading={'Contact Info'} />
-                        <GenInfo iconsNameContactMap={iconsNameSocialMap} formData={formData} color={'#FE385D'} keyName={'socialMedia'} setformData={setformData} heading={'Social Media'} />
-                        <GenInfo iconsNameContactMap={iconsNameCommerceMap} formData={formData} color={'#029C5F'} keyName={'commerce'} setformData={setformData} heading={'Commerce'} />
+                        <GeneralInfo formData={formData} setformData={setformData} edit={edit} slugExists={slugExists} slugError={slugError} setSlugError={setSlugError} setSlugExists={setSlugExists} />
+                        <GenInfo iconsNameContactMap={iconsNameContactMap} formData={formData} color={'#7366F0'} keyName={'PrimaryButtons'} setformData={setformData} heading={formData && formData.contactHeading} />
+                        <GenInfo iconsNameContactMap={iconsNameSocialMap} formData={formData} color={'#FE385D'} keyName={'socialMedia'} setformData={setformData} heading={formData && formData.socialMediaHeading} />
+                        <GenInfo iconsNameContactMap={iconsNameCommerceMap} formData={formData} color={'#029C5F'} keyName={'commerce'} setformData={setformData} heading={formData && formData.commerceHeading} />
                         <Media formData={formData} setformData={setformData} edit={edit} />
                         <FontsAndColors formData={formData} setformData={setformData} colorInputVariables={colorInputVariables} fontOptions={fontOptions} />
-                        <div style={{margin: '6rem 0'}}>
+                        <div style={{ margin: '6rem 0' }}>
                             {
-                                uploadError? 
-                                <div style={{color: '#FE395D'}}>{uploadError}</div>:
-                                null
+                                uploadError ?
+                                    <div className='error_message'>* {uploadError}</div> :
+                                    null
                             }
-                            <button className='create_btn' onClick={submitCard}>{edit ? 'Update card' : 'Create Card'}</button>
+                            <button disabled={submitClick} className='create_btn' onClick={submitCard}>{edit ? submitClick === true? 'Updating...': 'Update card' : submitClick === true? 'Creating...': 'Create Card'}</button>
                         </div>
                     </div>
                 </div>

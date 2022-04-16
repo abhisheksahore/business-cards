@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Typography } from '@mui/material';
 import './IphoneMockup.css';
 import { styled } from '@mui/material/styles';
@@ -23,16 +23,28 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LanguageIcon from '@mui/icons-material/Language';
 import AddLocationIcon from '@mui/icons-material/AddLocation';
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
+import ScreenArea from '../ScreenArea/ScreenArea';
+import { useLocation } from 'react-router-dom';
+import { faBatteryFull, faSignalPerfect, faWifi } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
 
-function IphoneMockup({ formData, setformData }) {
+
+function IphoneMockup({ formData }) {
+
+
+  const [edit, setEdit] = useState(false);
+  const { pathname } = useLocation();
+  useEffect(() => {
+    if (pathname && pathname.includes('/edit/')) {
+      setEdit(true);
+    }
+    if (pathname && pathname.includes('/card/')) {
+      setEdit(true);
+    }
+  }, [])
+
+
   return (
     <div className="iphone_mockup">
       <div className="iphone_mockup_left_btns_wrapper">
@@ -50,403 +62,22 @@ function IphoneMockup({ formData, setformData }) {
         <div className="middle">
           <div className="inner">
             <div className="inner_most">
-              <div className="iphone_notch">
-                <div className="iphone_notch_cam visibility_hidden"></div>
-                <div className="iphone_notch_speaker"></div>
-                <div className="iphone_notch_cam"></div>
-              </div>
-
-              <div className="screen_area">
-                <div
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    flexDirection: 'column',
-                  }}
-                >
-                  {formData && formData.Logo && (
-                    <img
-                      src={formData && formData.Logo}
-                      style={{
-                        width: '40px',
-                        height: '40px',
-                        // backgroundColor: 'red',
-                        borderRadius: '50%',
-                        marginTop: '2rem',
-                        objectFit: 'cover',
-                      }}
-                    />
-                  )}
-                  {formData && formData.ProfilePicture && (
-                    <img
-                      src={formData && formData.ProfilePicture}
-                      style={{
-                        width: '100px',
-                        height: '100px',
-                        // backgroundColor: 'red',
-                        borderRadius: '50%',
-                        marginTop:
-                          formData && formData.Logo ? '1.1rem' : '5.2rem',
-                        objectFit: 'cover',
-                      }}
-                    />
-                  )}
-
-                  <div style={{ marginTop: '20px' }}>
-                    <Typography variant="h6" component="div">
-                      {formData && formData.Name}{' '}
-                    </Typography>
-                    <Typography
-                      variant="subtitle1"
-                      gutterBottom
-                      component="div"
-                    >
-                      {formData && formData.BusinessName}
-                    </Typography>
-                    <div style={{ marginTop: '20px' }}>
-                      <Typography variant="body2" gutterBottom>
-                        {formData && formData.DescribeYourself}
-                      </Typography>
-                      <div
-                        style={{
-                          width: '100%',
-                          display: 'flex',
-                          justifyContent: 'center',
-                        }}
-                      >
-                        <Grid
-                          container
-                          spacing={3}
-                          columns={3}
-                          sx={{ marginTop: '30px' }}
-                        >
-                          {formData &&
-                            formData.PrimaryButtons &&
-                            formData.PrimaryButtons.map((icon) => {
-                              return (
-                                <>
-                                  {icon === 'CallIcon' ? (
-                                    <Grid
-                                      xs={1}
-                                      item
-                                      sx={{
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        alignItems: 'center',
-                                      }}
-                                    >
-                                      <Box
-                                        sx={{
-                                          width: '35px',
-                                          height: '35px',
-                                          borderRadius: '50%',
-                                          backgroundColor: '#1f2937',
-                                          display: 'flex',
-                                          justifyContent: 'center',
-                                          alignItems: 'center',
-                                          justifyItems: 'center',
-                                          marginBottom: '10px',
-                                        }}
-                                      >
-                                        <CallIcon
-                                          style={{
-                                            color: '#fff',
-                                            fontSize: '17px',
-                                          }}
-                                        />
-                                      </Box>{' '}
-                                      <Typography
-                                        style={{
-                                          color: '#1f2937',
-                                          fontSize: '12px',
-                                        }}
-                                      >
-                                        Call
-                                      </Typography>
-                                    </Grid>
-                                  ) : icon === 'TelegramIcon' ? (
-                                    <Grid
-                                      xs={1}
-                                      item
-                                      sx={{
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        alignItems: 'center',
-                                      }}
-                                    >
-                                      <Box
-                                        sx={{
-                                          width: '35px',
-                                          height: '35px',
-                                          borderRadius: '50%',
-                                          backgroundColor: '#1f2937',
-                                          display: 'flex',
-                                          justifyContent: 'center',
-                                          alignItems: 'center',
-                                          justifyItems: 'center',
-                                          marginBottom: '10px',
-                                        }}
-                                      >
-                                        <TelegramIcon
-                                          style={{
-                                            color: '#fff',
-                                            fontSize: '17px',
-                                          }}
-                                        />
-                                      </Box>{' '}
-                                      <Typography
-                                        style={{
-                                          color: '#1f2937',
-                                          fontSize: '12px',
-                                        }}
-                                      >
-                                        Telegram
-                                      </Typography>
-                                    </Grid>
-                                  ) : icon === 'WhatsAppIcon' ? (
-                                    <Grid
-                                      xs={1}
-                                      item
-                                      sx={{
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        alignItems: 'center',
-                                      }}
-                                    >
-                                      <Box
-                                        sx={{
-                                          width: '35px',
-                                          height: '35px',
-                                          borderRadius: '50%',
-                                          backgroundColor: '#1f2937',
-                                          display: 'flex',
-                                          justifyContent: 'center',
-                                          alignItems: 'center',
-                                          justifyItems: 'center',
-                                          marginBottom: '10px',
-                                        }}
-                                      >
-                                        <WhatsAppIcon
-                                          style={{
-                                            color: '#fff',
-                                            fontSize: '17px',
-                                          }}
-                                        />
-                                      </Box>{' '}
-                                      <Typography
-                                        style={{
-                                          color: '#1f2937',
-                                          fontSize: '12px',
-                                        }}
-                                      >
-                                        WhatsApp
-                                      </Typography>
-                                    </Grid>
-                                  ) : icon === 'MailOutlineIcon' ? (
-                                    <Grid
-                                      xs={1}
-                                      item
-                                      sx={{
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        alignItems: 'center',
-                                      }}
-                                    >
-                                      <Box
-                                        sx={{
-                                          width: '35px',
-                                          height: '35px',
-                                          borderRadius: '50%',
-                                          backgroundColor: '#1f2937',
-                                          display: 'flex',
-                                          justifyContent: 'center',
-                                          alignItems: 'center',
-                                          justifyItems: 'center',
-                                          marginBottom: '10px',
-                                        }}
-                                      >
-                                        <MailOutlineIcon
-                                          style={{
-                                            color: '#fff',
-                                            fontSize: '17px',
-                                          }}
-                                        />
-                                      </Box>{' '}
-                                      <Typography
-                                        style={{
-                                          color: '#1f2937',
-                                          fontSize: '12px',
-                                        }}
-                                      >
-                                        Mail
-                                      </Typography>
-                                    </Grid>
-                                  ) : icon === 'LanguageIcon' ? (
-                                    <Grid
-                                      xs={1}
-                                      item
-                                      sx={{
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        alignItems: 'center',
-                                      }}
-                                    >
-                                      <Box
-                                        sx={{
-                                          width: '35px',
-                                          height: '35px',
-                                          borderRadius: '50%',
-                                          backgroundColor: '#1f2937',
-                                          display: 'flex',
-                                          justifyContent: 'center',
-                                          alignItems: 'center',
-                                          justifyItems: 'center',
-                                          marginBottom: '10px',
-                                        }}
-                                      >
-                                        <LanguageIcon
-                                          style={{
-                                            color: '#fff',
-                                            fontSize: '17px',
-                                          }}
-                                        />
-                                      </Box>{' '}
-                                      <Typography
-                                        style={{
-                                          color: '#1f2937',
-                                          fontSize: '12px',
-                                        }}
-                                      >
-                                        Website
-                                      </Typography>
-                                    </Grid>
-                                  ) : icon === 'AddLocationIcon' ? (
-                                    <Grid
-                                      xs={1}
-                                      item
-                                      sx={{
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        alignItems: 'center',
-                                      }}
-                                    >
-                                      <Box
-                                        sx={{
-                                          width: '35px',
-                                          height: '35px',
-                                          borderRadius: '50%',
-                                          backgroundColor: '#1f2937',
-                                          display: 'flex',
-                                          justifyContent: 'center',
-                                          alignItems: 'center',
-                                          justifyItems: 'center',
-                                          marginBottom: '10px',
-                                        }}
-                                      >
-                                        <AddLocationIcon
-                                          style={{
-                                            color: '#fff',
-                                            fontSize: '17px',
-                                          }}
-                                        />
-                                      </Box>{' '}
-                                      <Typography
-                                        style={{
-                                          color: '#1f2937',
-                                          fontSize: '12px',
-                                        }}
-                                      >
-                                        Locate
-                                      </Typography>
-                                    </Grid>
-                                  ) : null}
-                                </>
-                              );
-                            })}
-                        </Grid>
-                      </div>
-                    </div>
-                  </div>
-                  {formData &&
-                    formData.ProFeaturesList &&
-                    formData.ProFeaturesList.map((feature) => {
-                      return (
-                        <div
-                          style={{
-                            width: '100%',
-                            padding: '10px',
-                            marginTop: '50px',
-                          }}
-                        >
-                          <Typography
-                            variant="h7"
-                            component="div"
-                            gutterBottom
-                            style={{ color: '#5d6473' }}
-                          >
-                            {feature.title}
-                          </Typography>
-                          {feature.type === 'image' &&
-                          feature.images &&
-                          feature.images.length > 0 ? (
-                            // <AwesomeSlider
-                            //   animation="cubeAnimation"
-                            //   cssModule={CubeStyles}
-                            // >
-                            //   {feature &&
-                            //     feature.images &&
-                            //     feature.images.map((image) => {
-                            //       return <div data-src={image} />;
-                            //     })}
-                            // </AwesomeSlider>
-                            <Carousel dynamicHeight={false} showThumbs={false}>
-                              {feature &&
-                                feature.images &&
-                                feature.images.map((image) => {
-                                  return (
-                                    <img
-                                      style={{
-                                        height: '200px',
-                                        objectFit: 'cover',
-                                      }}
-                                      src={image}
-                                    />
-                                  );
-                                })}
-                            </Carousel>
-                          ) : feature.type === 'media' ? (
-                            <div
-                              style={{
-                                maxWidth: '100%',
-                                display: 'flex',
-                                flexDirection: 'column',
-                                alignItems: 'center',
-                                height: '200px',
-                              }}
-                            >
-                              {feature &&
-                                feature.links &&
-                                feature.links.length > 0 &&
-                                feature.links.map((link) => {
-                                  return (
-                                    <ReactPlayer
-                                      style={{
-                                        maxWidth: '275px',
-                                        marginTop: '10px',
-                                      }}
-                                      url={link}
-                                    />
-                                  );
-                                })}
-                            </div>
-                          ) : null}
-                        </div>
-                      );
-                    })}
+              <div style={{ display: 'flex', borderTopLeftRadius: "32px", borderTopRightRadius: "32px", justifyContent: 'space-between',  alignItems: 'flex-end', color: formData && formData.fontColor?formData.fontColor: 'black', backgroundColor: formData && formData.mainBackgroundColor? formData.mainBackgroundColor: 'transparent', width: '100%' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginLeft: '10px', marginBottom: '3.5px' }}>
+                  <div style={{fontWeight: '600', width: '45px', fontSize: '.75rem', textAlign: 'center'}}>9:41</div>
+                </div>
+                <div className="iphone_notch">
+                  <div className="iphone_notch_cam visibility_hidden"></div>
+                  <div className="iphone_notch_speaker"></div>
+                  <div className="iphone_notch_cam"></div>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginRight: '10px', marginBottom: '3.5px' }}>
+                  <FontAwesomeIcon style={{ fontWeight: "800", fontSize: '.7rem' }} icon={faWifi} />
+                  <FontAwesomeIcon style={{ display: 'flex', alignItems: 'flex-end', position: 'relative', top: '1px', fontSize: '1rem'  }} icon={faBatteryFull} />
                 </div>
               </div>
+
+              <ScreenArea formData={formData} edit={edit} />
             </div>
           </div>
         </div>

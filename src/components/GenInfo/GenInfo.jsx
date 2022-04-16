@@ -14,6 +14,8 @@ import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import FacebookIcon from '@mui/icons-material/Facebook';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 function GenInfo({
   formData,
@@ -23,9 +25,34 @@ function GenInfo({
   keyName,
   color,
 }) {
+
+
+  const [editHeading, setEditHeading] = useState(false);
+  const [newHeading, setNewHeading] = useState();
+
   const getIconComponent = (name) => {
     const compToReturn = iconsNameContactMap.find((e) => e.name === name);
-    return compToReturn.component;
+    return (
+      <Box
+        sx={{
+          width: '55px',
+          height: '55px',
+          borderRadius: '50%',
+          backgroundColor: keyName && keyName === 'socialMedia' ? compToReturn.color : color,
+          marginLeft: '5px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          '&:hover': {
+            transform: 'scale(1.2)',
+            transition: 'transform .2s',
+            cursor: 'pointer',
+          },
+        }}
+      >
+        {compToReturn.component}
+      </Box>
+    )
   };
 
   const returnOutlineInput = (name) => {
@@ -55,34 +82,42 @@ function GenInfo({
     );
   };
 
-  const returnButtons = (btnName, iconComponent) => {
+  const returnButtons = (btnName, iconComponent, tooltip, smColor) => {
     return (
-      <Box
-        sx={{
-          width: '55px',
-          height: '55px',
-          borderRadius: '50%',
-          backgroundColor: color,
-          marginRight: '20px',
-          marginTop: '25px',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          '&:hover': {
-            transform: 'scale(1.2)',
-            transition: 'transform .2s',
-            cursor: 'pointer',
-          },
-        }}
-        onClick={() => {
-          setformData((formState) => ({
-            ...formState,
-            [keyName]: [...formData[keyName], btnName],
-          }));
-        }}
-      >
-        {iconComponent}
-      </Box>
+      <div className='tooltip_container' style={keyName && keyName === 'socialMedia' ? { width: '100%' } : null}>
+        <div className='tooltip_text'>{tooltip}</div>
+        <div className='tooltip' style={keyName && keyName === 'socialMedia' ? { width: '100%' } : null}>
+          <Box
+            sx={{
+              width: keyName && keyName === 'socialMedia' ? '100%' : '55px',
+              height: '55px',
+              borderRadius: keyName && keyName === 'socialMedia' ? '10px' : '50%',
+              backgroundColor: keyName && keyName === 'socialMedia' ? smColor : color,
+              marginRight: '20px',
+              marginTop: '25px',
+              display: 'flex',
+              gap: '2rem',
+              justifyContent: 'center',
+              alignItems: 'center',
+              fontsize: keyName && keyName === 'socialMedia' ? '1.5rem' : 'inherit',
+              '&:hover': {
+                transform: keyName && keyName === 'socialMedia' ? 'scale(1.02)' : 'scale(1.2)',
+                transition: 'transform .2s',
+                cursor: 'pointer',
+              },
+            }}
+            onClick={() => {
+              setformData((formState) => ({
+                ...formState,
+                [keyName]: [...formData[keyName], btnName],
+              }));
+            }}
+          >
+            {iconComponent}
+            {keyName && keyName === 'socialMedia' ? <div style={{ color: 'white', fontSize: '1rem', fontWeight: '800' }}>{tooltip}</div> : null}
+          </Box>
+        </div>
+      </div>
     );
   };
 
@@ -100,16 +135,63 @@ function GenInfo({
     handleSelector: 'a',
   };
 
-  console.log(formData, '<-------------------------');
+
+  const changeHeading = () => {
+    setformData({ ...formData, })
+  }
+
 
   return (
     <>
+
+      {/* {editHeading ?
+        <>
+        <div className='dark_model_background' onClick={() => setEditHeading(false)}></div>
+          <div className='modal'>
+            <div className='modal_message'>Cannot create more than 2 cards.</div>
+            <div><FontAwesomeIcon className='modal_close' onClick={() => setEditHeading(false)} icon={faXmark} /></div>
+          </div>
+        </> :
+        null
+      } */}
       {/*------------------------- Primary Buttons---------------------------- */}
       <div
         className="gen_info_heading"
-        style={{ marginTop: '40px', color: 'white' }}
+        style={{ marginTop: '8rem', color: 'white', display: 'flex', alignItems: 'center', gap: '1rem' }}
       >
         {heading}
+        {
+          !editHeading ?
+            <FontAwesomeIcon style={{ marginLeft: '.5rem', fontSize: '1rem', cursor: 'pointer' }} icon={faEdit} onClick={() => {
+              setEditHeading(true);
+              if (keyName === 'PrimaryButtons') {
+                setNewHeading(formData.contactHeading)
+              } else if (keyName === 'socialMedia') {
+                setNewHeading(formData.socialMediaHeading)
+              } else if (keyName === 'commerce') {
+                setNewHeading(formData.commerceHeading)
+              }
+            }} /> :
+            <div className='edit_heading_popup'>
+              <div style={{display: 'flex', alignItems: 'center'}}>
+                <input className='heading_input' type="text" value={newHeading} onChange={(e) => setNewHeading(e.target.value)} />
+                <button className='heading_save_btn' onClick={()=>{
+                  if (keyName === 'PrimaryButtons') {
+                    setformData({ ...formData, contactHeading: newHeading })
+                  } else if (keyName === 'socialMedia') {
+                    setformData({ ...formData, socialMediaHeading: newHeading })
+                  } else if (keyName === 'commerce') {
+                    setformData({ ...formData, commerceHeading: newHeading })
+                  }
+                  setEditHeading(false);
+                }}>
+                  Save
+                </button>
+              </div>
+              <div><FontAwesomeIcon icon={faXmark} className='xmark_close_btn' onClick={()=>setEditHeading(false)} /></div>
+
+            </div>
+        }
       </div>
       <ReactDragListView {...dragProps}>
         <ol>
@@ -137,27 +219,10 @@ function GenInfo({
                 >
                   <DragIndicatorIcon />
                 </a>
-                <Box
-                  sx={{
-                    width: '55px',
-                    height: '55px',
-                    borderRadius: '50%',
-                    backgroundColor: color,
-                    marginLeft: '5px',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    '&:hover': {
-                      transform: 'scale(1.2)',
-                      transition: 'transform .2s',
-                      cursor: 'pointer',
-                    },
-                  }}
-                >
-                  {getIconComponent(item)}
-                </Box>
+
+                {getIconComponent(item)}
                 {returnOutlineInput(item)}
-                <CloseIcon
+                < CloseIcon
                   onClick={() => {
                     let list =
                       formData &&
@@ -178,22 +243,24 @@ function GenInfo({
             ))}
         </ol>
       </ReactDragListView>
-      {formData && formData[keyName] && formData[keyName].length > 0 ? (
-        <Divider
-          style={{
-            marginTop: '30px',
-            backgroundColor: '#D3D3D3',
-            opacity: '0.1',
-          }}
-        />
-      ) : null}
+      {
+        formData && formData[keyName] && formData[keyName].length > 0 ? (
+          <Divider
+            style={{
+              marginTop: '30px',
+              backgroundColor: '#D3D3D3',
+              opacity: '0.1',
+            }}
+          />
+        ) : null
+      }
       <div style={{ display: 'flex', maxWidth: '450px', flexWrap: 'wrap' }}>
         {iconsNameContactMap.map((icon) => {
           return formData &&
             formData[keyName] &&
             formData[keyName].includes(icon.name)
             ? null
-            : returnButtons(icon.name, icon.component);
+            : returnButtons(icon.name, icon.component, icon.tooltip, icon.color);
         })}
       </div>
     </>

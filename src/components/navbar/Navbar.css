@@ -1,6 +1,6 @@
 .navbar_container {
     color: rgb(195, 195, 195);
-    padding: 1rem 5rem 0;
+    padding: 0rem 5rem;
     position: sticky;
     right: 0rem;
     left: 0rem;
@@ -13,7 +13,7 @@
 .navbar_wrapper {
     background-color: transparent;
     /* background-color: white; */
-    padding: 1rem 0rem 2rem;
+    padding: 1rem 0rem 1rem;
     /* border-radius: 8px; */
     font-weight: 600;
     letter-spacing: 1px;
@@ -42,7 +42,7 @@
 .welcome_note {
     display: flex;
     align-items: center;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
 }
 
 .profile_btn {
@@ -63,6 +63,7 @@
     width: 50px;
     height: 50px;
     position: relative;
+    cursor: pointer;
 }
 
 .profile_pic::after {
@@ -99,4 +100,37 @@
     color: white;
     border: none;
     text-decoration: none;
+}
+
+
+.menu_background {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+}
+
+.navbar_menu {
+    position: absolute;
+    background-color: white;
+    padding: .75rem .5rem;
+    gap: .4rem;
+    display: flex;
+    flex-direction: column;  
+    border-radius: 10px;  
+    top: 6rem;
+    right: 4rem;
+    color: grey;
+}
+
+.navbar_menu div {
+    padding: .75rem;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.navbar_menu div:hover,
+.navbar_menu div:focus {
+    background-color: rgb(240, 240, 240);   
 }

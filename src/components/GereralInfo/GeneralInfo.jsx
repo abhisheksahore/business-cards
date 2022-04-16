@@ -9,12 +9,45 @@ import AuthContext from '../../context/AuthContext/AuthContext';
 
 
 
-const GeneralInfo = ({ formData, setformData, edit }) => {
+const GeneralInfo = ({ formData, setformData, edit, slugExists, setSlugExists, slugError, setSlugError }) => {
 
-    const [slugExists, setSlugExists] = useState();
-    const [slugError, setSlugError] = useState('');
 
-    const {currentUser} = useContext(AuthContext);
+
+    const [logoUrl, setLogoUrl] = useState('')
+    const [coverPhotoUrl, setCoverPhotoUrl] = useState('')
+    const [profilePictureUrl, setProfilePictureUrl] = useState('')
+
+
+    useEffect(async () => {
+
+        // if (formData.Logo) {
+        //     if (edit && typeof (formData.Logo) === 'string') {
+        //         setLogoUrl(await fetchPhoto(formData.Logo));
+        //     } else {
+        //         setLogoUrl(URL.createObjectURL(formData.Logo))
+        //     }
+        // }
+
+        // if (formData.coverPhoto) {
+        //     if (edit && typeof (formData.coverPhoto) === 'string') {
+        //         setCoverPhotoUrl(await fetchPhoto(formData.coverPhoto));
+        //     } else {
+        //         setCoverPhotoUrl(URL.createObjectURL(formData.coverPhoto))
+        //     }
+        // }
+        // if (formData.ProfilePicture) {
+        //     if (edit && typeof (formData.ProfilePicture) === 'string') {
+        //         setProfilePictureUrl(await fetchPhoto(formData.ProfilePicture));
+        //     } else {
+        //         setProfilePictureUrl(URL.createObjectURL(formData.ProfilePicture))
+        //     }
+        // }
+    }, [formData.Logo, formData.coverPhoto, formData.ProfilePicture])
+
+
+
+
+    const { currentUser } = useContext(AuthContext);
     const LogoInput = useRef();
     const coverInput = useRef();
     const profilePictureInput = useRef();
@@ -24,9 +57,11 @@ const GeneralInfo = ({ formData, setformData, edit }) => {
         const promise = await fetch(`user/fileupload/deletefiles`, {
             method: "POST",
             headers: {
-                token: newToken
+                token: newToken,
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
             },
-            body: JSON.stringify({urls: [file]})
+            body: JSON.stringify({ urls: [file] })
 
         })
     }
@@ -39,13 +74,21 @@ const GeneralInfo = ({ formData, setformData, edit }) => {
             const promise = await fetch(`/user/card/checkSlug?slug=${formData.cardSlug}`, {
                 method: "GET",
                 headers: {
-                    token: newToken
+                    token: newToken,
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json'
                 }
             });
             const data = await promise.json();
-            console.log(data);
-            setSlugExists(data.status);
+            if (data.status === true) {
+                setSlugExists(data.status);
+                setSlugError('Slug already exists. Choose another one')
+            } else {
+                setSlugExists(data.status);
+                setSlugError('');
+            }
         } else {
+            setSlugExists(undefined);
             setSlugError('Not a valid Slug.');
         }
 
@@ -57,20 +100,22 @@ const GeneralInfo = ({ formData, setformData, edit }) => {
         const promise = await fetch(`/user/fileupload/getImageUrl`, {
             method: "POST",
             headers: {
-                token: newToken
+                token: newToken,
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                urls: [filePath] 
+                urls: [filePath]
             })
         });
         const data = await promise.json();
-        console.log(data);
+        return data.urls[0]
     }
 
 
     return (
         <>
-         <div className="gen_info_heading">General Information</div>
+            <div className="gen_info_heading" style={{marginBottom: '2rem'}}>General Information</div>
             <OutlinedInput
                 required
                 variant="outlined"
@@ -118,66 +163,70 @@ const GeneralInfo = ({ formData, setformData, edit }) => {
             />
 
             {/* Card URL */}
-            <div style={{display:'flex', alignItems: 'flex-end', justifyContent: 'space-between', width: '449px'}}>
-                <OutlinedInput
-                    variant="outlined"
-                    name={'cardSlug'}
-                    // placeholder={'Card URL'}
-                    // disabled
-                    sx={{
-                        width: '35%',
-                        borderRadius: '5px',
-                        marginTop: '15px',
-                        border: '0.5px solid #6a97ae',
-                        color: '#fff',
-                        backgroundColor: '#283046;',
-                        fontWeight: '700'
-                    }}
-                    value={'bizcard.com/'}
-                />
-                <OutlinedInput
-                    required
-                    variant="outlined"
-                    name={'cardSlug'}
-                    value={formData.cardSlug}
-                    placeholder={'Card URL'}
-                    sx={{
-                        width: '35%',
-                        borderRadius: '5px',
-                        marginTop: '15px',
-                        border: '0.5px solid #6a97ae',
-                        color: '#fff',
-                        backgroundColor: '#283046;',
-                    }}
-                    onChange={(e) => {
-                        setformData((formState) => ({
-                            ...formState,
-                            cardSlug: e.target.value,
-                        }));
-                    }}
-                />
-                <button className='slug_check_button' onClick={checkSlug}>
-                    Check
-                </button>
-            </div>
-            { 
-                slugExists === true?
-                <small className='slug_error'>
-                    Slug already exists. Choose another one 
-                </small>:
-                slugExists === false?
-                <small className='slug_success'>
-                    Available 
-                </small>:
-                null
-            }
-            {
-                slugError !== ""?
-                <small className='slug_error'>
-                    {slugError} 
-                </small>:
-                null
-            }
+            {edit === false ?
+                <>
+                    <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', width: '449px' }}>
+                        <OutlinedInput
+                            variant="outlined"
+                            name={'cardSlug'}
+                            // placeholder={'Card URL'}
+                            // disabled
+                            sx={{
+                                width: '35%',
+                                borderRadius: '5px',
+                                marginTop: '15px',
+                                border: '0.5px solid #6a97ae',
+                                color: '#fff',
+                                backgroundColor: '#283046;',
+                                fontWeight: '700'
+                            }}
+                            value={'bizcard.com/'}
+                        />
+                        <OutlinedInput
+                            required
+                            variant="outlined"
+                            name={'cardSlug'}
+                            value={formData.cardSlug}
+                            placeholder={'Card URL'}
+                            sx={{
+                                width: '35%',
+                                borderRadius: '5px',
+                                marginTop: '15px',
+                                border: '0.5px solid #6a97ae',
+                                color: '#fff',
+                                backgroundColor: '#283046;',
+                            }}
+                            onChange={(e) => {
+                                setformData((formState) => ({
+                                    ...formState,
+                                    cardSlug: e.target.value,
+                                }));
+                            }}
+                        />
+                        <button className='slug_check_button' onClick={checkSlug}>
+                            Check
+                        </button>
+                    </div>
+                    {
+                        slugExists === true ?
+                            <small className='slug_error'>
+                                {slugError}
+                            </small> :
+                            slugExists === false ?
+                                <small className='slug_success'>
+                                    Available
+                                </small> :
+                                null
+                    }
+                    {
+                        slugError !== "" ?
+                            <small className='slug_error'>
+                                {slugError}
+                            </small> :
+                            null
+                    }
+                </> :
+                null}
 
 
             {/* Gender Pronouns */}
@@ -290,12 +339,19 @@ const GeneralInfo = ({ formData, setformData, edit }) => {
                 }}
                 value={formData.DescribeYourself}
             />
+
+
+
+
+
+
+
             {formData && formData.Logo ? (
                 <div
                     style={{ display: 'flex', marginTop: '20px', alignItems: 'center' }}
                 >
                     <img
-                        src={edit && typeof(formData.Logo) === 'string'? fetchPhoto(formData.Logo): URL.createObjectURL(formData.Logo)}
+                        src={edit && formData.Logo && formData.Logo.url ? formData.Logo.url : formData.Logo && !formData.Logo.url ? URL.createObjectURL(formData.Logo) : null}
                         style={{ width: '55px', height: '55px', objectFit: 'cover' }}
                     />
                     <CloseIcon
@@ -339,7 +395,6 @@ const GeneralInfo = ({ formData, setformData, edit }) => {
                             accept="image/*"
                             style={{ width: '100%', height: '100%', display: 'none' }}
                             onChange={(e) => {
-                                console.log(e.target.files[0]);
                                 setformData((formState) => ({
                                     ...formState,
                                     Logo: e.target.files[0],
@@ -385,7 +440,7 @@ const GeneralInfo = ({ formData, setformData, edit }) => {
                     style={{ display: 'flex', marginTop: '20px', alignItems: 'center' }}
                 >
                     <img
-                        src={edit && typeof(formData.coverPhoto) === 'string'? fetchPhoto(formData.coverPhoto): URL.createObjectURL(formData.coverPhoto)}
+                        src={edit && formData.coverPhoto && formData.coverPhoto.url ? formData.coverPhoto.url : formData.coverPhoto && !formData.coverPhoto.url ? URL.createObjectURL(formData.coverPhoto) : null}
                         style={{ width: '55px', height: '55px', objectFit: 'cover' }}
                     />
                     <CloseIcon
@@ -429,7 +484,6 @@ const GeneralInfo = ({ formData, setformData, edit }) => {
                             accept="image/*"
                             style={{ width: '100%', height: '100%', display: 'none' }}
                             onChange={(e) => {
-                                console.log(e.target.files[0]);
                                 setformData((formState) => ({
                                     ...formState,
                                     coverPhoto: e.target.files[0],
@@ -472,7 +526,7 @@ const GeneralInfo = ({ formData, setformData, edit }) => {
                     style={{ display: 'flex', marginTop: '20px', alignItems: 'center' }}
                 >
                     <img
-                        src={edit && typeof(formData.ProfilePicture) === 'string'? fetchPhoto(formData.ProfilePicture): URL.createObjectURL(formData.ProfilePicture)}
+                        src={edit && formData.ProfilePicture && formData.ProfilePicture.url ? formData.ProfilePicture.url : formData.ProfilePicture && !formData.ProfilePicture.url ? URL.createObjectURL(formData.ProfilePicture) : null}
                         style={{ width: '55px', height: '55px', objectFit: 'cover' }}
                     />
                     <CloseIcon
@@ -516,7 +570,6 @@ const GeneralInfo = ({ formData, setformData, edit }) => {
                             accept="image/*"
                             style={{ width: '100%', height: '100%', display: 'none' }}
                             onChange={(e) => {
-                                console.log(e.target.files[0]);
                                 setformData((formState) => ({
                                     ...formState,
                                     ProfilePicture: e.target.files[0],

@@ -151,7 +151,6 @@ function Signup() {
         setLoadingGoogle(false);
     }
 
-
     // password visibiliity toggle
     const togglePasswordVisibility = () => {
         const password = document.querySelector('#password');
