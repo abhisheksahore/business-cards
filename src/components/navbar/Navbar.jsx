@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import AuthContext from '../../context/AuthContext/AuthContext';
 import './Navbar.css'
+import Logo from '../../assets/logo.svg';
 
 function Navbar() {
     const location = useLocation();
@@ -24,7 +25,8 @@ function Navbar() {
             <div className='navbar_container'>
                 <div className='navbar_wrapper'>
                     <div className='logo'>
-                        <span className='logo_main'>bizcards</span><span className='logo_com'>.com</span>
+                        {/* <span className='logo_main'>bizcards</span><span className='logo_com'>.com</span> */}
+                        <img src={Logo} width='200' height={70} alt="" />
                     </div>
                     <div className='welcome_note'>
                         Welcome, {currentUser.displayName}

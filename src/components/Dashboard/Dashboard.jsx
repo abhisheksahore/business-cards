@@ -27,7 +27,7 @@ function Dashboard() {
         const newToken = await currentUser.getIdToken(true);
         console.log(newToken)
         console.log(currentUser)
-        const promise = await fetch(`/user/card/getAllCards`, {
+        const promise = await fetch(process.env.REACT_APP_API_URL+`/user/card/getAllCards`, {
             headers: {
                 'Content-Type': 'application/json',
                 'uid': `${currentUser.uid}`,
@@ -47,7 +47,8 @@ function Dashboard() {
 
         if (currentUser) {
             const newToken = await currentUser.getIdToken(true);
-            const promise = await fetch(`/user/auth/getUserDetails`, {
+            console.log(process.env.REACT_APP_API_URL)
+            const promise = await fetch(process.env.REACT_APP_API_URL+`/user/auth/getUserDetails`, {
                 headers: {
                     token: newToken
                 }
@@ -64,7 +65,7 @@ function Dashboard() {
 
     const fetchPhoto = async (filePath) => {
         const newToken = await currentUser.getIdToken(true);
-        const promise = await fetch(`/user/fileupload/getImageUrl`, {
+        const promise = await fetch(process.env.REACT_APP_API_URL+`/user/fileupload/getImageUrl`, {
             method: "POST",
             headers: {
                 token: newToken,
@@ -98,7 +99,7 @@ function Dashboard() {
 
     // const getQRCode = async (cardUrl) => {
     //     const newToken = await currentUser.getIdToken(true);
-    //     const promise = await fetch(`/user/card/createQr`);
+    //     const promise = await fetch(process.env.REACT_APP_API_URL+`/user/card/createQr`);
     //     const data = await promise.json();
     //     return data.data;
     // }
@@ -120,7 +121,7 @@ function Dashboard() {
 
     const deleteCard = async (id) => {
         const newToken = await currentUser.getIdToken(true);
-        const promise = await fetch(`/user/card/deleteCard?id=${id}`, {
+        const promise = await fetch(process.env.REACT_APP_API_URL+`/user/card/deleteCard?id=${id}`, {
             method: "PUT",
             headers: {
                 token: newToken,
@@ -142,7 +143,7 @@ function Dashboard() {
         }
         if (currentUser) {
             const newToken = await currentUser.getIdToken(true);
-            const promise = await fetch(`/user/auth/getUserDetails`, {
+            const promise = await fetch(process.env.REACT_APP_API_URL+`/user/auth/getUserDetails`, {
                 headers: {
                     token: newToken
                 }
@@ -171,7 +172,7 @@ function Dashboard() {
 
     const publishCard = async (card) => {
         const newToken = await currentUser.getIdToken(true);
-        const promise = fetch(`/user/card/changeStatus`, {
+        const promise = fetch(process.env.REACT_APP_API_URL+`/user/card/changeStatus`, {
             method: 'PUT',
             headers: {
                 token: newToken,

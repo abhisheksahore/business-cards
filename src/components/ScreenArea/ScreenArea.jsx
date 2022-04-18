@@ -80,7 +80,7 @@ const ScreenArea = ({ formData, edit }) => {
 
     // const fetchPhoto = async (filePath) => {
     //     const newToken = await currentUser.getIdToken(true);
-    //     const promise = await fetch(`/user/fileupload/getImageUrl`, {
+    //     const promise = await fetch(process.env.REACT_APP_API_URL+`/user/fileupload/getImageUrl`, {
     //         method: "POST",
     //         headers: {
     //             token: newToken,
@@ -106,7 +106,7 @@ const ScreenArea = ({ formData, edit }) => {
 
 
     // const download_vcf = async () => {
-    //     const promise = await fetch(`/user/card/vcard?name=${formData && formData.Name ? formData.Name : null}&email=${formData && formData.Mail ? formData.Mail : null}&phone=${formData && formData.Call ? formData.Call : null}`);
+    //     const promise = await fetch(process.env.REACT_APP_API_URL+`/user/card/vcard?name=${formData && formData.Name ? formData.Name : null}&email=${formData && formData.Mail ? formData.Mail : null}&phone=${formData && formData.Call ? formData.Call : null}`);
     //     promise.blob().then(blob => {
     //         const filename = `${Date.now()}`.vcf;
     //         const url = window.URL.createObjectURL(blob);
@@ -124,7 +124,7 @@ const ScreenArea = ({ formData, edit }) => {
 
     //     useEffect(async () => {
     //         const newToken = await currentUser.getIdToken(true);
-    //         const promise = await fetch(`/user/card/vcard?name=${formData && formData.Name ? formData.Name : null}&email=${formData && formData.Mail ? formData.Mail : null}&phone=${formData && formData.Call ? formData.Call : null}`, {
+    //         const promise = await fetch(process.env.REACT_APP_API_URL+`/user/card/vcard?name=${formData && formData.Name ? formData.Name : null}&email=${formData && formData.Mail ? formData.Mail : null}&phone=${formData && formData.Call ? formData.Call : null}`, {
     //             headers: {
     //                 token: newToken
     //             },
@@ -194,7 +194,7 @@ const ScreenArea = ({ formData, edit }) => {
         //         for (let j = 0; j < featureListTemp[i].images.length; j++) {
         //             if (edit && typeof (featureListTemp[i].images[j]) === 'string') {
         //                 const newToken = await currentUser.getIdToken(true);
-        //                 const promise = await fetch(`/user/fileupload/getImageUrl`, {
+        //                 const promise = await fetch(process.env.REACT_APP_API_URL+`/user/fileupload/getImageUrl`, {
         //                     method: "POST",
         //                     headers: {
         //                         token: newToken,
@@ -215,7 +215,7 @@ const ScreenArea = ({ formData, edit }) => {
         //     } else if (featureListTemp[i].image) {
         //         if (edit && typeof (featureListTemp[i].image) === 'string') {
         //             const newToken = await currentUser.getIdToken(true);
-        //             const promise = await fetch(`/user/fileupload/getImageUrl`, {
+        //             const promise = await fetch(process.env.REACT_APP_API_URL+`/user/fileupload/getImageUrl`, {
         //                 method: "POST",
         //                 headers: {
         //                     token: newToken,
