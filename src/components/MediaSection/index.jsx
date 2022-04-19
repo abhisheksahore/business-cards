@@ -39,7 +39,7 @@ const Media = ({ formData, setformData, edit }) => {
     //   fetch photo url using path of photo in firestrore
     // const fetchPhoto = async (filePath) => {
     //     const newToken = await currentUser.getIdToken(true);
-    //     const promise = await fetch(`/user/fileupload/getImageUrl`, {
+    //     const promise = await fetch(process.env.REACT_APP_API_URL+`/user/fileupload/getImageUrl`, {
     //         method: "POST",
     //         headers: {
     //             token: newToken,
@@ -68,7 +68,7 @@ const Media = ({ formData, setformData, edit }) => {
         //         for (let j = 0; j < featureListTemp[i].images.length; j++) {
         //             if (edit && typeof (featureListTemp[i].images[j]) === 'string') {
         //                 const newToken = await currentUser.getIdToken(true);
-        //                 const promise = await fetch(`/user/fileupload/getImageUrl`, {
+        //                 const promise = await fetch(process.env.REACT_APP_API_URL+`/user/fileupload/getImageUrl`, {
         //                     method: "POST",
         //                     headers: {
         //                         token: newToken,
@@ -90,7 +90,7 @@ const Media = ({ formData, setformData, edit }) => {
         //     } else if (featureListTemp[i].image) {
         //         if (edit && typeof (featureListTemp[i].image) === 'string') {
         //             const newToken = await currentUser.getIdToken(true);
-        //             const promise = await fetch(`/user/fileupload/getImageUrl`, {
+        //             const promise = await fetch(process.env.REACT_APP_API_URL+`/user/fileupload/getImageUrl`, {
         //                 method: "POST",
         //                 headers: {
         //                     token: newToken,

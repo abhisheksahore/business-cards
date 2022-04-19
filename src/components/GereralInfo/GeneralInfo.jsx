@@ -54,7 +54,7 @@ const GeneralInfo = ({ formData, setformData, edit, slugExists, setSlugExists, s
 
     const deleteFile = async (file) => {
         const newToken = await currentUser.getIdToken(true);
-        const promise = await fetch(`user/fileupload/deletefiles`, {
+        const promise = await fetch(process.env.REACT_APP_API_URL+`user/fileupload/deletefiles`, {
             method: "POST",
             headers: {
                 token: newToken,
@@ -71,7 +71,7 @@ const GeneralInfo = ({ formData, setformData, edit, slugExists, setSlugExists, s
         if (/^[a-z](-?[a-z])*$/.test(formData.cardSlug)) {
             setSlugError('');
             const newToken = await currentUser.getIdToken(true);
-            const promise = await fetch(`/user/card/checkSlug?slug=${formData.cardSlug}`, {
+            const promise = await fetch(process.env.REACT_APP_API_URL+`/user/card/checkSlug?slug=${formData.cardSlug}`, {
                 method: "GET",
                 headers: {
                     token: newToken,
@@ -97,7 +97,7 @@ const GeneralInfo = ({ formData, setformData, edit, slugExists, setSlugExists, s
 
     const fetchPhoto = async (filePath) => {
         const newToken = await currentUser.getIdToken(true);
-        const promise = await fetch(`/user/fileupload/getImageUrl`, {
+        const promise = await fetch(process.env.REACT_APP_API_URL+`/user/fileupload/getImageUrl`, {
             method: "POST",
             headers: {
                 token: newToken,

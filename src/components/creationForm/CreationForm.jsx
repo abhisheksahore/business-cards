@@ -154,7 +154,7 @@ function CreationForm() {
         const cardId = pathname.split('/')[2];
         if (cardId && currentUser) {
             const newToken = await currentUser.getIdToken(true);
-            const promise = await fetch(`/user/card/getCard?id=${cardId}`, {
+            const promise = await fetch(process.env.REACT_APP_API_URL+`/user/card/getCard?id=${cardId}`, {
                 method: 'GET',
                 headers: {
                     token: newToken
@@ -196,7 +196,8 @@ function CreationForm() {
         // fetch user data and set total cards to cardLimitReached state here
         if (currentUser) {
             const newToken = await currentUser.getIdToken(true);
-            const promise = await fetch(`/user/auth/getUserDetails`, {
+            
+            const promise = await fetch(process.env.REACT_APP_API_URL+`/user/auth/getUserDetails`, {
                 headers: {
                     token: newToken
                 }
@@ -638,7 +639,7 @@ function CreationForm() {
     //     const newToken = await currentUser.getIdToken(true);
     //     const form = new FormData();
     //     form.append('files', formData[fileType]);
-    //     const promise = await fetch(`/user/fileupload`, {
+    //     const promise = await fetch(process.env.REACT_APP_API_URL+`/user/fileupload`, {
     //         method: "POST",
     //         body: form,
     //         headers: {
@@ -667,7 +668,7 @@ function CreationForm() {
                 const newToken = await currentUser.getIdToken(true);
                 const form = new FormData();
                 form.append('files', formData['Logo']);
-                const promise = await fetch(`/user/fileupload`, {
+                const promise = await fetch(process.env.REACT_APP_API_URL+`/user/fileupload`, {
                     method: "POST",
                     body: form,
                     headers: {
@@ -688,7 +689,7 @@ function CreationForm() {
                 const newToken = await currentUser.getIdToken(true);
                 const form = new FormData();
                 form.append('files', formData['coverPhoto']);
-                const promise = await fetch(`/user/fileupload`, {
+                const promise = await fetch(process.env.REACT_APP_API_URL+`/user/fileupload`, {
                     method: "POST",
                     body: form,
                     headers: {
@@ -709,7 +710,7 @@ function CreationForm() {
                 const newToken = await currentUser.getIdToken(true);
                 const form = new FormData();
                 form.append('files', formData['ProfilePicture']);
-                const promise = await fetch(`/user/fileupload`, {
+                const promise = await fetch(process.env.REACT_APP_API_URL+`/user/fileupload`, {
                     method: "POST",
                     body: form,
                     headers: {
@@ -743,7 +744,7 @@ function CreationForm() {
 
 
                     if (flag === 1) {
-                        const promise = await fetch(`/user/fileupload`, {
+                        const promise = await fetch(process.env.REACT_APP_API_URL+`/user/fileupload`, {
                             method: "POST",
                             body: form,
                             headers: {
@@ -767,7 +768,7 @@ function CreationForm() {
 
                     if (!f.image.url) {
                         form.append("files", f.image);
-                        const promise = await fetch(`/user/fileupload`, {
+                        const promise = await fetch(process.env.REACT_APP_API_URL+`/user/fileupload`, {
                             method: "POST",
                             body: form,
                             headers: {
@@ -800,7 +801,7 @@ function CreationForm() {
             if (edit) {
 
                 const cardId = pathname.split('/')[2];
-                const promise = await fetch(`/user/card/editCard?id=${cardId}`, {
+                const promise = await fetch(process.env.REACT_APP_API_URL+`/user/card/editCard?id=${cardId}`, {
                     method: 'PUT',
                     headers: {
                         token: newToken,
@@ -817,7 +818,7 @@ function CreationForm() {
                     setSubmitClick(false);
                 }
             } else {
-                const promise = await fetch(`/user/card/createCard`, {
+                const promise = await fetch(process.env.REACT_APP_API_URL+`/user/card/createCard`, {
                     method: 'POST',
                     headers: {
                         token: newToken,

@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import AuthContext from '../../context/AuthContext/AuthContext';
 import './Navbar.css'
+import Logo from '../../assets/logo.svg';
 
 function Navbar() {
     const location = useLocation();

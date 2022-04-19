@@ -56,7 +56,7 @@ function Signup() {
     const sendToken = async () => {
         const newToken = await currentUser.getIdToken(true);
         console.log(typeof (newToken))
-        const promise = await fetch(`/user/auth/googleSignIn`, {
+        const promise = await fetch(process.env.REACT_APP_API_URL+`/user/auth/googleSignIn`, {
             method: 'POST',
             headers: {
                 accessToken: newToken,
@@ -112,7 +112,7 @@ function Signup() {
         if (error.name === '' && error.email === '' && error.password === '' && error.submit === '') {
             setLoading(true);
             try {
-                const promise = await fetch(`/user/auth/signupByEmail`, {
+                const promise = await fetch(process.env.REACT_APP_API_URL+`/user/auth/signupByEmail`, {
                     method: "POST",
                     headers: {
                         'Accept': 'application/json',

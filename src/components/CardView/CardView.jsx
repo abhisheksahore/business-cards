@@ -21,7 +21,7 @@ function CardView() {
   useEffect(async () => {
     if (cardId && currentUser) {
       const newToken = await currentUser.getIdToken(true);
-      const promise = await fetch(`/user/card/getCard?id=${cardId}`, {
+      const promise = await fetch(process.env.REACT_APP_API_URL+`/user/card/getCard?id=${cardId}`, {
         method: "get",
         headers: {
           token: newToken,
