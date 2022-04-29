@@ -298,10 +298,10 @@ function Dashboard() {
                                             <div>
                                                 {!e.published ?
                                                     <>
-                                                        {`${process.env.REACT_APP_API_URL}${e.cardSlug}`}
+                                                        {`${process.env.REACT_APP_APP_URL}${e.cardSlug}`}
                                                         {/* <FontAwesomeIcon icon={faSquareArrowUpRight}/> */}
                                                     </> :
-                                                    <a style={{ textDecoration: "none", color: '#6AA354', fontWeight: "700" }} target='_blank' href={`${process.env.REACT_APP_APP_URL}${e.cardSlug}`}>{`${process.env.REACT_APP_API_URL}${e.cardSlug}`}
+                                                    <a style={{ textDecoration: "none", color: '#6AA354', fontWeight: "700" }} target='_blank' href={`${process.env.REACT_APP_APP_URL}${e.cardSlug}`}>{`${process.env.REACT_APP_APP_URL}${e.cardSlug}`}
                                                         {' '}<FontAwesomeIcon icon={faSquareArrowUpRight} /></a>
                                                 }
                                             </div>
