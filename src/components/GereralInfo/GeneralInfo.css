@@ -1,7 +1,7 @@
 .slug_check_button {
     padding: 18px;
     height: fit-content;
-    background-color: #FE395D;
+    background-color: #6AA354;
     color: white;
     font-weight: 600;
     letter-spacing: 1px;
@@ -14,7 +14,7 @@
 
 
 .slug_error {
-    color: #FE395D;
+    color: #6AA354;
     font-size: 1rem; 
     margin-top: .5rem; 
     font-weight: 600;

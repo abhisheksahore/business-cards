@@ -17,7 +17,7 @@ const CardFinalView = () => {
     // }, [])
 
     const fetchCards = async (newToken) => {
-        const promise = await fetch(process.env.REACT_APP_API_URL+`/user/card/getCard?id=${pathname.split('/')[pathname.split('/').length - 1]}&isCount=${true}`, {
+        const promise = await fetch(process.env.REACT_APP_API_URL+`user/card/getCard?id=${pathname.split('/')[pathname.split('/').length - 1]}&isCount=${true}`, {
             method: "get",
             headers: {
                 token: newToken,

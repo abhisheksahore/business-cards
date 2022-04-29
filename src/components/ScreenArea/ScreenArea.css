@@ -49,3 +49,13 @@
 .head_area_wrapper {
     height: 250px;
 }
+
+.save-to-contact-btn {
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 1rem 2rem;
+    color: white;    
+    border-radius: 10px;  
+    cursor: pointer;  
+    margin-top: 4rem;
+}

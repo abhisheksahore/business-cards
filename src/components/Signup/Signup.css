@@ -46,7 +46,7 @@
     width: 100%;
 }
 .input_box:focus {
-    outline: 3px solid #FE385D;
+    outline: 3px solid #6AA354;
 }
 
 .login_password_input {
@@ -72,7 +72,7 @@
 }
 
 .login_btn {
-    background-color: #FE385D;
+    background-color: #6AA354;
     border: none;
     outline: none;
     padding: .7rem;
@@ -86,7 +86,7 @@
 }
 .login_btn:hover,
 .login_btn:focus {
-    background-color: #fc244b;
+    background-color: #4da32b;
 }
 
 .login_instead_wrapper {
@@ -98,7 +98,7 @@
 
 .login_instead {
     text-decoration: none;
-    color: #fc2c52;
+    color: #6AA354;
     font-weight: 500;
     margin-left: .7rem;
 }
@@ -116,7 +116,7 @@
     align-items: center;
     margin-top: 2rem;
     outline: none;
-    outline: 2px solid #FE385D;
+    outline: 2px solid #6AA354;
     border: none;
     padding: 1rem;
     width: 100%;
@@ -125,7 +125,7 @@
     cursor: pointer;
     letter-spacing: 1px;
     background-color: transparent;
-    color: #FE385D;
+    color: #6AA354;
     font-size: 1rem;
     letter-spacing: 1px;
     font-weight: 600;
@@ -133,7 +133,7 @@
 
 .signup_with_google:hover,
 .signup_with_google:focus {
-    background-color: #FE385D;
+    background-color: #6AA354;
     color: white;
     font-weight: 600;
 }
@@ -151,7 +151,7 @@
     font-family: 'Varela Round', sans-serif;
 }
 .big_logo .big_logo_name {
-    color: #FE385D;
+    color: #6AA354;
     /* background-color: white;
      */
      /* outline: 4px solid #FE385D; */

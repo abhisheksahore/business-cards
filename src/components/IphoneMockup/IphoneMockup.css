@@ -1,5 +1,7 @@
 .iphone_mockup {
     display: flex;
+    position: sticky;
+     top: 132px;
 }
 
 /* .iphone_mockup_left_btns_wrapper {

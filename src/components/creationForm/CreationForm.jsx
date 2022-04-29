@@ -6,6 +6,9 @@ import GeneralInfo from '../GereralInfo/GeneralInfo';
 import IphoneMockup from '../IphoneMockup/IphoneMockup';
 import Loader from '../Loader/Loader';
 import './CreationForm.css';
+import { alpha, styled } from '@mui/material/styles';
+import { pink } from '@mui/material/colors';
+import Switch from '@mui/material/Switch';
 
 import TelegramIcon from '@mui/icons-material/Telegram';
 import StorefrontIcon from '@mui/icons-material/Storefront';
@@ -47,6 +50,7 @@ import {
 import Media from '../MediaSection';
 import FontsAndColors from '../FontsAndColors';
 import { Button } from 'react-bootstrap';
+import { FormControlLabel } from '@mui/material';
 
 
 
@@ -154,7 +158,7 @@ function CreationForm() {
         const cardId = pathname.split('/')[2];
         if (cardId && currentUser) {
             const newToken = await currentUser.getIdToken(true);
-            const promise = await fetch(process.env.REACT_APP_API_URL+`/user/card/getCard?id=${cardId}`, {
+            const promise = await fetch(process.env.REACT_APP_API_URL + `user/card/getCard?id=${cardId}`, {
                 method: 'GET',
                 headers: {
                     token: newToken
@@ -172,6 +176,59 @@ function CreationForm() {
 
 
 
+    const IOSSwitch = styled((props) => (
+        <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
+    ))(({ theme }) => ({
+        width: 60,
+        height: 34,
+        padding: 0,
+        '& .MuiSwitch-switchBase': {
+            padding: 0,
+            margin: 2,
+            transitionDuration: '300ms',
+            '&.Mui-checked': {
+                transform: 'translateX(26px)',
+                color: '#fff',
+                '& + .MuiSwitch-track': {
+                    backgroundColor: theme.palette.mode === 'dark' ? '#6aa354' : '#6aa354',
+                    opacity: 1,
+                    border: 0,
+                },
+                '&.Mui-disabled + .MuiSwitch-track': {
+                    opacity: 0.5,
+                },
+            },
+            '&.Mui-focusVisible .MuiSwitch-thumb': {
+                color: '#33cf4d',
+                border: '6px solid #fff',
+                backgroundColor: 'red'
+            },
+            '&.Mui-disabled .MuiSwitch-thumb': {
+                color:
+                    theme.palette.mode === 'light'
+                        ? "#6aa354"
+                        : "#6aa354",
+            },
+            '&.Mui-disabled + .MuiSwitch-track': {
+                opacity: theme.palette.mode === 'light' ? 0.7 : 0.3,
+            },
+        },
+        '& .MuiSwitch-thumb': {
+            boxSizing: 'border-box',
+            width: 30,
+            height: 30,
+            backgroundColor: '#346140'
+        },
+        '& .MuiSwitch-track': {
+            borderRadius: 34 / 2,
+            // backgroundColor: theme.palette.mode === 'light' ? '#696969' : '#111111',
+            backgroundColor: "#ffffff",
+            opacity: 1,
+            transition: theme.transitions.create(['background-color'], {
+                duration: 500,
+            }),
+        },
+    }));
 
 
     useEffect(() => {
@@ -196,8 +253,8 @@ function CreationForm() {
         // fetch user data and set total cards to cardLimitReached state here
         if (currentUser) {
             const newToken = await currentUser.getIdToken(true);
-            
-            const promise = await fetch(process.env.REACT_APP_API_URL+`/user/auth/getUserDetails`, {
+
+            const promise = await fetch(process.env.REACT_APP_API_URL + `user/auth/getUserDetails`, {
                 headers: {
                     token: newToken
                 }
@@ -408,7 +465,7 @@ function CreationForm() {
         {
             name: 'messenger',
             component: <FontAwesomeIcon className='font_size-1-2_and_color_white' icon={faFacebookMessenger} />,
-            placeholder: 'm.me/username',
+            placeholder: 'https://m.me/username',
             type: 'text',
             tooltip: 'Messenger'
         },
@@ -572,56 +629,64 @@ function CreationForm() {
             component: <img src={CashApp} style={{ width: '4rem' }} alt="" />,
             placeholder: 'https://cash.app/$yourcashtag',
             type: 'text',
-            tooltip: 'CashApp'
+            tooltip: 'CashApp',
+            color: '#01CF30'
         },
         {
             name: 'paypal',
             component: <FontAwesomeIcon className='font_size-1-2_and_color_white' icon={faPaypal} />,
             placeholder: 'https://PayPal.me/YourUserName',
             type: 'text',
-            tooltip: 'PayPal'
+            tooltip: 'PayPal',
+            color: '#012C81'
         },
         {
             name: 'stripe',
             component: <FontAwesomeIcon className='font_size-1-2_and_color_white' icon={faStripeS} />,
             placeholder: 'Your Stripe account',
             type: 'text',
-            tooltip: 'Stripe'
+            tooltip: 'Stripe',
+            color: '#6772E5'
         },
         {
             name: 'googleBusinessProfile',
             component: <FontAwesomeIcon className='font_size-1-2_and_color_white' icon={faGoogle} />,
             placeholder: 'Your Google Business Profile',
             type: 'text',
-            tooltip: 'Google'
+            tooltip: 'Google',
+            color: '#7FAAF8'
         },
         {
             name: 'bingBusinessProfile',
             component: <img src={bing} />,
             placeholder: 'Your Bing Business Profile',
             type: 'text',
-            tooltip: 'Bing'
+            tooltip: 'Bing',
+            color: '#027E6E'
         },
         {
             name: 'amazonStore',
             component: <FontAwesomeIcon className='font_size-1-2_and_color_white' icon={faAmazon} />,
             placeholder: 'Your amazon store',
             type: 'text',
-            tooltip: 'Amazon'
+            tooltip: 'Amazon',
+            color: '#FB9B0F'
         },
         {
             name: 'eBayStore',
             component: <FontAwesomeIcon className='font_size-1-2_and_color_white' icon={faEbay} />,
             placeholder: 'Your eBay store',
             type: 'text',
-            tooltip: 'eBay'
+            tooltip: 'eBay',
+            color: '#E53338'
         },
         {
             name: 'yelp',
             component: <FontAwesomeIcon className='font_size-1-2_and_color_white' icon={faYelp} />,
             placeholder: 'Your yelp store',
             type: 'text',
-            tooltip: 'Yelp'
+            tooltip: 'Yelp',
+            color: '#D32422'
         }
     ]
 
@@ -639,7 +704,7 @@ function CreationForm() {
     //     const newToken = await currentUser.getIdToken(true);
     //     const form = new FormData();
     //     form.append('files', formData[fileType]);
-    //     const promise = await fetch(process.env.REACT_APP_API_URL+`/user/fileupload`, {
+    //     const promise = await fetch(process.env.REACT_APP_API_URL+`user/fileupload`, {
     //         method: "POST",
     //         body: form,
     //         headers: {
@@ -668,7 +733,7 @@ function CreationForm() {
                 const newToken = await currentUser.getIdToken(true);
                 const form = new FormData();
                 form.append('files', formData['Logo']);
-                const promise = await fetch(process.env.REACT_APP_API_URL+`/user/fileupload`, {
+                const promise = await fetch(process.env.REACT_APP_API_URL + `user/fileupload`, {
                     method: "POST",
                     body: form,
                     headers: {
@@ -676,9 +741,9 @@ function CreationForm() {
                     }
                 });
                 const data = await promise.json();
-                 if (data.status === 'error') {
-                     setSubmitClick(false);
-                 }
+                if (data.status === 'error') {
+                    setSubmitClick(false);
+                }
                 formDataTemp.Logo = data.data[0]
             } else if (formData.Logo && formData.Logo.url) {
                 formDataTemp.Logo = formData.Logo.name;
@@ -689,7 +754,7 @@ function CreationForm() {
                 const newToken = await currentUser.getIdToken(true);
                 const form = new FormData();
                 form.append('files', formData['coverPhoto']);
-                const promise = await fetch(process.env.REACT_APP_API_URL+`/user/fileupload`, {
+                const promise = await fetch(process.env.REACT_APP_API_URL + `user/fileupload`, {
                     method: "POST",
                     body: form,
                     headers: {
@@ -710,7 +775,7 @@ function CreationForm() {
                 const newToken = await currentUser.getIdToken(true);
                 const form = new FormData();
                 form.append('files', formData['ProfilePicture']);
-                const promise = await fetch(process.env.REACT_APP_API_URL+`/user/fileupload`, {
+                const promise = await fetch(process.env.REACT_APP_API_URL + `user/fileupload`, {
                     method: "POST",
                     body: form,
                     headers: {
@@ -744,7 +809,7 @@ function CreationForm() {
 
 
                     if (flag === 1) {
-                        const promise = await fetch(process.env.REACT_APP_API_URL+`/user/fileupload`, {
+                        const promise = await fetch(process.env.REACT_APP_API_URL + `user/fileupload`, {
                             method: "POST",
                             body: form,
                             headers: {
@@ -768,7 +833,7 @@ function CreationForm() {
 
                     if (!f.image.url) {
                         form.append("files", f.image);
-                        const promise = await fetch(process.env.REACT_APP_API_URL+`/user/fileupload`, {
+                        const promise = await fetch(process.env.REACT_APP_API_URL + `user/fileupload`, {
                             method: "POST",
                             body: form,
                             headers: {
@@ -801,7 +866,7 @@ function CreationForm() {
             if (edit) {
 
                 const cardId = pathname.split('/')[2];
-                const promise = await fetch(process.env.REACT_APP_API_URL+`/user/card/editCard?id=${cardId}`, {
+                const promise = await fetch(process.env.REACT_APP_API_URL + `user/card/editCard?id=${cardId}`, {
                     method: 'PUT',
                     headers: {
                         token: newToken,
@@ -814,11 +879,11 @@ function CreationForm() {
                 const data = await promise.json();
                 if (data.status === 'success') {
                     navigate('/dashboard');
-                } else  if (data.status === 'error' || data.statusCode !== undefined) {
+                } else if (data.status === 'error' || data.statusCode !== undefined) {
                     setSubmitClick(false);
                 }
             } else {
-                const promise = await fetch(process.env.REACT_APP_API_URL+`/user/card/createCard`, {
+                const promise = await fetch(process.env.REACT_APP_API_URL + `user/card/createCard`, {
                     method: 'POST',
                     headers: {
                         token: newToken,
@@ -831,7 +896,7 @@ function CreationForm() {
                 const data = await promise.json();
                 if (data.status === 'success') {
                     navigate('/dashboard');
-                } else if (data.status === 'error'|| data.statusCode !== undefined) {
+                } else if (data.status === 'error' || data.statusCode !== undefined) {
                     setUploadError(data.message);
                     setSubmitClick(false);
                 }
@@ -847,6 +912,10 @@ function CreationForm() {
             console.log(slugError);
             setUploadError("Fill the required fields.");
         }
+    }
+
+    const change = (e) => {
+        setformData({...formData, SaveToContact: e.target.checked})
     }
 
     return (
@@ -865,6 +934,14 @@ function CreationForm() {
                         <GenInfo iconsNameContactMap={iconsNameContactMap} formData={formData} color={'#7366F0'} keyName={'PrimaryButtons'} setformData={setformData} heading={formData && formData.contactHeading} />
                         <GenInfo iconsNameContactMap={iconsNameSocialMap} formData={formData} color={'#FE385D'} keyName={'socialMedia'} setformData={setformData} heading={formData && formData.socialMediaHeading} />
                         <GenInfo iconsNameContactMap={iconsNameCommerceMap} formData={formData} color={'#029C5F'} keyName={'commerce'} setformData={setformData} heading={formData && formData.commerceHeading} />
+                        <div className='save-to-contact-wrapper'>
+                            <label htmlFor="save-to-contact" className="save-to-contact">Save to Contact</label>
+                            <FormControlLabel id="save-to-contact"
+                                control={<IOSSwitch sx={{ m: 1 }} checked={formData.SaveToContact} />}
+                                label=""
+                                onClick={(e)=>change(e)}
+                            />
+                        </div>
                         <Media formData={formData} setformData={setformData} edit={edit} />
                         <FontsAndColors formData={formData} setformData={setformData} colorInputVariables={colorInputVariables} fontOptions={fontOptions} />
                         <div style={{ margin: '6rem 0' }}>
@@ -873,11 +950,11 @@ function CreationForm() {
                                     <div className='error_message'>* {uploadError}</div> :
                                     null
                             }
-                            <button disabled={submitClick} className='create_btn' onClick={submitCard}>{edit ? submitClick === true? 'Updating...': 'Update card' : submitClick === true? 'Creating...': 'Create Card'}</button>
+                            <button disabled={submitClick} className='create_btn' onClick={submitCard}>{edit ? submitClick === true ? 'Updating...' : 'Update card' : submitClick === true ? 'Creating...' : 'Create Card'}</button>
                         </div>
                     </div>
                 </div>
-                <div style={{ width: '50%', marginLeft: '30px' }}>
+                <div style={{ width: '50%', marginLeft: '30px', position: 'relative' }}>
                     <IphoneMockup formData={formData} />
                 </div>
             </div> :

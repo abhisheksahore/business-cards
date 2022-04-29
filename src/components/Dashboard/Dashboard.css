@@ -119,7 +119,7 @@ table {
 .table_wrapper {
     display: flex;
     flex-direction: column;
-    padding: 5rem;
+    padding: 3rem 5rem;
     border: 1.5px solid rgb(74, 74, 74);
     border-radius: 30px;
     gap: 1rem;
@@ -130,7 +130,7 @@ table {
 .searchbar_container {
     display: flex;
     /* border-bottom: 1px solid rgb(62, 62, 62); */
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
     justify-content: space-between;
     align-items: center;
     gap: 2rem;

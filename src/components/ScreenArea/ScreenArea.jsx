@@ -80,7 +80,7 @@ const ScreenArea = ({ formData, edit }) => {
 
     // const fetchPhoto = async (filePath) => {
     //     const newToken = await currentUser.getIdToken(true);
-    //     const promise = await fetch(process.env.REACT_APP_API_URL+`/user/fileupload/getImageUrl`, {
+    //     const promise = await fetch(process.env.REACT_APP_API_URL+`user/fileupload/getImageUrl`, {
     //         method: "POST",
     //         headers: {
     //             token: newToken,
@@ -105,26 +105,25 @@ const ScreenArea = ({ formData, edit }) => {
     // const [vCardFile, setVCardFile] = useState();
 
 
-    // const download_vcf = async () => {
-    //     const promise = await fetch(process.env.REACT_APP_API_URL+`/user/card/vcard?name=${formData && formData.Name ? formData.Name : null}&email=${formData && formData.Mail ? formData.Mail : null}&phone=${formData && formData.Call ? formData.Call : null}`);
-    //     promise.blob().then(blob => {
-    //         const filename = `${Date.now()}`.vcf;
-    //         const url = window.URL.createObjectURL(blob);
-    //         const a = document.createElement('a');
-    //         a.style.display = 'none';
-    //         a.href = url;
-    //         // the filename you want
-    //         a.download = filename;
-    //         document.body.appendChild(a);
-    //         a.click();
-    //         document.body.removeChild(a);
-    //         window.URL.revokeObjectURL(url);
-    //     })
-    // }
+    const download_vcf = async () => {
+        const promise = await fetch(process.env.REACT_APP_API_URL+`user/card/vcard?name=${formData && formData.Name ? formData.Name : null}&email=${formData && formData.Mail ? formData.Mail : null}&phone=${formData && formData.Call ? formData.Call : null}`);
+        promise.blob().then(blob => {
+            const filename = `${Date.now()}`.vcf;
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        })
+    }
 
     //     useEffect(async () => {
     //         const newToken = await currentUser.getIdToken(true);
-    //         const promise = await fetch(process.env.REACT_APP_API_URL+`/user/card/vcard?name=${formData && formData.Name ? formData.Name : null}&email=${formData && formData.Mail ? formData.Mail : null}&phone=${formData && formData.Call ? formData.Call : null}`, {
+    //         const promise = await fetch(process.env.REACT_APP_API_URL+`user/card/vcard?name=${formData && formData.Name ? formData.Name : null}&email=${formData && formData.Mail ? formData.Mail : null}&phone=${formData && formData.Call ? formData.Call : null}`, {
     //             headers: {
     //                 token: newToken
     //             },
@@ -194,7 +193,7 @@ const ScreenArea = ({ formData, edit }) => {
         //         for (let j = 0; j < featureListTemp[i].images.length; j++) {
         //             if (edit && typeof (featureListTemp[i].images[j]) === 'string') {
         //                 const newToken = await currentUser.getIdToken(true);
-        //                 const promise = await fetch(process.env.REACT_APP_API_URL+`/user/fileupload/getImageUrl`, {
+        //                 const promise = await fetch(process.env.REACT_APP_API_URL+`user/fileupload/getImageUrl`, {
         //                     method: "POST",
         //                     headers: {
         //                         token: newToken,
@@ -215,7 +214,7 @@ const ScreenArea = ({ formData, edit }) => {
         //     } else if (featureListTemp[i].image) {
         //         if (edit && typeof (featureListTemp[i].image) === 'string') {
         //             const newToken = await currentUser.getIdToken(true);
-        //             const promise = await fetch(process.env.REACT_APP_API_URL+`/user/fileupload/getImageUrl`, {
+        //             const promise = await fetch(process.env.REACT_APP_API_URL+`user/fileupload/getImageUrl`, {
         //                 method: "POST",
         //                 headers: {
         //                     token: newToken,
@@ -446,56 +445,64 @@ const ScreenArea = ({ formData, edit }) => {
             component: <img src={CashApp} style={{ width: '4rem' }} alt="" />,
             placeholder: 'https://cash.app/$yourcashtag',
             type: 'text',
-            tooltip: 'CashApp'
+            tooltip: 'CashApp',
+            color: '#01CF30'
         },
         {
             name: 'paypal',
             component: <FontAwesomeIcon className='font_size-1-2_and_color_white' icon={faPaypal} />,
             placeholder: 'https://PayPal.me/YourUserName',
             type: 'text',
-            tooltip: 'PayPal'
+            tooltip: 'PayPal',
+            color: '#012C81'
         },
         {
             name: 'stripe',
             component: <FontAwesomeIcon className='font_size-1-2_and_color_white' icon={faStripeS} />,
             placeholder: 'Your Stripe account',
             type: 'text',
-            tooltip: 'Stripe'
+            tooltip: 'Stripe',
+            color: '#6772E5'
         },
         {
             name: 'googleBusinessProfile',
             component: <FontAwesomeIcon className='font_size-1-2_and_color_white' icon={faGoogle} />,
             placeholder: 'Your Google Business Profile',
             type: 'text',
-            tooltip: 'Google'
+            tooltip: 'Google',
+            color: '#7FAAF8'
         },
         {
             name: 'bingBusinessProfile',
             component: <img src={bing} />,
             placeholder: 'Your Bing Business Profile',
             type: 'text',
-            tooltip: 'Bing'
+            tooltip: 'Bing',
+            color: '#027E6E'
         },
         {
             name: 'amazonStore',
             component: <FontAwesomeIcon className='font_size-1-2_and_color_white' icon={faAmazon} />,
             placeholder: 'Your amazon store',
             type: 'text',
-            tooltip: 'Amazon'
+            tooltip: 'Amazon',
+            color: '#FB9B0F'
         },
         {
             name: 'eBayStore',
             component: <FontAwesomeIcon className='font_size-1-2_and_color_white' icon={faEbay} />,
             placeholder: 'Your eBay store',
             type: 'text',
-            tooltip: 'eBay'
+            tooltip: 'eBay',
+            color: '#E53338'
         },
         {
             name: 'yelp',
             component: <FontAwesomeIcon className='font_size-1-2_and_color_white' icon={faYelp} />,
             placeholder: 'Your yelp store',
             type: 'text',
-            tooltip: 'Yelp'
+            tooltip: 'Yelp',
+            color: '#D32422'
         }
     ]
 
@@ -515,7 +522,7 @@ const ScreenArea = ({ formData, edit }) => {
             displayName = iconsNameSocialMap.filter(e => e.name === name)[0].tooltip
         } else if (type === 'commerce') {
             component = iconsNameCommerceMap.filter(e => e.name === name)[0].component;
-            backgroundColor = '#029C5E';
+            backgroundColor = iconsNameCommerceMap.filter(e => e.name === name)[0].color;
             displayName = iconsNameCommerceMap.filter(e => e.name === name)[0].tooltip
         }
 
@@ -560,9 +567,57 @@ const ScreenArea = ({ formData, edit }) => {
                                     {displayName}
                                 </Typography>
                             </a>
-                            : < a href={link} target="_blank" style={{ textDecoration: "none", display: "flex", flexDirection: "column", alignItems: 'center' }}>
+                            : name === 'skype' ?
+                            < a href={`skype:${link}?chat`} target="_blank" style={{ textDecoration: "none", display: "flex", flexDirection: "column", alignItems: 'center' }}>
                                 <div className='box' >
                                     <Box sx={{ fontFamily: `${formData.font}`, width: '45px', height: '45px', borderRadius: '50%', backgroundColor: formData.buttonBackgroundColor, display: 'flex', justifyContent: 'center', alignItems: 'center', justifyItems: 'center', marginBottom: '10px' }}>
+                                        {component}
+                                    </Box>
+                                </div>
+                                {' '}
+                                <Typography style={{ color: formData && formData.fontColor, fontSize: '12px' }}>
+                                    {displayName}
+                                </Typography>
+                            </a>
+                            : name === 'weChat' ?
+                            < a href={`weixin://dl/chat?${link}`} target="_blank" style={{ textDecoration: "none", display: "flex", flexDirection: "column", alignItems: 'center' }}>
+                                <div className='box' >
+                                    <Box sx={{ fontFamily: `${formData.font}`, width: '45px', height: '45px', borderRadius: '50%', backgroundColor: formData.buttonBackgroundColor, display: 'flex', justifyContent: 'center', alignItems: 'center', justifyItems: 'center', marginBottom: '10px' }}>
+                                        {component}
+                                    </Box>
+                                </div>
+                                {' '}
+                                <Typography style={{ color: formData && formData.fontColor, fontSize: '12px' }}>
+                                    {displayName}
+                                </Typography>
+                            </a>
+                            :name === 'signal' ?
+                            < a href={`https://signal.me/#p/${link}`} target="_blank" style={{ textDecoration: "none", display: "flex", flexDirection: "column", alignItems: 'center' }}>
+                                <div className='box' >
+                                    <Box sx={{ fontFamily: `${formData.font}`, width: '45px', height: '45px', borderRadius: '50%', backgroundColor: formData.buttonBackgroundColor, display: 'flex', justifyContent: 'center', alignItems: 'center', justifyItems: 'center', marginBottom: '10px' }}>
+                                        {component}
+                                    </Box>
+                                </div>
+                                {' '}
+                                <Typography style={{ color: formData && formData.fontColor, fontSize: '12px' }}>
+                                    {displayName}
+                                </Typography>
+                            </a>
+                            : name === 'viber' ?
+                            < a href={`viber://contact?number=${link}`} target="_blank" style={{ textDecoration: "none", display: "flex", flexDirection: "column", alignItems: 'center' }}>
+                                <div className='box' >
+                                    <Box sx={{ fontFamily: `${formData.font}`, width: '45px', height: '45px', borderRadius: '50%', backgroundColor: formData.buttonBackgroundColor, display: 'flex', justifyContent: 'center', alignItems: 'center', justifyItems: 'center', marginBottom: '10px' }}>
+                                        {component}
+                                    </Box>
+                                </div>
+                                {' '}
+                                <Typography style={{ color: formData && formData.fontColor, fontSize: '12px' }}>
+                                    {displayName}
+                                </Typography>
+                            </a>
+                            : < a href={link} target="_blank" style={{ textDecoration: "none", display: "flex", flexDirection: "column", alignItems: 'center' }}>
+                                <div className='box' >
+                                    <Box sx={{ fontFamily: `${formData.font}`, width: '45px', height: '45px', borderRadius: '50%', backgroundColor: type === 'contact' ? formData.buttonBackgroundColor : backgroundColor, display: 'flex', justifyContent: 'center', alignItems: 'center', justifyItems: 'center', marginBottom: '10px' }}>
                                         {component}
                                     </Box>
                                 </div>
@@ -582,7 +637,7 @@ const ScreenArea = ({ formData, edit }) => {
             {
                 formData ? <div className='screen_area' style={{ borderBottomRightRadius: pathname.includes('edit') || pathname.includes('create') || pathname.includes('card') ? '2rem' : '0', borderBottomLeftRadius: pathname.includes('edit') || pathname.includes('create') || pathname.includes('card') ? '2rem' : '0', backgroundColor: `${formData.mainBackgroundColor}` }}>
                     <div className='head_area_wrapper'>
-                        <div style={{ height: '100%' }}>{formData && formData.coverPhoto && (<img className='backgroundCoverPhoto' style={{backgroundColor: 'grey'}} src={edit && formData.coverPhoto && formData.coverPhoto.url ? formData.coverPhoto.url : formData.coverPhoto && !formData.coverPhoto.url ? URL.createObjectURL(formData.coverPhoto) : null} alt="" />)}</div>
+                        <div style={{ height: '100%' }}>{formData && formData.coverPhoto && (<img className='backgroundCoverPhoto' style={{ backgroundColor: 'grey' }} src={edit && formData.coverPhoto && formData.coverPhoto.url ? formData.coverPhoto.url : formData.coverPhoto && !formData.coverPhoto.url ? URL.createObjectURL(formData.coverPhoto) : null} alt="" />)}</div>
                         <div className='head_area' style={{ marginTop: `${formData.coverPhoto ? '-160px' : '-160px'}` }}>
 
                             <div style={{ height: "60px", width: '60px', marginTop: '0rem', backgroundColor: `${formData.Logo ? 'transparent' : formData.logoBackgroundColor}`, borderRadius: '50%' }}>
@@ -719,14 +774,14 @@ const ScreenArea = ({ formData, edit }) => {
                                     marginTop: '5rem',
                                     color: formData && formData.fontColor
                                 }}>{formData && formData.contactHeading}</div> : null}
-                            <div style={{ marginTop: '0px', display: 'flex', flexWrap: 'wrap', justifyContent: `${formData.PrimaryButtons.length === 1 ? 'center' : 'space-between'}`, padding: '1rem' }}>
+                            <div style={{ marginTop: '0px', display: 'grid', gap: "auto auto", gridTemplateColumns: "auto auto auto", padding: '1rem' }}>
 
                                 {formData &&
                                     formData.PrimaryButtons &&
                                     formData.PrimaryButtons.map((icon) => {
                                         return (
                                             <>
-                                                <div style={{ display: 'flex', justifyContent: 'center', padding: "0 .5rem" }}>
+                                                <div style={{ display: 'flex', justifyContent: 'center', padding: "0 .5rem", width: '80px', margin: 'auto auto' }}>
                                                     {/* <Grid container spacing={3} columns={3} sx={{ marginTop: '30px' }}> */}
                                                     {
                                                         PrimaryButtons(icon, 'contact')
@@ -743,13 +798,13 @@ const ScreenArea = ({ formData, edit }) => {
                                     marginTop: '3rem',
                                     color: formData && formData.fontColor
                                 }}>{formData && formData.socialMediaHeading}</div> : null}
-                            <div style={{ marginTop: '0px', display: 'flex', flexWrap: 'wrap', justifyContent: `${formData.socialMedia.length === 1 ? 'center' : 'space-between'}`, padding: '1rem' }}>
+                            <div style={{ marginTop: '0px', display: 'grid', gap: "auto auto", gridTemplateColumns: "auto auto auto", padding: '1rem' }}>
                                 {formData &&
                                     formData.socialMedia &&
                                     formData.socialMedia.map((icon) => {
                                         return (
                                             <>
-                                                <div style={{ display: 'flex', justifyContent: 'center', padding: "0 .5rem" }}>
+                                                <div style={{ display: 'flex', justifyContent: 'center', padding: "0 .5rem", width: '85px', margin: 'auto auto' }}>
                                                     {/* <Grid container spacing={3} columns={3} sx={{ marginTop: '30px' }}> */}
                                                     {
                                                         PrimaryButtons(icon, 'social')
@@ -766,13 +821,13 @@ const ScreenArea = ({ formData, edit }) => {
                                     marginTop: '3rem',
                                     color: formData && formData.fontColor
                                 }}>{formData && formData.commerceHeading}</div> : null}
-                            <div style={{ marginTop: '0px', display: 'flex', flexWrap: 'wrap', justifyContent: `${formData.commerce.length === 1 ? 'center' : 'space-between'}`, padding: '1rem' }}>
+                            <div style={{ marginTop: '0px', display: 'grid', gap: "auto auto", gridTemplateColumns: "auto auto auto", padding: '1rem' }}>
                                 {formData &&
                                     formData.commerce &&
                                     formData.commerce.map((icon) => {
                                         return (
                                             <>
-                                                <div style={{ display: 'flex', justifyContent: 'center', padding: "0 .5rem" }}>
+                                                <div style={{ display: 'flex', justifyContent: 'center', padding: "0 .5rem", width: '80px', margin: 'auto auto' }}>
                                                     {/* <Grid container spacing={3} columns={3} sx={{ marginTop: '30px' }}> */}
                                                     {
                                                         PrimaryButtons(icon, 'commerce')
@@ -787,7 +842,28 @@ const ScreenArea = ({ formData, edit }) => {
 
 
 
-                        <div style={{ padding: '2rem' }}>
+
+
+
+
+                        {/* S a v e   t o   c o n t a c t   b u t t o n */}
+
+                        {
+                            formData &&
+                                formData.SaveToContact ?
+                                <div className='save-to-contact-btn' style={{backgroundColor: formData.buttonBackgroundColor}} onClick={download_vcf}>
+                                    Save to Contact
+                                </div> :
+                                null
+                        }
+
+
+
+
+
+
+
+                        <div style={{ padding: '2rem', maxWidth: '330px' }}>
                             {formData &&
                                 formData.ProFeaturesList &&
                                 formData.ProFeaturesList.map((feature, index) => {
@@ -806,7 +882,7 @@ const ScreenArea = ({ formData, edit }) => {
                                                 variant="h7"
                                                 component="div"
                                                 gutterBottom
-                                                style={{ marginBottom: '1.5rem', fontSize: '1.2rem', fontWeight: '800' }}
+                                                style={{ marginBottom: '1.5rem', fontSize: '1.1rem', fontWeight: '800', letterSpacing: '0.2px' }}
                                             >
                                                 {feature.title}
                                             </Typography>

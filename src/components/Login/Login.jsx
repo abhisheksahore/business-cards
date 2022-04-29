@@ -44,7 +44,7 @@ function Login() {
     const sendToken = async () => {
         const newToken = await currentUser.getIdToken(true);
         console.log(typeof (newToken))
-        const promise = await fetch(process.env.REACT_APP_API_URL+`/user/auth/googleSignIn`, {
+        const promise = await fetch(process.env.REACT_APP_API_URL+`user/auth/googleSignIn`, {
             method: 'POST',
             headers: {
                 accessToken: newToken,
@@ -164,7 +164,7 @@ function Login() {
                                 <div className='login_password_input'>
                                     <input id='password' className='input_box' type="password" name='password' placeholder='eg. pas@9wrD#7' onChange={(e) => updateSignupCred(e)} value={user.password} />
                                     <div id='toggle_password' className='password_visible' onClick={togglePasswordVisibility}>
-                                        {passwordVisible ? <FontAwesomeIcon icon={faEyeSlash} style={{ color: '#FE385D' }} /> : <FontAwesomeIcon icon={faEye} style={{ color: '#FE385D' }} />}
+                                        {passwordVisible ? <FontAwesomeIcon icon={faEyeSlash} style={{ color: '#6AA354' }} /> : <FontAwesomeIcon icon={faEye} style={{ color: '#6AA354' }} />}
                                     </div>
                                 </div>
                             </div>

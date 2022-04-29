@@ -6,6 +6,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 import AuthContext from '../../context/AuthContext/AuthContext';
+import { letterSpacing } from '@mui/system';
 
 
 
@@ -71,7 +72,7 @@ const GeneralInfo = ({ formData, setformData, edit, slugExists, setSlugExists, s
         if (/^[a-z](-?[a-z])*$/.test(formData.cardSlug)) {
             setSlugError('');
             const newToken = await currentUser.getIdToken(true);
-            const promise = await fetch(process.env.REACT_APP_API_URL+`/user/card/checkSlug?slug=${formData.cardSlug}`, {
+            const promise = await fetch(process.env.REACT_APP_API_URL+`user/card/checkSlug?slug=${formData.cardSlug}`, {
                 method: "GET",
                 headers: {
                     token: newToken,
@@ -97,7 +98,7 @@ const GeneralInfo = ({ formData, setformData, edit, slugExists, setSlugExists, s
 
     const fetchPhoto = async (filePath) => {
         const newToken = await currentUser.getIdToken(true);
-        const promise = await fetch(process.env.REACT_APP_API_URL+`/user/fileupload/getImageUrl`, {
+        const promise = await fetch(process.env.REACT_APP_API_URL+`user/fileupload/getImageUrl`, {
             method: "POST",
             headers: {
                 token: newToken,
@@ -178,9 +179,10 @@ const GeneralInfo = ({ formData, setformData, edit, slugExists, setSlugExists, s
                                 border: '0.5px solid #6a97ae',
                                 color: '#fff',
                                 backgroundColor: '#283046;',
-                                fontWeight: '700'
+                                fontWeight: '700',
+                                letterSpacing: '2px'
                             }}
-                            value={'bizcard.com/'}
+                            value={'qli.ink/'}
                         />
                         <OutlinedInput
                             required

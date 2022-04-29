@@ -47,7 +47,7 @@
 
 
 .input_box:focus {
-    outline: 3px solid #FE385D;
+    outline: 3px solid #6AA354;
 }
 
 .login_password_input {
@@ -100,7 +100,7 @@
 .login_instead {
     text-decoration: none;
     font-size: .9rem;
-    color: #fe5574;
+    color: #6AA354;
     font-weight: 700;
     margin-left: .7rem;
 }

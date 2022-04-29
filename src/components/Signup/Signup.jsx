@@ -56,7 +56,7 @@ function Signup() {
     const sendToken = async () => {
         const newToken = await currentUser.getIdToken(true);
         console.log(typeof (newToken))
-        const promise = await fetch(process.env.REACT_APP_API_URL+`/user/auth/googleSignIn`, {
+        const promise = await fetch(process.env.REACT_APP_API_URL+`user/auth/googleSignIn`, {
             method: 'POST',
             headers: {
                 accessToken: newToken,
@@ -112,7 +112,7 @@ function Signup() {
         if (error.name === '' && error.email === '' && error.password === '' && error.submit === '') {
             setLoading(true);
             try {
-                const promise = await fetch(process.env.REACT_APP_API_URL+`/user/auth/signupByEmail`, {
+                const promise = await fetch(process.env.REACT_APP_API_URL+`user/auth/signupByEmail`, {
                     method: "POST",
                     headers: {
                         'Accept': 'application/json',
@@ -197,7 +197,7 @@ function Signup() {
                                 <div className='login_password_input'>
                                     <input id='password' className='input_box' type="password" name='password' placeholder='eg. pas@9wrD#7' value={user.password} onChange={(e) => updateSignupCred(e)} autoComplete="false" />
                                     <div id='toggle_password' className='password_visible' onClick={togglePasswordVisibility}>
-                                        {passwordVisible ? <FontAwesomeIcon icon={faEyeSlash} style={{ color: "#FE385D" }} /> : <FontAwesomeIcon icon={faEye} style={{ color: "#FE385D" }} />}
+                                        {passwordVisible ? <FontAwesomeIcon icon={faEyeSlash} style={{ color: "#6AA354" }} /> : <FontAwesomeIcon icon={faEye} style={{ color: "#6AA354" }} />}
                                     </div>
                                     <div className="error" style={{ color: "#FE385D" }}>
                                         {error.password}
