@@ -124,7 +124,9 @@ const GeneralInfo = ({ formData, setformData, edit, slugExists, setSlugExists, s
                 value={formData.Name}
                 placeholder={'Name'}
                 sx={{
-                    width: '450px',
+                    maxWidth: '450px',
+                    width: '100%',
+                    minWidth: '300px',
                     borderRadius: '5px',
                     marginTop: '15px',
                     border: '0.5px solid #6a97ae',
@@ -148,7 +150,9 @@ const GeneralInfo = ({ formData, setformData, edit, slugExists, setSlugExists, s
                 value={formData.cardName}
                 placeholder={'Card Name'}
                 sx={{
-                    width: '450px',
+                    maxWidth: '450px',
+                    width: '100%',
+                    minWidth: '300px',
                     borderRadius: '5px',
                     marginTop: '15px',
                     border: '0.5px solid #6a97ae',
@@ -166,14 +170,14 @@ const GeneralInfo = ({ formData, setformData, edit, slugExists, setSlugExists, s
             {/* Card URL */}
             {edit === false ?
                 <>
-                    <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', width: '449px' }}>
+                    <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', width: '100%', maxWidth: '450px', minWidth: '300px' }}>
                         <OutlinedInput
                             variant="outlined"
                             name={'cardSlug'}
                             // placeholder={'Card URL'}
                             // disabled
                             sx={{
-                                width: '35%',
+                                width: '30%',
                                 borderRadius: '5px',
                                 marginTop: '15px',
                                 border: '0.5px solid #6a97ae',
@@ -238,7 +242,9 @@ const GeneralInfo = ({ formData, setformData, edit, slugExists, setSlugExists, s
                 placeholder={'Gender pronouns'}
                 value={formData.genderPronouns}
                 sx={{
-                    width: '450px',
+                    maxWidth: '450px',
+                    width: '100%',
+                    minWidth: '300px',
                     borderRadius: '5px',
                     marginTop: '15px',
                     border: '0.5px solid #6a97ae',
@@ -260,7 +266,9 @@ const GeneralInfo = ({ formData, setformData, edit, slugExists, setSlugExists, s
                 name={'genderPronouns'}
                 placeholder={'Job Title'}
                 sx={{
-                    width: '450px',
+                    maxWidth: '450px',
+                    width: '100%',
+                    minWidth: '300px',
                     borderRadius: '5px',
                     marginTop: '15px',
                     border: '0.5px solid #6a97ae',
@@ -281,7 +289,9 @@ const GeneralInfo = ({ formData, setformData, edit, slugExists, setSlugExists, s
                 name={'Business'}
                 placeholder={'Business Name'}
                 sx={{
-                    width: '450px',
+                    maxWidth: '450px',
+                    width: '100%',
+                    minWidth: '300px',
                     borderRadius: '5px',
                     marginTop: '15px',
                     border: '0.5px solid #6a97ae',
@@ -303,7 +313,9 @@ const GeneralInfo = ({ formData, setformData, edit, slugExists, setSlugExists, s
                 name={'businessDescription'}
                 placeholder={'Business Description'}
                 sx={{
-                    width: '450px',
+                    maxWidth: '450px',
+                    width: '100%',
+                    minWidth: '300px',
                     borderRadius: '5px',
                     marginTop: '15px',
                     border: '0.5px solid #6a97ae',
@@ -326,7 +338,9 @@ const GeneralInfo = ({ formData, setformData, edit, slugExists, setSlugExists, s
                 name={'Describe'}
                 placeholder={'Describe yourself (optional) '}
                 sx={{
-                    width: '450px',
+                    maxWidth: '450px',
+                    width: '100%',
+                    minWidth: '300px',
                     borderRadius: '5px',
                     marginTop: '15px',
                     border: '0.5px solid #6a97ae',

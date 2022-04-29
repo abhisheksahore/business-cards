@@ -157,7 +157,7 @@ function GenInfo({
       {/*------------------------- Primary Buttons---------------------------- */}
       <div
         className="gen_info_heading"
-        style={{ marginTop: '8rem', color: 'white', display: 'flex', alignItems: 'center', gap: '1rem' }}
+        style={{ marginTop: '8rem', minWidth: '320px', color: 'white', display: 'flex', alignItems: 'center', gap: '1rem' }}
       >
         {heading}
         {
@@ -254,7 +254,7 @@ function GenInfo({
           />
         ) : null
       }
-      <div style={{ display: 'flex', maxWidth: '450px', flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', maxWidth: '450px', width: '100%', minWidth: '300px', flexWrap: 'wrap' }}>
         {iconsNameContactMap.map((icon) => {
           return formData &&
             formData[keyName] &&

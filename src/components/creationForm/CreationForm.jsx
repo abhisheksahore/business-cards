@@ -915,21 +915,22 @@ function CreationForm() {
     }
 
     const change = (e) => {
-        setformData({...formData, SaveToContact: e.target.checked})
+        setformData({ ...formData, SaveToContact: e.target.checked })
     }
 
     return (
         <>
-            {currentUser ? <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: '3rem' }}>
+            {currentUser ? <div className='mainContainer'>
                 <div
-                    style={{
-                        width: '50%',
-                        display: 'flex',
-                        justifyContent: 'flex-end',
-                        marginRight: '30px',
-                    }}
+                    className='mainArea'
                 >
-                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    <div style={{
+                        display: 'flex', 
+                        flexDirection: 'column', 
+                        maxWidth: '450px',
+                        width: '100%',
+                        minWidth: '300px',
+                    }}>
                         <GeneralInfo formData={formData} setformData={setformData} edit={edit} slugExists={slugExists} slugError={slugError} setSlugError={setSlugError} setSlugExists={setSlugExists} />
                         <GenInfo iconsNameContactMap={iconsNameContactMap} formData={formData} color={'#7366F0'} keyName={'PrimaryButtons'} setformData={setformData} heading={formData && formData.contactHeading} />
                         <GenInfo iconsNameContactMap={iconsNameSocialMap} formData={formData} color={'#FE385D'} keyName={'socialMedia'} setformData={setformData} heading={formData && formData.socialMediaHeading} />
@@ -939,7 +940,7 @@ function CreationForm() {
                             <FormControlLabel id="save-to-contact"
                                 control={<IOSSwitch sx={{ m: 1 }} checked={formData.SaveToContact} />}
                                 label=""
-                                onClick={(e)=>change(e)}
+                                onClick={(e) => change(e)}
                             />
                         </div>
                         <Media formData={formData} setformData={setformData} edit={edit} />
@@ -954,7 +955,7 @@ function CreationForm() {
                         </div>
                     </div>
                 </div>
-                <div style={{ width: '50%', marginLeft: '30px', position: 'relative' }}>
+                <div className='mockupScreenArea'>
                     <IphoneMockup formData={formData} />
                 </div>
             </div> :

@@ -10,6 +10,8 @@
     
 }
 
+
+
 .navbar_wrapper {
     background-color: transparent;
     /* background-color: white; */
@@ -133,4 +135,43 @@
 .navbar_menu div:hover,
 .navbar_menu div:focus {
     background-color: rgb(240, 240, 240);   
+}
+
+
+@media(min-width: 451px) and (max-width: 900px) {
+    .navbar_container {
+        padding: 0rem 3rem;
+    }
+    .profile_pic {
+        position: relative;
+        right: 2rem;
+    }
+}
+
+@media(min-width: 300px) and (max-width: 450px) {
+    .navbar_container {
+        padding: 0 1rem;
+    }
+    .profile_pic {
+        position: relative;
+        right: 2rem;
+    }
+}
+
+
+@media (min-width: 300px) and (max-width: 900px) {
+   
+
+    .welcome_note,
+    .profile_username {
+        display: none;
+    }
+
+    .navbar_menu {
+        top: 5rem;
+        right: 1rem;
+    }
+
+    
+    
 }

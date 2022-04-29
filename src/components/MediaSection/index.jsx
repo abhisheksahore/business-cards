@@ -25,7 +25,7 @@ const Media = ({ formData, setformData, edit }) => {
             const data = formData.ProFeaturesList;
             const item = data.splice(fromIndex, 1)[0];
             data.splice(toIndex, 0, item);
-            setformData({...formData, ProFeaturesList: data});
+            setformData({ ...formData, ProFeaturesList: data });
             setTriggerSetFeatureList(!triggerSetFeatureList)
         },
         nodeSelector: 'li',
@@ -119,15 +119,15 @@ const Media = ({ formData, setformData, edit }) => {
     // useEffect(()=>{
     //     setRerender(!rerender);
     // }, [featureList])
-    
+
 
 
     return (
         <>
             {formData && currentUser ?
-                <div style={{marginTop: '6rem'}}>
+                <div style={{ marginTop: '6rem' }}>
 
-                    <h1 style={{color: "white", marginTop: "4rem"}}>Media</h1>
+                    <h1 style={{ color: "white", marginTop: "4rem" }}>Media</h1>
                     <div>
                         {/*------------------------- Primary Buttons---------------------------- */}
                         <ReactDragListView {...dragPropsProFeatures}>
@@ -147,7 +147,9 @@ const Media = ({ formData, setformData, edit }) => {
                                                     {featured.type === 'image' ? (
                                                         <div
                                                             style={{
-                                                                width: '450px',
+                                                                maxWidth: '450px',
+                                                                width: '90%',
+                                                                minWidth: '300px',
                                                                 border: '0.5px solid #6a97ae',
                                                                 backgroundColor: '#283046',
                                                                 borderRadius: '10px',
@@ -307,7 +309,7 @@ const Media = ({ formData, setformData, edit }) => {
                                                                                         }}
                                                                                     />
                                                                                     <img
-                                                                                        src={edit && image.url ? (()=>{ console.log(image.url);return image.url})() : image && !image.url? URL.createObjectURL(image) : null}
+                                                                                        src={edit && image.url ? (() => { console.log(image.url); return image.url })() : image && !image.url ? URL.createObjectURL(image) : null}
                                                                                         style={{
                                                                                             width: '55px',
                                                                                             height: '55px',
@@ -394,7 +396,9 @@ const Media = ({ formData, setformData, edit }) => {
                                                     ) : featured.type === 'media' ? (
                                                         <div
                                                             style={{
-                                                                width: '450px',
+                                                                maxWidth: '450px',
+                                                                width: '90%',
+                                                                minWidth: '300px',
                                                                 border: '0.5px solid #6a97ae',
                                                                 backgroundColor: '#283046',
                                                                 borderRadius: '10px',
@@ -747,7 +751,9 @@ const Media = ({ formData, setformData, edit }) => {
                                                     ) : featured.type === 'text' ? (
                                                         <div
                                                             style={{
-                                                                width: '450px',
+                                                                maxWidth: '450px',
+                                                                width: '90%',
+                                                                minWidth: '300px',
                                                                 border: '0.5px solid #6a97ae',
                                                                 backgroundColor: '#283046',
                                                                 borderRadius: '10px',
@@ -839,7 +845,7 @@ const Media = ({ formData, setformData, edit }) => {
                                                                 />
                                                             </div>
                                                             <textarea
-                                                            className='textarea_scroll_settings'
+                                                                className='textarea_scroll_settings'
                                                                 // variant="outlined"
                                                                 name={'description'}
                                                                 placeholder={'Description'}
@@ -881,7 +887,9 @@ const Media = ({ formData, setformData, edit }) => {
                                                     ) : featured.type === 'link' ? (
                                                         <div
                                                             style={{
-                                                                width: '450px',
+                                                                maxWidth: '450px',
+                                                                width: '90%',
+                                                                minWidth: '300px',
                                                                 border: '0.5px solid #6a97ae',
                                                                 backgroundColor: '#283046',
                                                                 borderRadius: '10px',
@@ -1130,7 +1138,7 @@ const Media = ({ formData, setformData, edit }) => {
                                                                         }}
                                                                     />
                                                                     <img
-                                                                        src={edit && featured.image && featured.image.url ? (()=>{console.log(featured.image.url);return featured.image.url})() : featured.image && !featured.image.url ? URL.createObjectURL(featured.image) : null}
+                                                                        src={edit && featured.image && featured.image.url ? (() => { console.log(featured.image.url); return featured.image.url })() : featured.image && !featured.image.url ? URL.createObjectURL(featured.image) : null}
                                                                         style={{
                                                                             width: '55px',
                                                                             height: '55px',

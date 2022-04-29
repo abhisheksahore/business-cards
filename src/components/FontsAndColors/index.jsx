@@ -39,7 +39,7 @@ const FontsAndColors = ({ formData, setformData, colorInputVariables, fontOption
 
 
     const changeFont = (e) => {
-        setformData({...formData, font: e.target.value})
+        setformData({ ...formData, font: e.target.value })
     }
 
 
@@ -62,7 +62,9 @@ const FontsAndColors = ({ formData, setformData, colorInputVariables, fontOption
                     value={formData.font}
                     onChange={e => changeFont(e)}
                     sx={{
-                        width: '450px',
+                        maxWidth: '450px',
+                        width: '100%',
+                        minWidth: '300px',
                         borderRadius: '5px',
                         marginTop: '15px',
                         border: '2px solid #6a97ae',

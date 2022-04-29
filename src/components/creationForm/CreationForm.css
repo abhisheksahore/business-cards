@@ -50,3 +50,53 @@
     gap: 2rem;
 }
 
+
+.mainContainer { 
+    width: 100%; 
+    display: flex; 
+    justify-content: center; 
+    margin-top: 3rem; 
+}
+
+
+.mainArea {
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 30px;
+}
+
+.mockupScreenArea { 
+    width: 38%; 
+    margin-left: 30px; 
+    position: relative; 
+}
+
+@media (min-width: 920px) and (max-width: 1040px) {
+    .mockupScreenArea {
+        width: 38%;
+    }
+}
+
+@media (min-width: 300px) and (max-width: 920px) {
+    .mockupScreenArea {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-left: 0px; 
+    }
+
+    .mainArea {
+        width: 100%;
+        justify-content: center;
+        margin-right: 0px;
+    }
+
+    .mainContainer {
+        flex-direction: column;
+        padding: 1.5rem;
+    }
+
+
+}
+
