@@ -293,7 +293,7 @@ function Dashboard() {
                                                 </div>
                                             </div>
                                         </td>
-                                        <td className='tdata'><img style={{ width: "60px", height: '60px' }} src={e.qr} alt="" /></td>
+                                        <td className='tdata'><a href={e.qr} target='_blank'><img style={{ width: "60px", height: '60px' }} src={e.qr} alt="" /></a></td>
                                         <td className='tdata table_card_urls'>
                                             <div>
                                                 {!e.published ?
