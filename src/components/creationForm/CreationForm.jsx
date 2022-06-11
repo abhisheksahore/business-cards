@@ -721,6 +721,9 @@ function CreationForm() {
             setSlugError('');
             setSlugExists(false);
         }
+        if (formData.Name!== null && formData.Name !== "") {
+            setUploadError(prev => '');
+        }
         if ((edit || cardLimitReached === false) && formData.cardName !== null && formData.cardSlug !== null && formData.Name !== null && formData.cardSlug.length > 6 && (edit || slugExists === false) && slugError === '') {
             setUploadError('');
             setSubmitClick(true);

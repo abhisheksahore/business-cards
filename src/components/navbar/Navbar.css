@@ -10,7 +10,26 @@
     
 }
 
-
+.big_logo_nav {
+    display: flex;
+    align-items: flex-end;
+    font-size: 2.5rem;
+    letter-spacing: 1px;
+    /* margin-bottom: 3rem; */
+    font-weight: 600;
+    color: rgb(255, 255, 255);
+    gap: .2rem;
+    /* color: #F4511E; */
+    font-family: 'Varela Round', sans-serif;
+}
+.big_logo_nav .big_logo_name_nav {
+    color: #6AA354;
+    /* background-color: white;
+     */
+     /* outline: 4px solid #FE385D; */
+    border-radius: 15px;
+    /* padding: .7rem; */
+}
 
 .navbar_wrapper {
     background-color: transparent;
@@ -29,7 +48,7 @@
     font-size: 1.2rem;
     font-weight: 600;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
 }
 
 .logo_com {
